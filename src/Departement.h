@@ -12,14 +12,16 @@ struct Departement {
 char* nom_dep;
 int numero_dep;
 Ville* prefecture;
-Ville* ville;
-int taille_tab_ville;
+Ville* tab_ville;
+int* taille_tab_ville;
 };
 
-void ajouterDepartement(Departement tab_departement, int *taille_tab_departement, char nom_dep[], char numero_dep[], char prefecture_tmp[]);
-Departement* ajouterPrefecture();
-void modifierDepartement(Departement* departement, char nom_dep[],int numero_dep, char prefecture[]);
-Departement* supprimerDepartement(Departement* departement, Departement* departement_supp, int* taille_tab_departement);
-Departement* detruireDepartement();
+void creerTabDepartement(Departement** tab_departement, int** taille_tab_departement, int taille_nom_dep);
+void ajouterDepartement(Departement** tab_departement, char nom_dep[], int numero_dep, int** taille_tab_departement);
+void modifierNomDepartement(Departement* departement, char nom_dep[]);
+void modifierNumeroDepartement(Departement* departement, int numero_dep);
+void modifierPrefectureDepartement(Departement* departement, Ville* prefecture);
+void supprimerDepartement(Departement** departement, Departement* departement_supp, int** taille_tab_departement);
+void detruireTabDepartement(Departement** departement, int** taille_tab_departement);
 
 #endif
