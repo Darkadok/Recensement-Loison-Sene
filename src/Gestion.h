@@ -6,7 +6,10 @@
 #include <string.h>
 #include <windows.h>
 #include <stdio.h>
-int NombrePointVirguleDansLigne(FILE* fichier);
+int nombrePointVirguleDansLigne(FILE* fichier);
+
+void lectureFichierDepartement(Region** tab_region, int** taille_tab_region);
+void ecritureFichierDepartement(Region* tab_region, int* taille_tab_region);
 void lectureFichierRecensements();
-void lectureFichierDepartement(Region** tab_region, int** taille_tab_region, Departement** tab_departement, int** taille_tab_departement);
+int ecritureFichierRecensements();
 #endif

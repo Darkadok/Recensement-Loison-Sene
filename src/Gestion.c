@@ -1,5 +1,5 @@
 #include "Gestion.h"
-int NombrePointVirguleDansLigne(FILE* fichier)
+int nombrePointVirguleDansLigne(FILE* fichier)
 {
 	char lettre = NULL;
 	int nombre=0;
@@ -15,7 +15,7 @@ int NombrePointVirguleDansLigne(FILE* fichier)
 }
 
 
-void lectureFichierDepartement(Region** tab_region, int** taille_tab_region, Departement** tab_departement, int** taille_tab_departement)
+void lectureFichierDepartement(Region** tab_region, int** taille_tab_region)// => a remplacer par Dépendances de Region
 {
 	FILE* fichier = NULL;
 	char lettre = NULL;
@@ -25,16 +25,25 @@ void lectureFichierDepartement(Region** tab_region, int** taille_tab_region, Dep
 	char region_tmp[200];
 	int is_departement_exist = 0;
 	int is_region_exist = 0;
+	int i = 0;
+	int* taille_tab_departement = NULL ;
+	int* ref_taille_tab_departement = NULL;
+	Departement* tab_departement = NULL;
+	int* ref_tab_departement = NULL;
 
+#if _DEBUG
+	fichier = fopen("../../../../GIT/Recensement/Import/departements.csv", "r");
+#endif
+#if !_DEBUG
 	fichier = fopen("../Import/departements.csv", "r");
-
+#endif
 	if (fichier == NULL)
 	{
 		return NULL;
 	}
 	else
 	{
-		*taille_tab_region = malloc(sizeof(int));
+ 		*taille_tab_region = malloc(sizeof(int));
 		**taille_tab_region = 0;
 
 		while (lettre != 'EOF')// parcours le fichier par ligne
@@ -45,7 +54,7 @@ void lectureFichierDepartement(Region** tab_region, int** taille_tab_region, Dep
 
 			for (int compteur_region = 0; compteur_region < **taille_tab_region; compteur_region++)
 			{
-				if (!strcmp(*(((*tab_region) + compteur_region)->nom_reg), region_tmp)//on verifie si la region est deja cree
+				if (!strcmp(*(((*tab_region) + compteur_region)->nom_reg), region_tmp))//on verifie si la region est deja cree
 				{
 					is_region_exist = 1;
 					
@@ -57,14 +66,20 @@ void lectureFichierDepartement(Region** tab_region, int** taille_tab_region, Dep
 
 				ajouterRegion(tab_region, region_tmp, taille_tab_region);
 
-				printf("Région créee");
+				printf("Région créée");
+				*tab_region = ((*tab_region) + i)->tab_departement;
+				ref_tab_departement = &(((*tab_region) + i) -> tab_departement);
+				taille_tab_departement = ((*tab_region) + i)->taille_tab_departement;//plantouile à mort
+				ref_taille_tab_departement = &(((*tab_region) + i)->taille_tab_departement);
+				
+				i++;
 			}
 
 			
 	
-			for (int compteur_departement = 0; compteur_departement < **taille_tab_departement; compteur_departement++)
+			for (int compteur_departement = 0; compteur_departement < ref_taille_tab_departement; compteur_departement++)
 			{
-				if (!strcmp(*((*tab_departement) + compteur_departement)->nom_dep), departement_tmp)
+				if (!strcmp(*((tab_departement + compteur_departement)->nom_dep), departement_tmp))
 				{
 					is_departement_exist = 1;
 				}
@@ -73,7 +88,7 @@ void lectureFichierDepartement(Region** tab_region, int** taille_tab_region, Dep
 			if (!is_departement_exist)
 			{
 
-				ajouterDepartement(tab_departement, departement_tmp, numerodep_tmp, taille_tab_departement);
+				ajouterDepartement(ref_tab_departement, departement_tmp, numerodep_tmp, ref_taille_tab_departement);
 				// ajouter prefecture
 
 				printf("Departement cree");
@@ -95,8 +110,12 @@ void lectureFichierRecensements()
 	char ligne_en_cours[1000];
 	int nombre_recensements = 0;
 
+#if _DEBUG
+	fichier = fopen("../../../../GIT/Recensement/Import/recensements.csv", "r");
+#endif
+#if !_DEBUG
 	fichier = fopen("../Import/recensements.csv", "r");
-
+#endif
 	if (fichier == NULL)
 	{
 		return NULL;
@@ -116,4 +135,26 @@ void lectureFichierRecensements()
 	}
 	
 	fclose(fichier);
+}
+
+
+
+ecritureFichierRecensements()
+{
+	return 0;
+}
+
+void ecritureFichierDepartement(Region* tab_region, int* taille_tab_region)
+{
+	FILE* fichier = NULL;
+#if _DEBUG
+	fichier = fopen("../../../../GIT/Recensement/Import/departements.csv", "w+");
+#endif
+#if !_DEBUG
+	fichier = fopen("../Import/departements.csv", "w+");
+#endif
+	if (fichier == NULL)
+	{
+		return NULL;
+	}
 }
