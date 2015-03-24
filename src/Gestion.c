@@ -109,6 +109,7 @@ void lectureFichierRecensements()
 	char* token = NULL;
 	char ligne_en_cours[1000];
 	int nombre_recensements = 0;
+	int i;
 
 #if _DEBUG
 	fichier = fopen("../../../../GIT/Recensement/Import/recensements.csv", "r");
@@ -126,12 +127,48 @@ void lectureFichierRecensements()
 		nombre_recensements = nombrePointVirguleDansLigne(fichier) - 2;
 		rewind(fichier);
 		fgets(ligne_en_cours, sizeof(ligne_en_cours), fichier);
+		token = strtok(ligne_en_cours, ";");
+		strcpy(ligne_en_cours, token);
+		for (i = 0; i < 2; i++)
+		{
+			token = strtok(NULL, ";");
+			strcpy(ligne_en_cours, token);
+		}
 
-		token = strtok(ligne_en_cours, ';');
+		for (i=0; i<nombre_recensements - 1 ; i++)
+		{
+			token = strtok(NULL, ";");
+			strcpy(ligne_en_cours, token);
 
-		/*fgets poru avoir toute la chaine, dans une variable machaine, 
-		definir une var char* token, token = strtok(machaine, ';'), strcopy token => ... . 
-		tant que fgets != NULL {} \!/ seconde utilisation NUll à la place de machaine de strtok, */
+			/* ligne en cours => tableau contenant les années de references.*/
+		}
+		token = strtok(NULL, "\n");
+		strcpy(ligne_en_cours, token);
+		/* ligne en cours => tableau contenant les années de references à la dernière case.*/
+		/*pour toutes les années*/
+		while (fgets(ligne_en_cours, sizeof(ligne_en_cours), fichier) != NULL)
+		{
+
+			token = strtok(ligne_en_cours, ";");
+			strcpy(ligne_en_cours, token);
+			/*depcom_ville -> ligne en cours*/
+			token = strtok(NULL, ";");
+			strcpy(ligne_en_cours, token);
+			/*dep_ville -> ligne en cours*/
+			token = strtok(NULL, ";");
+			strcpy(ligne_en_cours, token);
+			/*nom_ville -> ligne en cours*/
+			for (i = 0; i < nombre_recensements - 1; i++)
+			{
+				token = strtok(NULL, ";");
+				strcpy(ligne_en_cours, token);
+				/*valeur_recensement_ville_+i-> ligne en cours*/
+			}
+			token = strtok(NULL, "\n");
+			strcpy(ligne_en_cours, token);
+			/* ligne en cours => tableau contenant les années de references à la dernière case.*/
+
+		}
 	}
 	
 	fclose(fichier);
