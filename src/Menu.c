@@ -1,6 +1,6 @@
 #include"Menu.h"
-
-int main(int argc, char *argv[])
+//Fait par Alexandre
+int menu(int argc, char *argv[])
 {
 	int choix = 0;
 	do
@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 int menuConsulter(int choix) /*  ajouter les variables pour affichage */
 {
 
-	int choix = 0;
+	choix = 0;
 	do
 	{
 		system("cls");
@@ -69,18 +69,18 @@ void menuAdmin(int choix)
 {
 
 	int pass = 0;
-	int saisie_utilisateur = 0;
+	int saisie_utilisateur = ;
 
 	do
 	{
 		printf("Accès sécurisé mot de passe nécessaire\n");
 		printf("Saisir le mot de passe administration");
-		scanf("%d", &saisie_utilisateur);
+		scanf("%d", &saisie_utilisateur);// decimal => string.
 
 	} while (pass != saisie_utilisateur);
 
 
-	int choix = 0;
+	choix = 0;
 
 	do
 	{
@@ -127,7 +127,7 @@ void menuAjouter(int choix) /*  ajouter les variables pour affichage */
 		printf("0 -Menu précédent\n");
 		scanf("%d", &choix);
 
-		switch (choix2)
+		switch (choix2)// => toujours égal à 0.
 		{
 		case 1:
 			menuRegion(choix2); /* ajouter les variables pour affichage*/
@@ -150,7 +150,7 @@ void menuAjouter(int choix) /*  ajouter les variables pour affichage */
 
 void menuModifier(choix)
 {
-
+	/* ? ? ?*/
 
 
 

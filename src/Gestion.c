@@ -14,7 +14,6 @@ int nombrePointVirguleDansLigne(FILE* fichier)
 	return nombre;
 }
 
-
 void lectureFichierDepartement(Region** tab_region, int** taille_tab_region)// => a remplacer par Dépendances de Region
 {
 	FILE* fichier = NULL;
@@ -173,7 +172,6 @@ void lectureFichierRecensements()
 	
 	fclose(fichier);
 }
-
 
 void ecritureFichierDepartement(Region* tab_region, int* taille_tab_region)
 {
