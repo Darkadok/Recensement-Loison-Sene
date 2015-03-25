@@ -14,6 +14,14 @@ int nombrePointVirguleDansLigne(FILE* fichier)
 	return nombre;
 }
 
+char* decouperChaine(char chaine_a_decouper[], char separateur[])
+{
+	strtok(chaine_a_decouper, separateur);
+
+	return chaine_a_decouper;
+
+}
+
 void lectureFichierDepartement(Region** tab_region, int** taille_tab_region)// => a remplacer par Dépendances de Region
 {
 	FILE* fichier = NULL;
@@ -21,7 +29,9 @@ void lectureFichierDepartement(Region** tab_region, int** taille_tab_region)// =
 	char numerodep_tmp[3];
 	char departement_tmp[200];
 	char prefecture_tmp[200];
-	char region_tmp[200];
+	char region_tmp[300];
+	char ligne_en_cours[1000];
+	char* token = NULL;
 	int is_departement_exist = 0;
 	int is_region_exist = 0;
 	int i = 0;
@@ -49,8 +59,13 @@ void lectureFichierDepartement(Region** tab_region, int** taille_tab_region)// =
 		{
 			fscanf(fichier, "%3[^;];%200[^;];%200[^;];%s", numerodep_tmp, departement_tmp, prefecture_tmp, region_tmp);
 			printf("%s %s %s %s", numerodep_tmp, departement_tmp, prefecture_tmp, region_tmp);
-		
 
+			/*fgets(ligne_en_cours, sizeof(ligne_en_cours), fichier);
+			strcpy(numerodep_tmp, decouperChaine(ligne_en_cours, ";"));
+			
+			token = strtok(ligne_en_cours, ";");
+			strcpy(ligne_en_cours, token);
+			token = strtok(NULL, "\n");    => Remplacer pour gerer les espaces*/ 
 			for (int compteur_region = 0; compteur_region < **taille_tab_region; compteur_region++)
 			{
 				if (!strcmp(*(((*tab_region) + compteur_region)->nom_reg), region_tmp))//on verifie si la region est deja cree
@@ -62,7 +77,7 @@ void lectureFichierDepartement(Region** tab_region, int** taille_tab_region)// =
 			
 			if (!is_region_exist)//sinon on l'ajoute
 			{
-
+				/*
 				ajouterRegion(tab_region, region_tmp, taille_tab_region);
 
 				printf("Région créée");
@@ -70,7 +85,7 @@ void lectureFichierDepartement(Region** tab_region, int** taille_tab_region)// =
 				ref_tab_departement = &(((*tab_region) + i) -> tab_departement);
 				taille_tab_departement = ((*tab_region) + i)->taille_tab_departement;//plantouile à mort
 				ref_taille_tab_departement = &(((*tab_region) + i)->taille_tab_departement);
-
+*/
 			}
 
 			
@@ -86,7 +101,7 @@ void lectureFichierDepartement(Region** tab_region, int** taille_tab_region)// =
 			if (!is_departement_exist)
 			{
 
-				ajouterDepartement(ref_tab_departement, departement_tmp, numerodep_tmp, ref_taille_tab_departement);
+				//ajouterDepartement(ref_tab_departement, departement_tmp, numerodep_tmp, ref_taille_tab_departement);
 				// ajouter prefecture
 
 				printf("Departement cree");

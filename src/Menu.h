@@ -12,7 +12,7 @@ int menuConsulter(int choix);
 //Fonctions en rapport avec l'administration
 void menuAdmin(int choix);
 
-void menuAjouter(int choix);
+void menuAjouter(int choix);/*prototypes à typer !*/
 void menuModifier(choix);
 void menuSupprimer(int choix);
 
