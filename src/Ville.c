@@ -45,6 +45,9 @@ void ajouterVille(Ville** tab_ville, char nom_ville[], char dep_com[], int** tai
 		(tab_nouveau+i)->tab_recensement = NULL;
 		(tab_nouveau+i)->taille_tab_recensement = NULL; 
 
+
+		(**taille_tab_ville)++;
+		
 		free(*tab_ville);
 		*tab_ville = tab_nouveau;
 	}

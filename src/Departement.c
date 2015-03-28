@@ -45,6 +45,8 @@ void ajouterDepartement(Departement** tab_departement, char nom_dep[], int numer
 		(tab_nouveau+i)->taille_tab_ville = NULL; 
 		(*tab_departement)->prefecture = NULL;
 
+		(**taille_tab_departement)++;
+
 		free(*tab_departement);
 		*tab_departement = tab_nouveau;
 	}

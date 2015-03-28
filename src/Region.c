@@ -16,6 +16,7 @@ void creerTabRegion(Region** tab_region, int** taille_tab_region, int taille_nom
 void ajouterRegion(Region** tab_region, char nom_reg[], int** taille_tab_region)
 {
 	int i=0;
+	Region* free_tab = NULL;
 
 	if(*taille_tab_region == NULL)
 	{
@@ -26,22 +27,25 @@ void ajouterRegion(Region** tab_region, char nom_reg[], int** taille_tab_region)
 	else
 	{
 		Region* tab_nouveau = malloc (sizeof(Region)*(**taille_tab_region)+1);
-
-		for(i = 0; i<**taille_tab_region; i++)
+		
+		for(i = 0; i< **taille_tab_region; i++)
 		{
 			*(tab_nouveau+i) = *((*tab_region)+i);
-			i++;
+		
 		}
 
-		tab_nouveau->nom_reg = malloc(sizeof(char)* strlen(nom_reg));
+		(tab_nouveau+i)->nom_reg = malloc(sizeof(char)* strlen(nom_reg));
 
 		strcpy((tab_nouveau+i)->nom_reg, nom_reg);
 
 		(tab_nouveau+i)->tab_departement = NULL;
 		(tab_nouveau+i)->taille_tab_departement = NULL; 
 
-		free(*tab_region);
+		(**taille_tab_region)++;
+
+		//free(*tab_region);
 		*tab_region = tab_nouveau;
+		
 	}
 }
 
@@ -105,11 +109,11 @@ void detruireTabRegion(Region** tab_region, int** taille_tab_region)
 			detruireTabDepartement(&(((*tab_region)+i)->tab_departement), &(((*tab_region)+i)->taille_tab_departement));
 		}
 
-		for(i=0; i<**taille_tab_region; i++)
+		/*for(i=0; i<**taille_tab_region; i++)
 		{
 			free(((*tab_region)+i)->nom_reg);
 			((*tab_region)+i)->nom_reg = NULL;
-		}
+		}*/
 
 		free(*tab_region);
 		*tab_region = NULL;
