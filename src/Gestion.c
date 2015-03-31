@@ -66,7 +66,7 @@ void lectureFichierDepartement(Region** tab_region, int** taille_tab_region)// =
 
 				ajouterRegion(tab_region, region_tmp, taille_tab_region);
 
-				printf("Région créée");
+				printf("Région creee");
 				*tab_region = ((*tab_region) + i)->tab_departement;
 				ref_tab_departement = &(((*tab_region) + i) -> tab_departement);
 				taille_tab_departement = ((*tab_region) + i)->taille_tab_departement;//plantouile à mort
