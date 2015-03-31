@@ -7,6 +7,4 @@ void main()
 	ajouterRegion(&tab_region, "SilenceIsGolden", &taille_tab_etoile);
 	lectureFichierRecensements();
 	lectureFichierDepartement(&tab_region, &taille_tab_etoile);
-	
-
 }
