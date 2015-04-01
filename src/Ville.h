@@ -17,7 +17,7 @@ Recensement* tab_recensement;
 int* taille_tab_recensement;
 };
 
-Ville* creerTabVille(Ville* tab_ville, int** taille_tab_ville, int taille_nom_ville, int taille_dep_com);
+Ville* creerTabVille(Ville* tab_ville, int** taille_tab_ville, char nom_ville[], char dep_com[]);
 Ville* ajouterVille(Ville* tab_ville, char nom_ville[], char dep_com[], int** taille_tab_ville);
 
 void afficherVille(Ville* ville);

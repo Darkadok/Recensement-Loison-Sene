@@ -1,16 +1,20 @@
 #include "Departement.h"
 
 
-Departement* creerTabDepartement(Departement* tab_departement, int** taille_tab_departement, int taille_nom_dep)
+Departement* creerTabDepartement(Departement* tab_departement, int** taille_tab_departement, char nom_dep[], int numero_dep, char prefecture[])
 {
 	*taille_tab_departement = malloc(sizeof(int));
 	**taille_tab_departement = 1;
 
 	tab_departement = malloc(sizeof(Departement)*(**taille_tab_departement));
-	tab_departement->nom_dep = malloc(sizeof(char)*((taille_nom_dep) + 1 ));
+	tab_departement->nom_dep = malloc(sizeof(char)*(strlen(nom_dep) + 1));
 	tab_departement->tab_ville = NULL;
 	tab_departement->taille_tab_ville = NULL;
-	tab_departement->prefecture = NULL;
+	tab_departement->prefecture = malloc(sizeof(char) * (strlen(prefecture) + 1));
+
+	strcpy(tab_departement->nom_dep, nom_dep);
+	tab_departement->numero_dep = numero_dep;
+	strcpy(tab_departement->prefecture, prefecture);
 
 	return tab_departement;
 }
@@ -24,9 +28,7 @@ Departement* ajouterDepartement(Departement* tab_departement, char nom_dep[], in
 
 	if(*taille_tab_departement == NULL)
 	{
-		tab_departement = creerTabDepartement(tab_departement, taille_tab_departement, strlen(nom_dep));
-		strcpy(tab_departement->nom_dep, nom_dep);
-		tab_departement->numero_dep = numero_dep;
+		tab_departement = creerTabDepartement(tab_departement, taille_tab_departement, nom_dep, numero_dep, prefecture);
 	}
 
 	else

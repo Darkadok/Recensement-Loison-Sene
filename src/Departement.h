@@ -16,7 +16,7 @@ Ville* tab_ville;
 int* taille_tab_ville;
 };
 
-Departement* creerTabDepartement(Departement* tab_departement, int** taille_tab_departement, int taille_nom_dep);
+Departement* creerTabDepartement(Departement* tab_departement, int** taille_tab_departement, char nom_dep[], int numero_dep, char prefecture[]);
 Departement* ajouterDepartement(Departement* tab_departement, char nom_dep[], int numero_dep, char prefecture[], int** taille_tab_departement);
 
 void afficherDepartement(Departement* departement);

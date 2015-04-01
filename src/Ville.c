@@ -1,16 +1,19 @@
 #include "Ville.h"
 
 
-Ville* creerTabVille(Ville* tab_ville, int** taille_tab_ville, int taille_nom_ville, int taille_dep_com)
+Ville* creerTabVille(Ville* tab_ville, int** taille_tab_ville, char nom_ville[], char dep_com[])
 {
 	taille_tab_ville = malloc(sizeof(int));
 	**taille_tab_ville = 1;
 
 	tab_ville = malloc(sizeof(Ville)*(**taille_tab_ville));
-	tab_ville->nom_ville = malloc(sizeof(char)*((taille_nom_ville) + 1));
-	tab_ville->dep_com = malloc(sizeof(char)*((taille_dep_com) + 1));
+	tab_ville->nom_ville = malloc(sizeof(char)*(strlen(nom_ville) + 1));
+	tab_ville->dep_com = malloc(sizeof(char)*(strlen(dep_com) + 1));
 	tab_ville->tab_recensement = NULL;
 	tab_ville->taille_tab_recensement = NULL;
+
+	strcpy(tab_ville->nom_ville, nom_ville);
+	strcpy(tab_ville->dep_com, dep_com);
 
 	return tab_ville;
 }
@@ -25,9 +28,7 @@ Ville* ajouterVille(Ville* tab_ville, char nom_ville[], char dep_com[], int** ta
 
 	if(*taille_tab_ville == NULL)
 	{
-		tab_ville =  creerTabVille(tab_ville, taille_tab_ville, strlen(nom_ville), strlen(dep_com));
-		strcpy(tab_ville->nom_ville, nom_ville);
-		strcpy(tab_ville->dep_com, dep_com);
+		tab_ville =  creerTabVille(tab_ville, taille_tab_ville,nom_ville, dep_com);
 	}
 
 	else

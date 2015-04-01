@@ -15,7 +15,7 @@ Departement* tab_departement;
 int* taille_tab_departement;
 };
 
-Region* creerTabRegion(Region* tab_region, int** taille_tab_region, int taille_nom_rg);
+Region* creerTabRegion(Region* tab_region, int** taille_tab_region, char nom_reg[]);
 Region* ajouterRegion(Region* tab_region, char nom_reg[], int** taille_tab_region);
 
 void afficherRegion(Region* region);

@@ -1,15 +1,17 @@
 #include "Region.h"
 
 
-Region* creerTabRegion(Region* tab_region, int** taille_tab_region, int taille_nom_reg)
+Region* creerTabRegion(Region* tab_region, int** taille_tab_region, char nom_reg[])
 {
 	*taille_tab_region = malloc(sizeof(int));
 	**taille_tab_region = 1;
 
 	tab_region = malloc(sizeof(Region));
-	tab_region->nom_reg = malloc(sizeof(char)*(taille_nom_reg + 1));
+	tab_region->nom_reg = malloc(sizeof(char)* strlen((nom_reg + 1)));
 	tab_region->tab_departement = NULL;
 	tab_region->taille_tab_departement = NULL;
+
+	strcpy(tab_region->nom_reg, nom_reg);
 
 	return tab_region;
 }
@@ -23,8 +25,7 @@ Region* ajouterRegion(Region* tab_region, char nom_reg[], int** taille_tab_regio
 
 	if (*taille_tab_region == NULL)
 	{
-		tab_region = creerTabRegion(tab_region, taille_tab_region, strlen(nom_reg));
-		strcpy(tab_region->nom_reg, nom_reg);
+		tab_region = creerTabRegion(tab_region, taille_tab_region, nom_reg);
 	}
 
 	else

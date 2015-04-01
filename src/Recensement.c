@@ -1,12 +1,15 @@
 #include "Recensement.h"
 
 
-Recensement* creerTabRecensement(Recensement* tab_recensement, int** taille_tab_recensement)
+Recensement* creerTabRecensement(Recensement* tab_recensement, char annee[], int valeur_recen, int** taille_tab_recensement)
 {
 	*taille_tab_recensement = malloc(sizeof(int));
 	**taille_tab_recensement = 1;
 
 	tab_recensement = malloc(sizeof(Recensement)*(**taille_tab_recensement));
+
+	strcpy(tab_recensement->annee, annee);
+	tab_recensement->valeur_recen = valeur_recen;
 
 	return tab_recensement;
 }
@@ -18,10 +21,7 @@ Recensement* ajouterRecensement(Recensement* tab_recensement, char annee[], int 
 
 	if(*taille_tab_recensement == NULL)
 	{
-		tab_recensement = creerTabRecensement(tab_recensement, taille_tab_recensement);
-
-		strcpy(tab_recensement->annee, annee);
-		tab_recensement->valeur_recen = valeur_recen;
+		tab_recensement = creerTabRecensement(tab_recensement, annee, valeur_recen, taille_tab_recensement);
 	}
 
 	else
