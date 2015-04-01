@@ -26,7 +26,4 @@ void modifierAnneeRecensement(Recensement* recensement, char annee[]);
 void* supprimerRecensement(Recensement** tab_recensement, int** taille_tab_recensement, Recensement* recensement_supp);
 void detruireTabRecensement(Recensement** tab_recensement, int** taille_tab_recensement);
 
-
-
-
 #endif
