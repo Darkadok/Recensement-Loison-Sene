@@ -15,10 +15,16 @@ Departement* tab_departement;
 int* taille_tab_departement;
 };
 
-void creerTabRegion(Region** tab_region, int** taille_tab_region, int taille_nom_rg);
-void ajouterRegion(Region** tab_region, char nom_reg[], int** taille_tab_region);
+Region* creerTabRegion(Region* tab_region, int** taille_tab_region, int taille_nom_rg);
+Region* ajouterRegion(Region* tab_region, char nom_reg[], int** taille_tab_region);
+
+void afficherRegion(Region* region);
+
+int rechercheRegionByNom(Region* tab_region, char nom_reg[]);
+
 void modifierNomRegion(Region* region, char nom_reg[]);
-void supprimerRegion(Region** tab_region, Region* region_supp, int** taille_tab_region);
+
+void* supprimerRegion(Region** tab_region, Region* region_supp, int** taille_tab_region);
 void detruireTabRegion(Region** tab_region, int** taille_tab_region);
 
 #endif

@@ -13,11 +13,17 @@ char annee[5];
 int valeur_recen;
 };
 
-void creerTabRecensement(Recensement** tab_recensement, int** taille_tab_recensement );
-void ajouterRecensement(Recensement** tab_recensement, char annee[], int valeur_recen, int** taille_tab_recensement);
+Recensement* creerTabRecensement(Recensement* tab_recensement, int** taille_tab_recensement );
+Recensement* ajouterRecensement(Recensement* tab_recensement, char annee[], int valeur_recen, int** taille_tab_recensement);
+
+void afficherRecensement(Recensement* recensement);
+
+int rechercheRecensement(Recensement* tab_recensement, char annee[]);
+
 void modifierValeurRecensement(Recensement* recensement, int valeur_recen);
 void modifierAnneeRecensement(Recensement* recensement, char annee[]);
-void supprimerRecensement(Recensement** tab_recensement, int** taille_tab_recensement, Recensement* recensement_supp);
+
+void* supprimerRecensement(Recensement** tab_recensement, int** taille_tab_recensement, Recensement* recensement_supp);
 void detruireTabRecensement(Recensement** tab_recensement, int** taille_tab_recensement);
 
 

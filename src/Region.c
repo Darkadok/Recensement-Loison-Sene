@@ -1,40 +1,62 @@
 #include "Region.h"
 
 
-void creerTabRegion(Region** tab_region, int** taille_tab_region, int taille_nom_reg)
+Region* creerTabRegion(Region* tab_region, int** taille_tab_region, int taille_nom_reg)
 {
 	*taille_tab_region = malloc(sizeof(int));
 	**taille_tab_region = 1;
 
-	*tab_region = malloc(sizeof(Region)*(**taille_tab_region));
-	(*tab_region)->nom_reg = malloc(sizeof(char)*(taille_nom_reg));
-	(*tab_region)->tab_departement = NULL;
-	(*tab_region)->taille_tab_departement = NULL;
+	tab_region = malloc(sizeof(Region));
+	tab_region->nom_reg = malloc(sizeof(char)*(taille_nom_reg + 1));
+	tab_region->tab_departement = NULL;
+	tab_region->taille_tab_departement = NULL;
+
+	return tab_region;
 }
 
 
-void ajouterRegion(Region** tab_region, char nom_reg[], int** taille_tab_region)
+Region* ajouterRegion(Region* tab_region, char nom_reg[], int** taille_tab_region)
 {
-	int i=0;
-	Region* free_tab = NULL;
+	int i = 0;
+	int j;
+	Departement* tab_departement_tmp;
 
-	if(*taille_tab_region == NULL)
+	if (*taille_tab_region == NULL)
 	{
-		creerTabRegion(tab_region, taille_tab_region, strlen(nom_reg));
-		strcpy((*tab_region)->nom_reg, nom_reg);
+		tab_region = creerTabRegion(tab_region, taille_tab_region, strlen(nom_reg));
+		strcpy(tab_region->nom_reg, nom_reg);
 	}
 
 	else
 	{
-		Region* tab_nouveau = malloc (sizeof(Region)*(**taille_tab_region)+1);
-		
-		for(i = 0; i< **taille_tab_region; i++)
+		Region* tab_nouveau = malloc(sizeof(Region)*((**taille_tab_region) + 1));
+
+/******* On recopie le contenu du tableau champs par champs ******/
+
+		for (i = 0; i < **taille_tab_region; i++)
 		{
-			*(tab_nouveau+i) = *((*tab_region)+i);
-		
+			(tab_nouveau + i)->nom_reg = malloc(sizeof(char)* (strlen((tab_region + i)->nom_reg) + 1));
+			strcpy((tab_nouveau + i)->nom_reg, (tab_region + i)->nom_reg);
+
+			(tab_nouveau + i)->tab_departement = NULL;
+			(tab_nouveau + i)->taille_tab_departement = NULL;
+
+/****** Pour chaque case du tableau de régions, on recopie le tableau de départements ******/
+
+			if ((tab_region + i)->tab_departement != NULL)
+			{
+				tab_departement_tmp = (tab_region + i)->tab_departement;
+
+				for (j = 0; j < *((tab_region + i)->taille_tab_departement); j++)
+				{
+					(tab_nouveau + i)->tab_departement = ajouterDepartement((tab_nouveau + i)->tab_departement, (tab_departement_tmp + j)->nom_dep, (tab_departement_tmp + j)->numero_dep, (tab_departement_tmp + j)->prefecture, &((tab_nouveau + i)->taille_tab_departement));
+				}
+			}
 		}
 
-		(tab_nouveau+i)->nom_reg = malloc(sizeof(char)* strlen(nom_reg));
+/****** On remplit la dernière case ******/
+
+		(tab_nouveau+i)->nom_reg = malloc(sizeof(char)* (strlen(nom_reg) + 1));
 
 		strcpy((tab_nouveau+i)->nom_reg, nom_reg);
 
@@ -43,28 +65,31 @@ void ajouterRegion(Region** tab_region, char nom_reg[], int** taille_tab_region)
 
 		(**taille_tab_region)++;
 
-		//free(*tab_region);
-		*tab_region = tab_nouveau;
+		return  tab_nouveau;
 		
 	}
+
+	return tab_region;
 }
 
 void modifierNomRegion(Region* region, char nom_reg[])
 {
 	free(region->nom_reg);
-	region->nom_reg = malloc(sizeof(char)* strlen(nom_reg));
+	region->nom_reg = malloc(sizeof(char)* (strlen(nom_reg) + 1));
 	strcpy(region->nom_reg, nom_reg);
 }
 
-void supprimerRegion(Region** tab_region, Region* region_supp, int** taille_tab_region)
+void* supprimerRegion(Region** tab_region, Region* region_supp, int** taille_tab_region)
 {
-	int i;
+	int i, k;
 	int j=0;
+	Departement* tab_departement_tmp;
 
 
 	if(**taille_tab_region == 1)
 	{
 		detruireTabRegion(tab_region, taille_tab_region);
+		return NULL;
 	}
 
 	else
@@ -73,26 +98,48 @@ void supprimerRegion(Region** tab_region, Region* region_supp, int** taille_tab_
 
 
 
-		for (i=0; i<**taille_tab_region; i++)
+		for (i = 0; i < **taille_tab_region; i++)
 		{
-			if(!strcmp(((*tab_region)+i)->nom_reg,region_supp->nom_reg))
+
+/****** Tant  qu'on ne tombe pas sur la région à supprimer, on recopie le contenu des structures *****/
+			
+			if (!strcmp(((*tab_region) + i)->nom_reg, region_supp->nom_reg))
 			{
-				*(tab_tmp+j) = *((*tab_region)+i);
-				
-				i++;
+
+				(tab_tmp + j)->nom_reg = malloc(sizeof(char)* (strlen(((*tab_region) + i)->nom_reg) + 1));
+				strcpy((tab_tmp + j)->nom_reg, ((*tab_region) + i)->nom_reg);
+
+				(tab_tmp + i)->tab_departement = NULL;
+				(tab_tmp + j)->taille_tab_departement = NULL;
+
+/****** Pour chaque région, on recopie son tableau de départemnts ******/
+
+				if (((*tab_region) + i)->tab_departement != NULL)
+				{
+					tab_departement_tmp = ((*tab_region) + i)->tab_departement;
+
+					for (k = 0; k< *(((*tab_region) + i)->taille_tab_departement); k++)
+					{
+						(tab_tmp + j)->tab_departement = ajouterDepartement((tab_tmp + j)->tab_departement, (tab_departement_tmp + k)->nom_dep, (tab_departement_tmp + k)->numero_dep, (tab_departement_tmp + k)->prefecture, &((tab_tmp + j)->taille_tab_departement));
+					}
+				}
+
+
 				j++;
 			}
+
+/***** Pour la région à supprimer, on détruit les départements, les villes et les recensements ******/
+
 			else
 			{
-				i++;
+				detruireTabDepartement(&(((*tab_region) + i)->tab_departement), &(((*tab_region) + i)->taille_tab_departement));
 			}
+
 		}
 
 		(**taille_tab_region)--;
 
-
-		free(*tab_region);
-		*tab_region = tab_tmp;
+		return tab_tmp;
 	}
 }
 
@@ -106,17 +153,23 @@ void detruireTabRegion(Region** tab_region, int** taille_tab_region)
 
 		for(i=0; i<**taille_tab_region; i++)
 		{	
+			if (((*tab_region) + i)->nom_reg != NULL)
+			{
+				free(((*tab_region) + i)->nom_reg);
+				((*tab_region) + i)->nom_reg = NULL;
+			}
+
 			detruireTabDepartement(&(((*tab_region)+i)->tab_departement), &(((*tab_region)+i)->taille_tab_departement));
 		}
 
-		/*for(i=0; i<**taille_tab_region; i++)
-		{
-			free(((*tab_region)+i)->nom_reg);
-			((*tab_region)+i)->nom_reg = NULL;
-		}*/
-
 		free(*tab_region);
 		*tab_region = NULL;
+	}
+
+	if (*taille_tab_region != NULL)
+	{
+		free(*taille_tab_region);
+		*taille_tab_region = NULL;
 	}
 
 }
