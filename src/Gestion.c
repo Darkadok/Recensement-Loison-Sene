@@ -87,7 +87,7 @@ void lectureFichierDepartement(Region** tab_region, int** taille_tab_region)// =
 			if (!is_departement_exist)
 			{
 
-				ajouterDepartement(ref_tab_departement, departement_tmp, numerodep_tmp, ref_taille_tab_departement);
+				//ajouterDepartement(ref_tab_departement, departement_tmp, numerodep_tmp, ref_taille_tab_departement);
 				// ajouter prefecture
 
 				printf("Departement cree");
