@@ -12,9 +12,9 @@ Departement* creerTabDepartement(Departement* tab_departement, int** taille_tab_
 	tab_departement->taille_tab_ville = NULL;
 	tab_departement->prefecture = malloc(sizeof(wchar_t) * (wcslen(prefecture) + 1));
 
-	strcpy(tab_departement->nom_dep, nom_dep);
+	wcscpy(tab_departement->nom_dep, nom_dep);
 	tab_departement->numero_dep = numero_dep;
-	strcpy(tab_departement->prefecture, prefecture);
+	wcscpy(tab_departement->prefecture, prefecture);
 
 	return tab_departement;
 }
@@ -41,7 +41,7 @@ Departement* ajouterDepartement(Departement* tab_departement, wchar_t nom_dep[],
 		for(i = 0; i<**taille_tab_departement; i++)
 		{
 			(tab_nouveau + i)->nom_dep = malloc(sizeof(wchar_t)* (wcslen((tab_departement+i)->nom_dep) + 1));
-			strcpy((tab_nouveau + i)->nom_dep, (tab_departement + i)->nom_dep);
+			wcscpy((tab_nouveau + i)->nom_dep, (tab_departement + i)->nom_dep);
 
 			(tab_nouveau + i)->numero_dep = (tab_departement + i)->numero_dep;
 
@@ -67,7 +67,7 @@ Departement* ajouterDepartement(Departement* tab_departement, wchar_t nom_dep[],
 			if ((tab_departement + i)->prefecture != NULL)
 			{
 				(tab_nouveau + i)->prefecture = malloc(sizeof(Ville) *(wcslen((tab_departement+i)->prefecture) + 1));
-				strcpy((tab_nouveau + i)->prefecture, (tab_departement + i)->prefecture);
+				wcscpy((tab_nouveau + i)->prefecture, (tab_departement + i)->prefecture);
 			}
 			
 		}
@@ -75,12 +75,12 @@ Departement* ajouterDepartement(Departement* tab_departement, wchar_t nom_dep[],
 /****** On remplit la dernière case ******/
 
 		(tab_nouveau + i)->nom_dep = malloc(sizeof(wchar_t)* (wcslen(nom_dep) + 1));
-		strcpy((tab_nouveau+i)->nom_dep, nom_dep);
+		wcscpy((tab_nouveau+i)->nom_dep, nom_dep);
 		
 		(tab_nouveau+i)->numero_dep = numero_dep;
 
 		(tab_nouveau + i)->prefecture = malloc(sizeof(wchar_t) * (wcslen(prefecture) + 1));
-		strcpy((tab_nouveau + i)->prefecture, prefecture);
+		wcscpy((tab_nouveau + i)->prefecture, prefecture);
 
 		(tab_nouveau+i)->tab_ville = NULL;
 		(tab_nouveau+i)->taille_tab_ville = NULL; 
@@ -100,7 +100,7 @@ int rechercheDepartementByNom(Departement* tab_departement, int* taille_tab_depa
 {
 	for (int i = 0; i < *taille_tab_departement; i++)
 	{
-		if (!strcmp((tab_departement + i)->nom_dep, nom_dep))
+		if (!wcscmp((tab_departement + i)->nom_dep, nom_dep))
 		{
 			return i;
 		}
@@ -126,7 +126,7 @@ int rechercheDepartementByPrefecture(Departement* tab_departement, int* taille_t
 {
 	for (int i = 0; i < *taille_tab_departement; i++)
 	{
-		if (!strcmp((tab_departement + i)->prefecture, prefecture))
+		if (!wcscmp((tab_departement + i)->prefecture, prefecture))
 		{
 			return i;
 		}
@@ -140,7 +140,7 @@ void modifierNomDepartement(Departement* departement, wchar_t nom_dep[])
 {
 	free(departement->nom_dep);
 	departement->nom_dep = malloc(sizeof(wchar_t)* (wcslen(nom_dep) + 1));
-	strcpy(departement->nom_dep, nom_dep);
+	wcscpy(departement->nom_dep, nom_dep);
 }
 
 void modifierNumeroDepartement(Departement* departement, int numero_dep)
@@ -152,7 +152,7 @@ void modifierPrefectureDepartement(Departement* departement, wchar_t* prefecture
 {
 	free(departement->prefecture);
 	departement->prefecture = malloc(sizeof(wchar_t) * (wcslen(prefecture) + 1));
-	strcpy(departement->prefecture, prefecture);
+	wcscpy(departement->prefecture, prefecture);
 }
 
 
@@ -179,10 +179,10 @@ void* supprimerDepartement(Departement** tab_departement, Departement* departeme
 /****** Tant  qu'on ne tombe pas sur le département à supprimer, on recopie le contenu des structures *****/
 
 
-			if (strcmp(((*tab_departement) + i)->nom_dep, departement_supp->nom_dep))
+			if (wcscmp(((*tab_departement) + i)->nom_dep, departement_supp->nom_dep))
 			{
 				(tab_tmp + j)->nom_dep = malloc(sizeof(wchar_t)* (wcslen(((*tab_departement) + i)->nom_dep) + 1));
-				strcpy((tab_tmp + j)->nom_dep, ((*tab_departement) + i)->nom_dep);
+				wcscpy((tab_tmp + j)->nom_dep, ((*tab_departement) + i)->nom_dep);
 
 				((tab_tmp) + j)->numero_dep = ((*tab_departement) + i)->numero_dep;
 
@@ -208,7 +208,7 @@ void* supprimerDepartement(Departement** tab_departement, Departement* departeme
 				if (((*tab_departement) + i)->prefecture != NULL)
 				{
 					(tab_tmp + j)->prefecture = malloc(sizeof(Ville) *(wcslen(((*tab_departement) + i)->prefecture) + 1));
-					strcpy((tab_tmp + j)->prefecture, ((*tab_departement) + i)->prefecture);
+					wcscpy((tab_tmp + j)->prefecture, ((*tab_departement) + i)->prefecture);
 				}
 				
 				j++;
