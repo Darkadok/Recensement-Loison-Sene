@@ -11,7 +11,7 @@ Region* creerTabRegion(Region* tab_region, int** taille_tab_region, wchar_t nom_
 	tab_region->tab_departement = NULL;
 	tab_region->taille_tab_departement = NULL;
 
-	strcpy(tab_region->nom_reg, nom_reg);
+	wcscpy(tab_region->nom_reg, nom_reg);
 
 	return tab_region;
 }
@@ -37,7 +37,7 @@ Region* ajouterRegion(Region* tab_region, wchar_t nom_reg[], int** taille_tab_re
 		for (i = 0; i < **taille_tab_region; i++)
 		{
 			(tab_nouveau + i)->nom_reg = malloc(sizeof(wchar_t)* (wcslen((tab_region + i)->nom_reg) + 1));
-			strcpy((tab_nouveau + i)->nom_reg, (tab_region + i)->nom_reg);
+			wcscpy((tab_nouveau + i)->nom_reg, (tab_region + i)->nom_reg);
 
 			(tab_nouveau + i)->tab_departement = NULL;
 			(tab_nouveau + i)->taille_tab_departement = NULL;
@@ -59,7 +59,7 @@ Region* ajouterRegion(Region* tab_region, wchar_t nom_reg[], int** taille_tab_re
 
 		(tab_nouveau+i)->nom_reg = malloc(sizeof(wchar_t)* (wcslen(nom_reg) + 1));
 
-		strcpy((tab_nouveau+i)->nom_reg, nom_reg);
+		wcscpy((tab_nouveau+i)->nom_reg, nom_reg);
 
 		(tab_nouveau+i)->tab_departement = NULL;
 		(tab_nouveau+i)->taille_tab_departement = NULL; 
@@ -77,7 +77,7 @@ void modifierNomRegion(Region* region, wchar_t nom_reg[])
 {
 	free(region->nom_reg);
 	region->nom_reg = malloc(sizeof(wchar_t)* (wcslen(nom_reg) + 1));
-	strcpy(region->nom_reg, nom_reg);
+	wcscpy(region->nom_reg, nom_reg);
 }
 
 void* supprimerRegion(Region** tab_region, Region* region_supp, int** taille_tab_region)
@@ -104,11 +104,11 @@ void* supprimerRegion(Region** tab_region, Region* region_supp, int** taille_tab
 
 /****** Tant  qu'on ne tombe pas sur la région à supprimer, on recopie le contenu des structures *****/
 			
-			if (strcmp(((*tab_region) + i)->nom_reg, region_supp->nom_reg))
+			if (wcscmp(((*tab_region) + i)->nom_reg, region_supp->nom_reg))
 			{
 
 				(tab_tmp + j)->nom_reg = malloc(sizeof(wchar_t)* (wcslen(((*tab_region) + i)->nom_reg) + 1));
-				strcpy((tab_tmp + j)->nom_reg, ((*tab_region) + i)->nom_reg);
+				wcscpy((tab_tmp + j)->nom_reg, ((*tab_region) + i)->nom_reg);
 
 				(tab_tmp + j)->tab_departement = NULL;
 				(tab_tmp + j)->taille_tab_departement = NULL;
@@ -148,7 +148,7 @@ int rechercheRegionByNom(Region* tab_region, int* taille_tab_region, wchar_t nom
 {
 	for (int i = 0; i < *taille_tab_region; i++)
 	{
-		if (!strcmp((tab_region + i)->nom_reg, nom_reg))
+		if (!wcscmp((tab_region + i)->nom_reg, nom_reg))
 		{
 			return i;
 		}
