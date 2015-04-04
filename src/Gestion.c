@@ -18,12 +18,12 @@ int nombrePointVirguleDansLigne(FILE* fichier)
 void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a remplacer par Dépendances
 {
 	FILE* fichier = NULL;
-	wchar_t lettre = NULL;
 	wchar_t ligne_en_cours[1000];
 	wchar_t numerodep_tmp[3];
 	wchar_t departement_tmp[200];
 	wchar_t prefecture_tmp[200];
 	wchar_t nom_region_tmp[200];
+	
 	wchar_t* token = NULL;
 	int is_departement_exist = 0;
 	int is_region_exist = 0;
@@ -50,10 +50,8 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
  		*taille_tab_region = malloc(sizeof(int));
 		**taille_tab_region = 0;
 
-		while (lettre != 'EOF')// parcours le fichier par ligne
+		while ((fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier)) != NULL)// parcours le fichier par ligne
 		{
-
-			fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier);
 
 			token = wcstok(ligne_en_cours, ";");
 			wcscpy(numerodep_tmp, token);
@@ -72,7 +70,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 				}
 			}
 			
-			if (!is_region_exist)//sinon on l'ajoute
+/*			if (!is_region_exist)//sinon on l'ajoute
 			{
 				ajouterRegion(tab_region, nom_region_tmp, taille_tab_region);
 
@@ -104,18 +102,17 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 
 
 			lettre = fgetwc(fichier);
-			i++;
+			i++;*/
 		}
-
+	
 		fclose(fichier);
-
+	}
 // ****************--------------------- deuxieme fichier, fichier des recensements  ---------------******************************
 
 		fichier = NULL;
-		lettre = NULL;
 		token = NULL;
-		int i = NULL;
-		wchar_t ligne_en_cours[1000];
+		i = NULL;
+
 		int nombre_recensements = 0;
 
 #if _DEBUG
@@ -132,6 +129,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 		{
 
 			nombre_recensements = nombrePointVirguleDansLigne(fichier) - 2;
+			int tableau_annee_reference[50];
 			rewind(fichier);
 			fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier);
 			token = wcstok(ligne_en_cours, ";");
@@ -146,11 +144,13 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 			{
 				token = wcstok(NULL, ";");
 				wcscpy(ligne_en_cours, token);
+				tableau_annee_reference[i] = _wtoi(ligne_en_cours);
 
 				/* ligne en cours => tableau contenant les ann�es de references.*/
 			}
 			token = wcstok(NULL, "\n");
 			wcscpy(ligne_en_cours, token);
+			tableau_annee_reference[i] = _wtoi(ligne_en_cours);
 			/* ligne en cours => tableau contenant les ann�es de references � la derni�re case.*/
 			/*pour toutes les ann�es*/
 			i = 0;
@@ -181,9 +181,6 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 		}
 
 		fclose(fichier);
-
-
-	}
 }
 
 void ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
@@ -234,7 +231,7 @@ void ecritureFichierRecensements(Region* tab_region, int* taille_tab_region)
 	{
 		return NULL;
 	}
-	else
+	else// ! Les rencement sont par ordre antechronologique !
 	{
 		int nombre_recensements = nombrePointVirguleDansLigne(fichier) - 2;
 		fwprintf(fichier, "%ls;%ls;%ls;", "DEPCOM", "DEP", "LIBMIN");//cas de la premiere ligne
