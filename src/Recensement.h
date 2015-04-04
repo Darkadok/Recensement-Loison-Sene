@@ -1,3 +1,13 @@
+/*
+Override
+Recensement.h
+
+2014/2015
+
+@author Alexandre Courcoul, Merlin Loison & Massamba Sène
+
+**/
+
 #ifndef RECENSEMENT_H
 #define RECENSEMENT_H
 

@@ -1,3 +1,13 @@
+/*
+Override
+Region.c
+
+2014/2015
+
+@author Alexandre Courcoul, Merlin Loison & Massamba Sène
+
+**/
+
 #include "Region.h"
 
 

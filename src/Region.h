@@ -1,6 +1,16 @@
 #ifndef REGION_H
 #define REGION_H
 
+/*
+Override
+Region.h
+
+2014/2015
+
+@author Alexandre Courcoul, Merlin Loison & Massamba Sène
+
+**/
+
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>

@@ -1,3 +1,14 @@
+/*
+Override
+Departement.h
+
+2014/2015
+
+@author Alexandre Courcoul, Merlin Loison & Massamba Sène
+
+**/
+
+
 #ifndef DEPARTEMENT_H
 #define DEPARTEMENT_H
 
@@ -11,24 +22,24 @@ typedef struct Departement Departement;
 
 struct Departement {
 
-wchar_t* nom_dep;
-int numero_dep;
-wchar_t* prefecture;
-Ville* tab_ville;
-int* taille_tab_ville;
+	wchar_t* nom_dep;
+	wchar_t* numero_dep;
+	wchar_t* prefecture;
+	Ville* tab_ville;
+	int* taille_tab_ville;
 };
 
-Departement* creerTabDepartement(Departement* tab_departement, int** taille_tab_departement, wchar_t nom_dep[], int numero_dep, wchar_t prefecture[]);
+Departement* creerTabDepartement(Departement* tab_departement, int** taille_tab_departement, wchar_t nom_dep[], wchar_t numero_dep[], wchar_t prefecture[]);
 Departement* ajouterDepartement(Departement* tab_departement, wchar_t nom_dep[], int numero_dep, wchar_t prefecture[], int** taille_tab_departement);
 
 void afficherDepartement(Departement* departement);
 
 int rechercheDepartementByNom(Departement* tab_departement, int* taille_tab_departement, wchar_t nom_dep[]);
-int rechercheDepartementByNumDep(Departement* tab_departement, int* taille_tab_departement, int numero_dep);
+int rechercheDepartementByNumDep(Departement* tab_departement, int* taille_tab_departement, wchar_t numero_dep[]);
 int rechercheDepartementByPrefecture(Departement* tab_departement, int* taille_tab_departement, wchar_t prefecture[]);
 
 void modifierNomDepartement(Departement* departement, wchar_t nom_dep[]);
-void modifierNumeroDepartement(Departement* departement, int numero_dep);
+void modifierNumeroDepartement(Departement* departement, wchar_t numero_dep[]);
 void modifierPrefectureDepartement(Departement* departement, wchar_t* prefecture);
 
 void* supprimerDepartement(Departement** departement, Departement* departement_supp, int** taille_tab_departement);

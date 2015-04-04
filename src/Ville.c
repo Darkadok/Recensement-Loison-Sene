@@ -1,76 +1,90 @@
+/*
+Override
+Ville.c
+
+2014/2015
+
+@author Alexandre Courcoul, Merlin Loison & Massamba Sène
+
+**/
+
 #include "Ville.h"
 
 
-Ville* creerTabVille(Ville* tab_ville, int** taille_tab_ville, wchar_t nom_ville[], int dep_com)
+Ville* creerTabVille(Ville* tab_ville, int** taille_tab_ville, wchar_t nom_ville[], wchar_t dep_com[])
 {
 	taille_tab_ville = malloc(sizeof(int));
 	**taille_tab_ville = 1;
 
 	tab_ville = malloc(sizeof(Ville)*(**taille_tab_ville));
 	tab_ville->nom_ville = malloc(sizeof(wchar_t)*(wcslen(nom_ville) + 1));
+	tab_ville->dep_com = malloc(sizeof(wchar_t)*(wcslen(dep_com) + 1));
 	tab_ville->tab_recensement = NULL;
 	tab_ville->taille_tab_recensement = NULL;
 
 	wcscpy(tab_ville->nom_ville, nom_ville);
-	tab_ville->dep_com = dep_com;
+	wcscpy(tab_ville->dep_com, dep_com);
 
 	return tab_ville;
 }
 
 
-Ville* ajouterVille(Ville* tab_ville, wchar_t nom_ville[], int dep_com, int** taille_tab_ville)
+Ville* ajouterVille(Ville* tab_ville, wchar_t nom_ville[], wchar_t dep_com[], int** taille_tab_ville)
 {
-	int i=0;
+	int i = 0;
 	int j;
 	Recensement* tab_recensement_tmp;
 
 
-	if(*taille_tab_ville == NULL)
+	if (*taille_tab_ville == NULL)
 	{
-		tab_ville =  creerTabVille(tab_ville, taille_tab_ville,nom_ville, dep_com);
+		tab_ville = creerTabVille(tab_ville, taille_tab_ville, nom_ville, dep_com);
 	}
 
 	else
 	{
-		Ville* tab_nouveau = malloc (sizeof(Ville)*((**taille_tab_ville) + 1));
+		Ville* tab_nouveau = malloc(sizeof(Ville)*((**taille_tab_ville) + 1));
 
-/******* On recopie le contenu du tableau champs par champs ******/
+		/******* On recopie le contenu du tableau champs par champs ******/
 
-		for(i = 0; i<**taille_tab_ville; i++)
+		for (i = 0; i<**taille_tab_ville; i++)
 		{
 			(tab_nouveau + i)->nom_ville = malloc(sizeof(wchar_t)* (wcslen((tab_ville + i)->nom_ville) + 1));
 			wcscpy((tab_nouveau + i)->nom_ville, (tab_ville + i)->nom_ville);
 
-			(tab_nouveau + i)->dep_com = (tab_ville + i)->dep_com;
+			tab_ville->dep_com = malloc(sizeof(wchar_t)*(wcslen(dep_com) + 1));
+			wcscpy((tab_nouveau + i)->dep_com, (tab_ville + i)->dep_com);
 
 			(tab_nouveau + i)->tab_recensement = NULL;
 			(tab_nouveau + i)->taille_tab_recensement = NULL;
 
 
-/****** Pour chaque case du tableau de villes, on recopie le tableau de recensements ******/
+			/****** Pour chaque case du tableau de villes, on recopie le tableau de recensements ******/
 
 			if ((tab_ville + i)->tab_recensement != NULL)
 			{
 				tab_recensement_tmp = (tab_ville + i)->tab_recensement;
 
 				for (j = 0; j < *((tab_ville + i)->taille_tab_recensement); j++)
-				{	
-				
+				{
+
 					(tab_nouveau + i)->tab_recensement = ajouterRecensement((tab_nouveau + i)->tab_recensement, (tab_recensement_tmp + j)->annee, (tab_recensement_tmp + j)->valeur_recen, &((tab_nouveau + i)->taille_tab_recensement));
 				}
 			}
 		}
 
 
-/****** On remplit la dernière case ******/
+		/****** On remplit la dernière case ******/
 
 		(tab_nouveau + i)->nom_ville = malloc(sizeof(wchar_t)* (wcslen(nom_ville) + 1));
 
-		wcscpy((tab_nouveau+i)->nom_ville, nom_ville);
-		(tab_nouveau+i)->dep_com =  dep_com;
+		wcscpy((tab_nouveau + i)->nom_ville, nom_ville);
 
-		(tab_nouveau+i)->tab_recensement = NULL;
-		(tab_nouveau+i)->taille_tab_recensement = NULL; 
+		tab_nouveau->dep_com = malloc(sizeof(wchar_t)*(wcslen(dep_com) + 1));
+		wcscpy((tab_nouveau + i)->dep_com, (tab_ville + i)->dep_com);
+
+		(tab_nouveau + i)->tab_recensement = NULL;
+		(tab_nouveau + i)->taille_tab_recensement = NULL;
 
 		(**taille_tab_ville)++;
 
@@ -95,11 +109,11 @@ int rechercheVilleByNom(Ville* tab_ville, int* taille_tab_ville, wchar_t nom_vil
 	return -1;
 }
 
-int rechercheVilleByDepCom(Ville* tab_ville, int* taille_tab_ville, int dep_com)
+int rechercheVilleByDepCom(Ville* tab_ville, int* taille_tab_ville, wchar_t dep_com[])
 {
 	for (int i = 0; i < *taille_tab_ville; i++)
 	{
-		if ((tab_ville + i)->dep_com == dep_com)
+		if (wcscpy((tab_ville + i)->dep_com, dep_com))
 		{
 			return i;
 		}
@@ -134,11 +148,11 @@ void modifierDepComVille(Ville* ville, int dep_com)
 void* supprimerVille(Ville** tab_ville, int** taille_tab_ville, Ville* ville_supp)
 {
 	int i;
-	int j=0;
+	int j = 0;
 	int k;
 	Recensement* tab_recensement_tmp;
 
-	if(**taille_tab_ville == 1)
+	if (**taille_tab_ville == 1)
 	{
 		detruireTabVille(tab_ville, taille_tab_ville);
 		return NULL;
@@ -147,25 +161,26 @@ void* supprimerVille(Ville** tab_ville, int** taille_tab_ville, Ville* ville_sup
 	else
 	{
 
-		Ville* tab_tmp = malloc(sizeof(Ville)*((**taille_tab_ville)-1));
+		Ville* tab_tmp = malloc(sizeof(Ville)*((**taille_tab_ville) - 1));
 
-		for (i=0; i<**taille_tab_ville; i++)
+		for (i = 0; i<**taille_tab_ville; i++)
 		{
 
-/****** Tant  qu'on ne tombe pas sur la ville à supprimer, on recopie le contenu des structures *****/
+			/****** Tant  qu'on ne tombe pas sur la ville à supprimer, on recopie le contenu des structures *****/
 
-			if(wcscmp(((*tab_ville)+i)->nom_ville, ville_supp->nom_ville))
+			if (wcscmp(((*tab_ville) + i)->nom_ville, ville_supp->nom_ville))
 			{
 				(tab_tmp + j)->nom_ville = malloc(sizeof(wchar_t)* (wcslen(((*tab_ville) + i)->nom_ville) + 1));
 				wcscpy((tab_tmp + j)->nom_ville, ((*tab_ville) + i)->nom_ville);
 
-				(tab_tmp + j)->dep_com = ((*tab_ville) + i)->dep_com;
+				tab_tmp->dep_com = malloc(sizeof(wchar_t)*(wcslen(((*tab_ville) + i)->dep_com) + 1));
+				wcscpy((tab_tmp + j)->dep_com, ((*tab_ville) + i)->dep_com);
 
 				(tab_tmp + j)->tab_recensement = NULL;
 				(tab_tmp + j)->taille_tab_recensement = NULL;
 
 
-/****** Pour chaque ville, on recopie son tableau de rencensements ******/
+				/****** Pour chaque ville, on recopie son tableau de rencensements ******/
 
 				if (((*tab_ville) + i)->tab_recensement != NULL)
 				{
@@ -181,7 +196,7 @@ void* supprimerVille(Ville** tab_ville, int** taille_tab_ville, Ville* ville_sup
 				j++;
 			}
 
-/****** Pour la ville à supprimer, on détruit les recensements ******/
+			/****** Pour la ville à supprimer, on détruit les recensements ******/
 
 			else
 			{
@@ -190,7 +205,7 @@ void* supprimerVille(Ville** tab_ville, int** taille_tab_ville, Ville* ville_sup
 		}
 
 		(**taille_tab_ville)--;
-		
+
 		return tab_tmp;
 	}
 }
@@ -199,25 +214,31 @@ void detruireTabVille(Ville** tab_ville, int** taille_tab_ville)
 {
 	int i;
 
-	if(*tab_ville != NULL)
+	if (*tab_ville != NULL)
 	{
 
-		for(i=0; i<**taille_tab_ville; i++)
-		{	
-			detruireTabRecensement(&(((*tab_ville)+i)->tab_recensement), &(((*tab_ville)+i)->taille_tab_recensement));
+		for (i = 0; i<**taille_tab_ville; i++)
+		{
+			detruireTabRecensement(&(((*tab_ville) + i)->tab_recensement), &(((*tab_ville) + i)->taille_tab_recensement));
 		}
 
-		for(i=0; i<**taille_tab_ville; i++)
+		for (i = 0; i<**taille_tab_ville; i++)
 		{
 			if (((*tab_ville) + i)->nom_ville != NULL)
 			{
-				free(((*tab_ville)+i)->nom_ville);
-				((*tab_ville)+i)->nom_ville = NULL;
+				free(((*tab_ville) + i)->nom_ville);
+				((*tab_ville) + i)->nom_ville = NULL;
+			}
+
+			if (((*tab_ville) + i)->dep_com != NULL)
+			{
+				free(((*tab_ville) + i)->dep_com);
+				((*tab_ville) + i)->dep_com = NULL;
 			}
 		}
 
 		free(*tab_ville);
-		*tab_ville=NULL;
+		*tab_ville = NULL;
 	}
 
 	if (*taille_tab_ville != NULL)
