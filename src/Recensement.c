@@ -52,6 +52,28 @@ Recensement* ajouterRecensement(Recensement* tab_recensement, char annee[], int 
 	return tab_recensement;
 }
 
+int rechercheRecensement(Recensement* tab_recensement, int* taille_tab_recensement, char annee[])
+{
+	for (int i = 0; i < *taille_tab_recensement; i++)
+	{
+		if (!strcmp((tab_recensement + i)->annee, annee))
+		{
+			return i;
+		}
+	}
+
+	return -1;
+}
+
+void afficherRecensement(Recensement* recensement)
+{
+
+	wprintf(L"%ls personnes ont %lct%c recens%lces en %d.", recensement->annee, 130, 130, 130, recensement->valeur_recen);
+
+}
+
+
+
 void modifierValeurRecensement(Recensement* recensement, int valeur_recen)
 {
 	recensement->valeur_recen = valeur_recen;
@@ -84,7 +106,7 @@ void* supprimerRecensement(Recensement** tab_recensement, int** taille_tab_recen
 
 		for (i=0; i<**taille_tab_recensement; i++)
 		{
-			if(!strcmp(((*tab_recensement)+i)->annee, recensement_supp->annee))
+			if(strcmp(((*tab_recensement)+i)->annee, recensement_supp->annee))
 			{
 				(tab_tmp + j)->valeur_recen = ((*tab_recensement) + i)->valeur_recen;
 				strcpy((tab_tmp + j)->annee, ((*tab_recensement) + i)->annee);

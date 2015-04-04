@@ -3,6 +3,8 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
+#include <wchar.h>
 
 
 typedef struct Recensement Recensement;
@@ -16,9 +18,9 @@ int valeur_recen;
 Recensement* creerTabRecensement(Recensement* tab_recensement, char annee[], int valeur_recen, int** taille_tab_recensement);
 Recensement* ajouterRecensement(Recensement* tab_recensement, char annee[], int valeur_recen, int** taille_tab_recensement);
 
-void afficherRecensement(Recensement* recensement);
+void afficherRecensement(Recensement* recensement, char tab_accent[]);
 
-int rechercheRecensement(Recensement* tab_recensement, char annee[]);
+int rechercheRecensement(Recensement* tab_recensement, int* taille_tab_recensement, char annee[]);
 
 void modifierValeurRecensement(Recensement* recensement, int valeur_recen);
 void modifierAnneeRecensement(Recensement* recensement, char annee[]);
