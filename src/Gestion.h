@@ -1,3 +1,13 @@
+/*
+Override
+Gestion.h
+
+2014/2015
+
+@author Alexandre Courcoul, Merlin Loison & Massamba Sène
+
+**/
+
 #ifndef GESTION_H
 #define GESTION_H
 

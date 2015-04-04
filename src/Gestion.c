@@ -1,4 +1,14 @@
-﻿#include "Gestion.h"
+﻿/*
+Override
+Gestion.c
+
+2014/2015
+
+@author Alexandre Courcoul, Merlin Loison & Massamba Sène
+
+**/
+
+#include "Gestion.h"
 int nombrePointVirguleDansLigne(FILE* fichier)
 {
 	wchar_t lettre = NULL;
