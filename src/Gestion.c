@@ -15,14 +15,16 @@ int nombrePointVirguleDansLigne(FILE* fichier)
 }
 
 
-void lectureFichierDepartement(Region** tab_region, int** taille_tab_region)// => a remplacer par Dépendances de Region
+void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a remplacer par Dépendances
 {
 	FILE* fichier = NULL;
 	wchar_t lettre = NULL;
+	wchar_t ligne_en_cours[1000];
 	wchar_t numerodep_tmp[3];
 	wchar_t departement_tmp[200];
 	wchar_t prefecture_tmp[200];
-	wchar_t region_tmp[200];
+	wchar_t nom_region_tmp[200];
+	wchar_t* token = NULL;
 	int is_departement_exist = 0;
 	int is_region_exist = 0;
 	int i = 0;
@@ -31,6 +33,8 @@ void lectureFichierDepartement(Region** tab_region, int** taille_tab_region)// =
 	Departement* tab_departement = NULL;
 	int* ref_tab_departement = NULL;
 
+
+// ****************--------------------- premier fichier, fichier des departements ---------------******************************
 #if _DEBUG
 	fichier = fopen("../../../../GIT/Recensement/Import/departements.csv", "r");
 #endif
@@ -48,13 +52,20 @@ void lectureFichierDepartement(Region** tab_region, int** taille_tab_region)// =
 
 		while (lettre != 'EOF')// parcours le fichier par ligne
 		{
-			fwscanf(fichier, "%3[^;];%200[^;];%200[^;];%ls", numerodep_tmp, departement_tmp, prefecture_tmp, region_tmp);
-			wprintf("%ls %ls %ls %ls", numerodep_tmp, departement_tmp, prefecture_tmp, region_tmp);
-		
 
+			fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier);
+
+			token = wcstok(ligne_en_cours, ";");
+			wcscpy(numerodep_tmp, token);
+			token = wcstok(NULL, ";");
+			wcscpy(departement_tmp, token);
+			token = wcstok(NULL, ";");
+			wcscpy(prefecture_tmp, token);
+			token = wcstok(NULL, "\n");
+			wcscpy(nom_region_tmp, token);
 			for (int compteur_region = 0; compteur_region < **taille_tab_region; compteur_region++)
 			{
-				if (!wcscmp(*(((*tab_region) + compteur_region)->nom_reg), region_tmp))//on verifie si la region est deja cree
+				if (!wcscmp(*(((*tab_region) + compteur_region)->nom_reg), nom_region_tmp))//on verifie si la region est deja cree
 				{
 					is_region_exist = 1;
 					
@@ -63,15 +74,13 @@ void lectureFichierDepartement(Region** tab_region, int** taille_tab_region)// =
 			
 			if (!is_region_exist)//sinon on l'ajoute
 			{
-
-				ajouterRegion(tab_region, region_tmp, taille_tab_region);
+				ajouterRegion(tab_region, nom_region_tmp, taille_tab_region);
 
 				wprintf("Région creee");
 				*tab_region = ((*tab_region) + i)->tab_departement;
 				ref_tab_departement = &(((*tab_region) + i) -> tab_departement);
 				taille_tab_departement = ((*tab_region) + i)->taille_tab_departement;//plantouile à mort
 				ref_taille_tab_departement = &(((*tab_region) + i)->taille_tab_departement);
-
 			}
 
 			
@@ -99,85 +108,85 @@ void lectureFichierDepartement(Region** tab_region, int** taille_tab_region)// =
 		}
 
 		fclose(fichier);
-	}
-}
 
-void lectureFichierRecensements()
-{
-	FILE* fichier = NULL;
-	wchar_t lettre = NULL;
-	wchar_t* token = NULL;
-	int i;
-	wchar_t ligne_en_cours[1000];
-	int nombre_recensements = 0;
+// ****************--------------------- deuxieme fichier, fichier des recensements  ---------------******************************
+
+		fichier = NULL;
+		lettre = NULL;
+		token = NULL;
+		int i = NULL;
+		wchar_t ligne_en_cours[1000];
+		int nombre_recensements = 0;
 
 #if _DEBUG
-	fichier = fopen("../../../../GIT/Recensement/Import/recensements.csv", "r");
+		fichier = fopen("../../../../GIT/Recensement/Import/recensements.csv", "r");
 #endif
 #if !_DEBUG
-	fichier = fopen("../Import/recensements.csv", "r");
+		fichier = fopen("../Import/recensements.csv", "r");
 #endif
-	if (fichier == NULL)
-	{
-		return NULL;
-	}
-	else
-	{
-		
-		nombre_recensements = nombrePointVirguleDansLigne(fichier) - 2;
-		rewind(fichier);
-		fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier);
-		token = wcstok(ligne_en_cours, ";");
-		wcscpy(ligne_en_cours, token);
-		for (i = 0; i < 2; i++)
+		if (fichier == NULL)
 		{
-			token = wcstok(NULL, ";");
-			wcscpy(ligne_en_cours, token);
+			return NULL;
 		}
-
-		for (i = 0; i<nombre_recensements - 1; i++)
-		{
-			token = wcstok(NULL, ";");
-			wcscpy(ligne_en_cours, token);
-
-			/* ligne en cours => tableau contenant les ann�es de references.*/
-		}
-		token = wcstok(NULL, "\n");
-		wcscpy(ligne_en_cours, token);
-		/* ligne en cours => tableau contenant les ann�es de references � la derni�re case.*/
-		/*pour toutes les ann�es*/
-		i = 0;
-		while (fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier) != NULL)
+		else
 		{
 
+			nombre_recensements = nombrePointVirguleDansLigne(fichier) - 2;
+			rewind(fichier);
+			fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier);
 			token = wcstok(ligne_en_cours, ";");
 			wcscpy(ligne_en_cours, token);
-			/*depcom_ville -> ligne en cours*/
-
-			token = wcstok(NULL, ";");
-			wcscpy(ligne_en_cours, token);
-			/*dep_ville -> ligne en cours*/
-			token = wcstok(NULL, ";");
-			wcscpy(ligne_en_cours, token);
-			/*nom_ville -> ligne en cours*/
-			for (i = 0; i < nombre_recensements - 1; i++)
+			for (i = 0; i < 2; i++)
 			{
 				token = wcstok(NULL, ";");
 				wcscpy(ligne_en_cours, token);
-				/*valeur_recensement_ville_+i-> ligne en cours*/
+			}
+
+			for (i = 0; i<nombre_recensements - 1; i++)
+			{
+				token = wcstok(NULL, ";");
+				wcscpy(ligne_en_cours, token);
+
+				/* ligne en cours => tableau contenant les ann�es de references.*/
 			}
 			token = wcstok(NULL, "\n");
 			wcscpy(ligne_en_cours, token);
 			/* ligne en cours => tableau contenant les ann�es de references � la derni�re case.*/
+			/*pour toutes les ann�es*/
+			i = 0;
+			while (fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier) != NULL)
+			{
 
+				token = wcstok(ligne_en_cours, ";");
+				wcscpy(ligne_en_cours, token);
+				/*depcom_ville -> ligne en cours*/
+
+				token = wcstok(NULL, ";");
+				wcscpy(ligne_en_cours, token);
+				/*dep_ville -> ligne en cours*/
+				token = wcstok(NULL, ";");
+				wcscpy(ligne_en_cours, token);
+				/*nom_ville -> ligne en cours*/
+				for (i = 0; i < nombre_recensements - 1; i++)
+				{
+					token = wcstok(NULL, ";");
+					wcscpy(ligne_en_cours, token);
+					/*valeur_recensement_ville_+i-> ligne en cours*/
+				}
+				token = wcstok(NULL, "\n");
+				wcscpy(ligne_en_cours, token);
+				/* ligne en cours => tableau contenant les ann�es de references � la derni�re case.*/
+
+			}
 		}
+
+		fclose(fichier);
+
+
 	}
-	
-	fclose(fichier);
 }
 
-
-void ecritureFichierDepartement(Region* tab_region, int* taille_tab_region)
+void ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
 {
 	FILE* fichier = NULL;
 	int i;

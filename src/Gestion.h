@@ -8,8 +8,7 @@
 #include <stdio.h>
 int nombrePointVirguleDansLigne(FILE* fichier);
 
-void lectureFichierDepartement(Region** tab_region, int** taille_tab_region);
-void ecritureFichierDepartement(Region* tab_region, int* taille_tab_region);
-void lectureFichierRecensements();
-void ecritureFichierRecensements();
+void lectureFichiers(Region** tab_region, int** taille_tab_region);
+void ecritureFichierDepartements(Region* tab_region, int* taille_tab_region);
+void ecritureFichierRecensements(Region* tab_region, int* taille_tab_region);
 #endif

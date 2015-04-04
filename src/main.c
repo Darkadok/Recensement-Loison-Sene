@@ -36,11 +36,7 @@ int main()
 	Region* tab_region = NULL;
 	tab_region = ajouterRegion(tab_region, "SilenceIsGolden", &taille_tab_etoile);
 
-	Departement* tab_departement_tmp;
-
-
-	//lectureFichierDepartement(&tab_region, &taille_tab_etoile);*/
-	lectureFichierRecensements();
+	lectureFichiers(&tab_region, &taille_tab_etoile);
 
 	return 0;
 }
