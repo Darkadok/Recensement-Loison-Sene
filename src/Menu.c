@@ -69,7 +69,7 @@
 //{
 //
 //	int pass = 0;
-//	int saisie_utilisateur = ;
+//	int saisie_utilisateur = NULL;
 //
 //	do
 //	{
@@ -155,4 +155,4 @@
 //
 //
 //}
- 
+// 
