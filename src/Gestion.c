@@ -131,18 +131,18 @@ void lectureFichierRecensements()
 		wcscpy(ligne_en_cours, token);
 		for (i = 0; i < 2; i++)
 		{
-			token = strtok(NULL, ";");
+			token = wcstok(NULL, ";");
 			wcscpy(ligne_en_cours, token);
 		}
 
 		for (i = 0; i<nombre_recensements - 1; i++)
 		{
-			token = strtok(NULL, ";");
+			token = wcstok(NULL, ";");
 			wcscpy(ligne_en_cours, token);
 
 			/* ligne en cours => tableau contenant les ann�es de references.*/
 		}
-		token = strtok(NULL, "\n");
+		token = wcstok(NULL, "\n");
 		wcscpy(ligne_en_cours, token);
 		/* ligne en cours => tableau contenant les ann�es de references � la derni�re case.*/
 		/*pour toutes les ann�es*/
@@ -150,23 +150,23 @@ void lectureFichierRecensements()
 		while (fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier) != NULL)
 		{
 
-			token = strtok(ligne_en_cours, ";");
+			token = wcstok(ligne_en_cours, ";");
 			wcscpy(ligne_en_cours, token);
 			/*depcom_ville -> ligne en cours*/
 
-			token = strtok(NULL, ";");
+			token = wcstok(NULL, ";");
 			wcscpy(ligne_en_cours, token);
 			/*dep_ville -> ligne en cours*/
-			token = strtok(NULL, ";");
+			token = wcstok(NULL, ";");
 			wcscpy(ligne_en_cours, token);
 			/*nom_ville -> ligne en cours*/
 			for (i = 0; i < nombre_recensements - 1; i++)
 			{
-				token = strtok(NULL, ";");
+				token = wcstok(NULL, ";");
 				wcscpy(ligne_en_cours, token);
 				/*valeur_recensement_ville_+i-> ligne en cours*/
 			}
-			token = strtok(NULL, "\n");
+			token = wcstok(NULL, "\n");
 			wcscpy(ligne_en_cours, token);
 			/* ligne en cours => tableau contenant les ann�es de references � la derni�re case.*/
 
