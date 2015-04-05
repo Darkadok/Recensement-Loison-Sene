@@ -1,6 +1,6 @@
 ﻿/*
 Override
-Gestion.c
+GestionFichier.c
 
 2014/2015
 
@@ -8,7 +8,7 @@ Gestion.c
 
 **/
 
-#include "Gestion.h"
+#include "GestionFichier.h"
 int nombrePointVirguleDansLigne(FILE* fichier)
 {
 	wchar_t lettre = NULL;

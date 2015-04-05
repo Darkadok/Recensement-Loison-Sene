@@ -1,6 +1,6 @@
 /*
 Override
-Gestion.h
+GestionFichier.h
 
 2014/2015
 
@@ -8,8 +8,8 @@ Gestion.h
 
 **/
 
-#ifndef GESTION_H
-#define GESTION_H
+#ifndef GESTION_FICHIER_H
+#define GESTION_FICHIER_H
 
 #include "Region.h"
 #include <stdlib.h>
