@@ -97,9 +97,19 @@ Ville* ajouterVille(Ville* tab_ville, wchar_t nom_ville[], wchar_t dep_com[], in
 
 int rechercheVilleByNom(Ville* tab_ville, int* taille_tab_ville, wchar_t nom_ville[])
 {
+
+	wchar_t tab_nom_ville_tmp[100];
+	wchar_t nom_ville_tmp[100];
+
+	wcscpy(nom_ville_tmp, nom_ville);
+	toMin(nom_ville, nom_ville_tmp);
+
 	for (int i = 0; i < *taille_tab_ville; i++)
 	{
-		if (!wcscmp((tab_ville + i)->nom_ville, nom_ville))
+		wcscpy(tab_nom_ville_tmp, (tab_ville + i)->nom_ville);
+		toMin((tab_ville + i)->nom_ville, tab_nom_ville_tmp);
+
+		if (!wcscmp(tab_nom_ville_tmp, nom_ville_tmp))
 		{
 			return i;
 		}
@@ -111,9 +121,19 @@ int rechercheVilleByNom(Ville* tab_ville, int* taille_tab_ville, wchar_t nom_vil
 
 int rechercheVilleByDepCom(Ville* tab_ville, int* taille_tab_ville, wchar_t dep_com[])
 {
+
+	wchar_t tab_dep_com_tmp[100];
+	wchar_t dep_com_tmp[100];
+
+	wcscpy(dep_com_tmp, dep_com);
+	toMin(dep_com, dep_com_tmp);
+
 	for (int i = 0; i < *taille_tab_ville; i++)
 	{
-		if (wcscpy((tab_ville + i)->dep_com, dep_com))
+		wcscpy(tab_dep_com_tmp, (tab_ville + i)->dep_com);
+		toMin((tab_ville + i)->dep_com, tab_dep_com_tmp);
+
+		if (!wcscmp(tab_dep_com_tmp , dep_com_tmp))
 		{
 			return i;
 		}

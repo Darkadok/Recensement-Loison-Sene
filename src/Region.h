@@ -1,6 +1,3 @@
-#ifndef REGION_H
-#define REGION_H
-
 /*
 Override
 Region.h
@@ -11,11 +8,15 @@ Region.h
 
 **/
 
+#ifndef REGION_H
+#define REGION_H
+
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
 #include <stdio.h>
 
+#include "GestionChaine.h"
 #include "Departement.h"
 
 typedef struct Region Region;
