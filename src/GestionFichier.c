@@ -80,20 +80,15 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 				}
 			}
 			
-/*			if (!is_region_exist)//sinon on l'ajoute
+     		if (!is_region_exist)//sinon on l'ajoute
 			{
 				ajouterRegion(tab_region, nom_region_tmp, taille_tab_region);
-
 				wprintf("Région creee");
-				*tab_region = ((*tab_region) + i)->tab_departement;
-				ref_tab_departement = &(((*tab_region) + i) -> tab_departement);
-				taille_tab_departement = ((*tab_region) + i)->taille_tab_departement;//plantouile à mort
-				ref_taille_tab_departement = &(((*tab_region) + i)->taille_tab_departement);
 			}
 
 			
 	
-			for (int compteur_departement = 0; compteur_departement < ref_taille_tab_departement; compteur_departement++)
+			/*for (int compteur_departement = 0; compteur_departement < ref_taille_tab_departement; compteur_departement++)
 			{
 				if (!wcscmp(*((tab_departement + compteur_departement)->nom_dep), departement_tmp))
 				{
