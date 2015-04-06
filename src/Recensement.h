@@ -17,7 +17,6 @@ Recensement.h
 #include <wchar.h>
 
 
-
 typedef struct Recensement Recensement;
 
 struct Recensement {

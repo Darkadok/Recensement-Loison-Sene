@@ -16,7 +16,6 @@ Departement.h
 #include <wchar.h>
 #include <stdio.h>
 
-#include "GestionChaine.h"
 #include "Ville.h"
 
 typedef struct Departement Departement;
