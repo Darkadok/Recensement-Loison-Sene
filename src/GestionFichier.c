@@ -86,28 +86,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 				wprintf("Région creee");
 			}
 
-			
-	
-			/*for (int compteur_departement = 0; compteur_departement < ref_taille_tab_departement; compteur_departement++)
-			{
-				if (!wcscmp(*((tab_departement + compteur_departement)->nom_dep), departement_tmp))
-				{
-					is_departement_exist = 1;
-				}
-			}
-			
-			if (!is_departement_exist)
-			{
-
-				//ajouterDepartement(ref_tab_departement, departement_tmp, numerodep_tmp, ref_taille_tab_departement);
-				// ajouter prefecture
-
-				wprintf("Departement cree");
-			}
-
-
-			lettre = fgetwc(fichier);
-			i++;*/
+			ajouterDepartement(tab_departement, departement_tmp, numerodep_tmp, prefecture_tmp, taille_tab_departement);//non test
 		}
 	
 		fclose(fichier);
@@ -151,13 +130,10 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 				wcscpy(ligne_en_cours, token);
 				tableau_annee_reference[i] = _wtoi(ligne_en_cours);
 
-				/* ligne en cours => tableau contenant les ann�es de references.*/
 			}
 			token = wcstok(NULL, "\n");
 			wcscpy(ligne_en_cours, token);
 			tableau_annee_reference[i] = _wtoi(ligne_en_cours);
-			/* ligne en cours => tableau contenant les ann�es de references � la derni�re case.*/
-			/*pour toutes les ann�es*/
 			i = 0;
 			while (fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier) != NULL)
 			{
