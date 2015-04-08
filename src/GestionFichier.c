@@ -62,7 +62,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 
 		while ((fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier)) != NULL)// parcours le fichier par ligne
 		{
-
+			is_region_exist = 0;
 			token = wcstok(ligne_en_cours, ";");
 			wcscpy(numerodep_tmp, token);
 			token = wcstok(NULL, ";");
@@ -71,22 +71,28 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 			wcscpy(prefecture_tmp, token);
 			token = wcstok(NULL, "\n");
 			wcscpy(nom_region_tmp, token);
+
+			wprintf(L"%ls \n", departement_tmp);
 			for (int compteur_region = 0; compteur_region < **taille_tab_region; compteur_region++)
 			{
-				if (!wcscmp(*(((*tab_region) + compteur_region)->nom_reg), nom_region_tmp))//on verifie si la region est deja cree
+				if (! (wcscmp((((*tab_region) + compteur_region )->nom_reg), nom_region_tmp)))//on verifie si la region est deja cree
 				{
 					is_region_exist = 1;
-					
+					((*tab_region) + compteur_region)->tab_departement = ajouterDepartement(((*tab_region) + compteur_region)->tab_departement, departement_tmp, numerodep_tmp, prefecture_tmp, &(((*tab_region) + compteur_region)->taille_tab_departement));
+					wprintf(L"Departement ajouté à région existante. \n");
+					printf("%d \n", **taille_tab_region);
+					break;
 				}
 			}
 			
      		if (!is_region_exist)//sinon on l'ajoute
 			{
-				ajouterRegion(tab_region, nom_region_tmp, taille_tab_region);
-				wprintf("Région creee");
-			}
+				*tab_region = ajouterRegion(*tab_region, nom_region_tmp, taille_tab_region);
+				wprintf(L"Région %ls creee \n", nom_region_tmp);
+				printf("%d \n", **taille_tab_region);
+				((*tab_region) + **taille_tab_region - 1 )->tab_departement = ajouterDepartement(((*tab_region) + **taille_tab_region - 1 )->tab_departement, departement_tmp, numerodep_tmp, prefecture_tmp, &(((*tab_region) + **taille_tab_region - 1)->taille_tab_departement));//ne marche pas encore
 
-			ajouterDepartement(tab_departement, departement_tmp, numerodep_tmp, prefecture_tmp, taille_tab_departement);//non test
+			}
 		}
 	
 		fclose(fichier);
