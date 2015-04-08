@@ -120,6 +120,9 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 
 			nombre_recensements = nombrePointVirguleDansLigne(fichier) - 2;
 			int tableau_annee_reference[50];
+			wchar_t nom_ville_tmp[200];
+			wchar_t depcom_tmp[200];
+			int no_dep_tmp;
 			rewind(fichier);
 			fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier);
 			token = wcstok(ligne_en_cours, ";");
@@ -140,20 +143,27 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 			token = wcstok(NULL, "\n");
 			wcscpy(ligne_en_cours, token);
 			tableau_annee_reference[i] = _wtoi(ligne_en_cours);
-			i = 0;
+
 			while (fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier) != NULL)
 			{
 
 				token = wcstok(ligne_en_cours, ";");
-				wcscpy(ligne_en_cours, token);
-				/*depcom_ville -> ligne en cours*/
+				wcscpy(depcom_tmp, token);//depcom
+				token = wcstok(NULL, ";");
+				wcscpy(no_dep_tmp, token);//dep
+				token = wcstok(NULL, ";");
+				wcscpy(nom_ville_tmp, token);//nomville
 
-				token = wcstok(NULL, ";");
-				wcscpy(ligne_en_cours, token);
-				/*dep_ville -> ligne en cours*/
-				token = wcstok(NULL, ";");
-				wcscpy(ligne_en_cours, token);
-				/*nom_ville -> ligne en cours*/
+				for (i = 0; i < taille_tab_region; i++)//pour chaque région
+				{
+					for (int j = 0; j < (((*tab_region) + i)->taille_tab_departement); j++)//pour chaque dep de cette region
+					{
+						if (!wcscmp((((*tab_region) + i)->tab_departement[j]->nom_dep), no_dep_tmp))//si le no du dep = no en cours
+						{
+							ajouterVille(/*le tab des villes du dep en cours*/, nom_ville_tmp, depcom_tmp,/*taille tab ville*/)
+						}
+					}
+				}
 				for (i = 0; i < nombre_recensements - 1; i++)
 				{
 					token = wcstok(NULL, ";");
