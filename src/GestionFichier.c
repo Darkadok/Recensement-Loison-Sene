@@ -122,7 +122,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 			int tableau_annee_reference[50];
 			wchar_t nom_ville_tmp[200];
 			wchar_t depcom_tmp[200];
-			int no_dep_tmp;
+			wchar_t no_dep_tmp[15];
 			rewind(fichier);
 			fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier);
 			token = wcstok(ligne_en_cours, ";");
@@ -154,26 +154,27 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 				token = wcstok(NULL, ";");
 				wcscpy(nom_ville_tmp, token);//nomville
 
-				for (i = 0; i < taille_tab_region; i++)//pour chaque région
+				for (i = 0; i < **taille_tab_region; i++)//pour chaque région
 				{
-					for (int j = 0; j < (((*tab_region) + i)->taille_tab_departement); j++)//pour chaque dep de cette region
+					for (int j = 0; j < *(((*tab_region) + i)->taille_tab_departement); j++)//pour chaque dep de cette region
 					{
-						if (!wcscmp((((*tab_region) + i)->tab_departement[j]->nom_dep), no_dep_tmp))//si le no du dep = no en cours
+						Departement** tmp = &(((*tab_region) + i)->tab_departement);
+						if (!wcscmp((((*tmp) + j )->numero_dep), no_dep_tmp))//si le no du dep = no en cours
 						{
-							ajouterVille(/*le tab des villes du dep en cours*/, nom_ville_tmp, depcom_tmp,/*taille tab ville*/)
+							((*tmp) + j)->tab_ville = ajouterVille(((*tmp) + j)->tab_ville, nom_ville_tmp, depcom_tmp, &(((*tmp) + j)->taille_tab_ville));
+							//Ville** ville_tmp = &((((*tmp) + j)->tab_ville + ((((*tmp) + j)))->taille_tab_ville));      //=> ca compile, ca marche pas mais ca compile en commentaire
+							for (i = 0; i < nombre_recensements - 1; i++)
+							{
+								token = wcstok(NULL, ";");
+								wcscpy(ligne_en_cours, token);
+								/*valeur_recensement_ville_+i-> ligne en cours*/
+							}
+							token = wcstok(NULL, "\n");
+							wcscpy(ligne_en_cours, token);
+							/* ligne en cours => tableau contenant les ann�es de references � la derni�re case.*/
 						}
 					}
 				}
-				for (i = 0; i < nombre_recensements - 1; i++)
-				{
-					token = wcstok(NULL, ";");
-					wcscpy(ligne_en_cours, token);
-					/*valeur_recensement_ville_+i-> ligne en cours*/
-				}
-				token = wcstok(NULL, "\n");
-				wcscpy(ligne_en_cours, token);
-				/* ligne en cours => tableau contenant les ann�es de references � la derni�re case.*/
-
 			}
 		}
 
