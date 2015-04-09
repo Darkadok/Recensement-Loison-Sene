@@ -28,12 +28,11 @@ int nombrePointVirguleDansLigne(FILE* fichier)
 void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a remplacer par Dépendances
 {
 	FILE* fichier = NULL;
-	wchar_t ligne_en_cours[1000];
-	wchar_t numerodep_tmp[3];
-	wchar_t departement_tmp[200];
-	wchar_t prefecture_tmp[200];
-	wchar_t nom_region_tmp[200];
-	
+	wchar_t ligne_en_cours[1000] = { 0 };
+	wchar_t numerodep_tmp[3] = { 0 };
+	wchar_t departement_tmp[200] = { 0 };
+	wchar_t prefecture_tmp[200] = { 0 };
+	wchar_t nom_region_tmp[200] = { 0 };;
 	wchar_t* token = NULL;
 	int is_departement_exist = 0;
 	int is_region_exist = 0;
@@ -88,7 +87,8 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
      		if (!is_region_exist)//sinon on l'ajoute
 			{
 				*tab_region = ajouterRegion(*tab_region, nom_region_tmp, taille_tab_region);
-				wprintf(L"Région %ls creee \n", nom_region_tmp);
+				wprintf(L"R%lcgion %ls cr%lc%lce \n", 130, nom_region_tmp, 130, 130);
+				// test non concluant pour affichage accents fwprintf(stdout, L"%ls\n", nom_region_tmp);
 				printf("%d \n", **taille_tab_region);
 				((*tab_region) + **taille_tab_region - 1 )->tab_departement = ajouterDepartement(((*tab_region) + **taille_tab_region - 1 )->tab_departement, departement_tmp, numerodep_tmp, prefecture_tmp, &(((*tab_region) + **taille_tab_region - 1)->taille_tab_departement));//ne marche pas encore
 
@@ -208,7 +208,7 @@ void ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
 			prefecture = tab_region;
 			nom_region = (*(tab_region + i) ->nom_reg);   => i don't fucking know what i'm supposed to do here*/
 		
-			fwprintf(fichier, "%d;%ls;%ls;%ls\n", no_dep, nom_dep, prefecture, nom_region);
+			fwprintf(fichier, L"%d;%ls;%ls;%ls\n", no_dep, nom_dep, prefecture, nom_region);
 		}
 		fclose(fichier);
 	}
