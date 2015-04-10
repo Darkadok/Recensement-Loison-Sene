@@ -13,7 +13,7 @@ Ville.c
 
 Ville* creerTabVille(Ville* tab_ville, int** taille_tab_ville, wchar_t nom_ville[], wchar_t dep_com[])
 {
-	taille_tab_ville = malloc(sizeof(int));
+	*taille_tab_ville = malloc(sizeof(int));
 	**taille_tab_ville = 1;
 
 	tab_ville = malloc(sizeof(Ville)*(**taille_tab_ville));
@@ -140,7 +140,7 @@ void modifierNomVille(Ville* ville, wchar_t nom_ville[])
 	wcscpy(ville->nom_ville, nom_ville);
 }
 
-void modifierDepComVille(Ville* ville, int dep_com)
+void modifierDepComVille(Ville* ville,  wchar_t dep_com[])
 {
 	ville->dep_com = dep_com;
 }

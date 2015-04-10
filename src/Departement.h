@@ -30,7 +30,7 @@ struct Departement {
 };
 
 Departement* creerTabDepartement(Departement* tab_departement, int** taille_tab_departement, wchar_t nom_dep[], wchar_t numero_dep[], wchar_t prefecture[]);
-Departement* ajouterDepartement(Departement* tab_departement, wchar_t nom_dep[], int numero_dep, wchar_t prefecture[], int** taille_tab_departement);
+Departement* ajouterDepartement(Departement* tab_departement, wchar_t nom_dep[], wchar_t numero_dep[], wchar_t prefecture[], int** taille_tab_departement);
 
 void afficherDepartement(Departement* departement);
 

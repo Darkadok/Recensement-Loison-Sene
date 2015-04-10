@@ -155,7 +155,7 @@ void modifierNomDepartement(Departement* departement, wchar_t nom_dep[])
 	wcscpy(departement->nom_dep, nom_dep);
 }
 
-void modifierNumeroDepartement(Departement* departement, int numero_dep)
+void modifierNumeroDepartement(Departement* departement, wchar_t numero_dep[])
 {
 	free(departement->numero_dep);
 	departement->numero_dep = malloc(sizeof(wchar_t)* (wcslen(numero_dep) + 1));

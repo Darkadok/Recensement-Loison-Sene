@@ -28,7 +28,7 @@ int valeur_recen;
 Recensement* creerTabRecensement(Recensement* tab_recensement,  int annee, int valeur_recen, int** taille_tab_recensement);
 Recensement* ajouterRecensement(Recensement* tab_recensement, int annee, int valeur_recen, int** taille_tab_recensement);
 
-void afficherRecensement(Recensement* recensement, char tab_accent[]);
+void afficherRecensement(Recensement* recensement);
 
 int rechercheRecensement(Recensement* tab_recensement, int* taille_tab_recensement, int annee);
 

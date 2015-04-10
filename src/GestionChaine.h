@@ -16,7 +16,7 @@ GestionChaine.h
 
 void masquerMdp(wchar_t saisie_mdp[]);
 void toMin(wchar_t chaine[], wchar_t chaine_tmp[]);
-int verificationSaisie(wchar_t saisie_utilisateur[]);
+int verificationSaisie(wchar_t saisie_utilisateur[], int code_menu);
 
 
 

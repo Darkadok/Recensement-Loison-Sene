@@ -83,7 +83,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 					break;
 				}
 			}
-			
+
      		if (!is_region_exist)//sinon on l'ajoute
 			{
 				*tab_region = ajouterRegion(*tab_region, nom_region_tmp, taille_tab_region);
@@ -94,7 +94,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 
 			}
 		}
-	
+
 		fclose(fichier);
 	}
 // ****************--------------------- deuxieme fichier, fichier des recensements  ---------------******************************
@@ -103,7 +103,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 		token = NULL;
 		i = NULL;
 
-		int nombre_recensements = 0;
+
 
 #if _DEBUG
 		fichier = fopen("../../../../GIT/Recensement/Import/recensements.csv", "r");
@@ -117,9 +117,10 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 		}
 		else
 		{
-
+			int nombre_recensements = 0;
 			nombre_recensements = nombrePointVirguleDansLigne(fichier) - 2;
 			int tableau_annee_reference[50];
+			int valeur_recensement_tmp = 0;
 			wchar_t nom_ville_tmp[200];
 			wchar_t depcom_tmp[200];
 			wchar_t no_dep_tmp[15];
@@ -162,16 +163,23 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 						if (!wcscmp((((*tmp) + j )->numero_dep), no_dep_tmp))//si le no du dep = no en cours
 						{
 							((*tmp) + j)->tab_ville = ajouterVille(((*tmp) + j)->tab_ville, nom_ville_tmp, depcom_tmp, &(((*tmp) + j)->taille_tab_ville));
-							//Ville** ville_tmp = &((((*tmp) + j)->tab_ville + ((((*tmp) + j)))->taille_tab_ville));      //=> ca compile, ca marche pas mais ca compile en commentaire
-							for (i = 0; i < nombre_recensements - 1; i++)
+							int taille_tableau_ville_tmp = *(((*tmp) + j)->taille_tab_ville);
+							Ville** ville_tmp = &(((*tmp) + j)->tab_ville);
+							Ville* ville_en_cours= ((*ville_tmp) + taille_tableau_ville_tmp);
+
+							int k;
+
+							for (k = 0; k < nombre_recensements - 1; k++)
 							{
 								token = wcstok(NULL, ";");
 								wcscpy(ligne_en_cours, token);
-								/*valeur_recensement_ville_+i-> ligne en cours*/
+								valeur_recensement_tmp = _wtoi(ligne_en_cours);
+								ville_en_cours->tab_recensement = ajouterRecensement(ville_en_cours->tab_recensement, tableau_annee_reference[k], valeur_recensement_tmp, &(ville_en_cours->taille_tab_recensement));
 							}
 							token = wcstok(NULL, "\n");
 							wcscpy(ligne_en_cours, token);
-							/* ligne en cours => tableau contenant les ann�es de references � la derni�re case.*/
+							valeur_recensement_tmp = _wtoi(ligne_en_cours);
+							ville_en_cours->tab_recensement = ajouterRecensement(ville_en_cours->tab_recensement, tableau_annee_reference[k], valeur_recensement_tmp, &(ville_en_cours->taille_tab_recensement));
 						}
 					}
 				}
@@ -202,17 +210,17 @@ void ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
 	else
 	{
 		for (i = 0; i < *taille_tab_region; i++)
-		{	
+		{
 			/*no_dep = *tab_region ->;
 			nom_dep = tab_region;
 			prefecture = tab_region;
 			nom_region = (*(tab_region + i) ->nom_reg);   => i don't fucking know what i'm supposed to do here*/
-		
+
 			fwprintf(fichier, L"%d;%ls;%ls;%ls\n", no_dep, nom_dep, prefecture, nom_region);
 		}
 		fclose(fichier);
 	}
-	
+
 }
 
 void ecritureFichierRecensements(Region* tab_region, int* taille_tab_region)
