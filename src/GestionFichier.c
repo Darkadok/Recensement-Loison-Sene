@@ -144,10 +144,10 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 			token = wcstok(NULL, "\n");
 			wcscpy(ligne_en_cours, token);
 			tableau_annee_reference[i] = _wtoi(ligne_en_cours);
-
+			//int test = 0;
 			while (fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier) != NULL)
 			{
-
+				wprintf(L"%ls", ligne_en_cours);
 				token = wcstok(ligne_en_cours, ";");
 				wcscpy(depcom_tmp, token);//depcom
 				token = wcstok(NULL, ";");
@@ -157,10 +157,11 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 
 				for (i = 0; i < **taille_tab_region; i++)//pour chaque région
 				{
+					//test++;
 					for (int j = 0; j < *(((*tab_region) + i)->taille_tab_departement); j++)//pour chaque dep de cette region
 					{
 						Departement** tmp = &(((*tab_region) + i)->tab_departement);
-						if (!wcscmp((((*tmp) + j )->numero_dep), no_dep_tmp))//si le no du dep = no en cours => ya SOUCIS
+						if (_wtoi((((*tmp) + j )->numero_dep)) == _wtoi(no_dep_tmp))//si le no du dep = no en cours => ya SOUCIS
 						{
 							wprintf(L"%ls est dans la region %ls", nom_ville_tmp, ((*tab_region) + i)->nom_reg);
 							wprintf(L" dans le departement %ls\n", (((*tmp) + j)->nom_dep));
