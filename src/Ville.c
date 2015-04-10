@@ -52,7 +52,7 @@ Ville* ajouterVille(Ville* tab_ville, wchar_t nom_ville[], wchar_t dep_com[], in
 			(tab_nouveau + i)->nom_ville = malloc(sizeof(wchar_t)* (wcslen((tab_ville + i)->nom_ville) + 1));
 			wcscpy((tab_nouveau + i)->nom_ville, (tab_ville + i)->nom_ville);
 
-			tab_ville->dep_com = malloc(sizeof(wchar_t)*(wcslen(dep_com) + 1));
+			(tab_nouveau + i)->dep_com = malloc(sizeof(wchar_t)*(wcslen((tab_ville+ i)->dep_com) + 1));
 			wcscpy((tab_nouveau + i)->dep_com, (tab_ville + i)->dep_com);
 
 			(tab_nouveau + i)->tab_recensement = NULL;
@@ -80,8 +80,8 @@ Ville* ajouterVille(Ville* tab_ville, wchar_t nom_ville[], wchar_t dep_com[], in
 
 		wcscpy((tab_nouveau + i)->nom_ville, nom_ville);
 
-		tab_nouveau->dep_com = malloc(sizeof(wchar_t)*(wcslen(dep_com) + 1));
-		wcscpy((tab_nouveau + i)->dep_com, (tab_ville + i)->dep_com);
+		(tab_nouveau + i)->dep_com = malloc(sizeof(wchar_t)*(wcslen(dep_com) + 1));
+		wcscpy((tab_nouveau + i)->dep_com, dep_com);
 
 		(tab_nouveau + i)->tab_recensement = NULL;
 		(tab_nouveau + i)->taille_tab_recensement = NULL;

@@ -160,12 +160,14 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 					for (int j = 0; j < *(((*tab_region) + i)->taille_tab_departement); j++)//pour chaque dep de cette region
 					{
 						Departement** tmp = &(((*tab_region) + i)->tab_departement);
-						if (!wcscmp((((*tmp) + j )->numero_dep), no_dep_tmp))//si le no du dep = no en cours
+						if (!wcscmp((((*tmp) + j )->numero_dep), no_dep_tmp))//si le no du dep = no en cours => ya SOUCIS
 						{
+							wprintf(L"%ls est dans la region %ls", nom_ville_tmp, ((*tab_region) + i)->nom_reg);
+							wprintf(L" dans le departement %ls\n", (((*tmp) + j)->nom_dep));
 							((*tmp) + j)->tab_ville = ajouterVille(((*tmp) + j)->tab_ville, nom_ville_tmp, depcom_tmp, &(((*tmp) + j)->taille_tab_ville));
 							int taille_tableau_ville_tmp = *(((*tmp) + j)->taille_tab_ville);
 							Ville** ville_tmp = &(((*tmp) + j)->tab_ville);
-							Ville* ville_en_cours= ((*ville_tmp) + taille_tableau_ville_tmp);
+							Ville* ville_en_cours= ((*ville_tmp) + taille_tableau_ville_tmp - 1);
 
 							int k;
 
