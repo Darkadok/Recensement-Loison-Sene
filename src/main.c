@@ -5,7 +5,8 @@
 int main()
 {
 	
-
+	wchar_t test[3] = L"01";
+	printf("%d", _wtoi(test));
 
 
 /*	char vec[10];
