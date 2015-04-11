@@ -19,7 +19,7 @@ GestionFichier.h
 
 int nombrePointVirguleDansLigne(FILE* fichier);
 
-void lectureFichiers(Region** tab_region, int** taille_tab_region);
-void ecritureFichierDepartements(Region* tab_region, int* taille_tab_region);
-void ecritureFichierRecensements(Region* tab_region, int* taille_tab_region);
+void* lectureFichiers(Region** tab_region, int** taille_tab_region);
+void* ecritureFichierDepartements(Region* tab_region, int* taille_tab_region);
+void* ecritureFichierRecensements(Region* tab_region, int* taille_tab_region);
 #endif
