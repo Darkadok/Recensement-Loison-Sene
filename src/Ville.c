@@ -68,7 +68,7 @@ Ville* ajouterVille(Ville** tab_ville, wchar_t nom_ville[], wchar_t dep_com[], i
 				for (j = 0; j < *(((*tab_ville) + i)->taille_tab_recensement); j++)
 				{
 
-					(tab_nouveau + i)->tab_recensement = ajouterRecensement((tab_nouveau + i)->tab_recensement, (tab_recensement_tmp + j)->annee, (tab_recensement_tmp + j)->valeur_recen, &((tab_nouveau + i)->taille_tab_recensement));
+					(tab_nouveau + i)->tab_recensement = ajouterRecensement(&((tab_nouveau + i)->tab_recensement), (tab_recensement_tmp + j)->annee, (tab_recensement_tmp + j)->valeur_recen, &((tab_nouveau + i)->taille_tab_recensement));
 				}
 			}
 		}
