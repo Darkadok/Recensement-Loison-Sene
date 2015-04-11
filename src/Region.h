@@ -1,6 +1,3 @@
-#ifndef REGION_H
-#define REGION_H
-
 /*
 Override
 Region.h
@@ -11,11 +8,15 @@ Region.h
 
 **/
 
+#ifndef REGION_H
+#define REGION_H
+
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
 #include <stdio.h>
 
+#include "GestionChaine.h"
 #include "Departement.h"
 
 typedef struct Region Region;
@@ -27,8 +28,8 @@ Departement* tab_departement;
 int* taille_tab_departement;
 };
 
-Region* creerTabRegion(Region* tab_region, int** taille_tab_region, wchar_t nom_reg[]);
-Region* ajouterRegion(Region* tab_region, wchar_t nom_reg[], int** taille_tab_region);
+Region* creerTabRegion(Region** tab_region, int** taille_tab_region, wchar_t nom_reg[]);
+Region* ajouterRegion(Region** tab_region, wchar_t nom_reg[], int** taille_tab_region);
 
 void afficherRegion(Region* region);
 

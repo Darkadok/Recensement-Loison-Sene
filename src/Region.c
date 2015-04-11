@@ -11,23 +11,23 @@ Region.c
 #include "Region.h"
 
 
-Region* creerTabRegion(Region* tab_region, int** taille_tab_region, wchar_t nom_reg[])
+Region* creerTabRegion(Region** tab_region, int** taille_tab_region, wchar_t nom_reg[])
 {
 	*taille_tab_region = malloc(sizeof(int));
 	**taille_tab_region = 1;
 
-	tab_region = malloc(sizeof(Region));
-	tab_region->nom_reg = malloc(sizeof(wchar_t)* (wcslen(nom_reg)+1));
-	tab_region->tab_departement = NULL;
-	tab_region->taille_tab_departement = NULL;
+	*tab_region = malloc(sizeof(Region));
+	(*tab_region)->nom_reg = malloc(sizeof(wchar_t)* (wcslen(nom_reg)+1));
+	(*tab_region)->tab_departement = NULL;
+	(*tab_region)->taille_tab_departement = NULL;
 
-	wcscpy(tab_region->nom_reg, nom_reg);
+	wcscpy((*tab_region)->nom_reg, nom_reg);
 
-	return tab_region;
+	return *tab_region;
 }
 
 
-Region* ajouterRegion(Region* tab_region, wchar_t nom_reg[], int** taille_tab_region)
+Region* ajouterRegion(Region** tab_region, wchar_t nom_reg[], int** taille_tab_region)
 {
 	int i = 0;
 	int j;
@@ -35,7 +35,7 @@ Region* ajouterRegion(Region* tab_region, wchar_t nom_reg[], int** taille_tab_re
 
 	if (*taille_tab_region == NULL)
 	{
-		tab_region = creerTabRegion(tab_region, taille_tab_region, nom_reg);
+		*tab_region = creerTabRegion(tab_region, taille_tab_region, nom_reg);
 	}
 
 	else
@@ -46,19 +46,19 @@ Region* ajouterRegion(Region* tab_region, wchar_t nom_reg[], int** taille_tab_re
 
 		for (i = 0; i < **taille_tab_region; i++)
 		{
-			(tab_nouveau + i)->nom_reg = malloc(sizeof(wchar_t)* (wcslen((tab_region + i)->nom_reg) + 1));
-			wcscpy((tab_nouveau + i)->nom_reg, (tab_region + i)->nom_reg);
+			(tab_nouveau + i)->nom_reg = malloc(sizeof(wchar_t)* (wcslen(((*tab_region) + i)->nom_reg) + 1));
+			wcscpy((tab_nouveau + i)->nom_reg, ((*tab_region) + i)->nom_reg);
 
 			(tab_nouveau + i)->tab_departement = NULL;
 			(tab_nouveau + i)->taille_tab_departement = NULL;
 
 /****** Pour chaque case du tableau de régions, on recopie le tableau de départements ******/
 
-			if ((tab_region + i)->tab_departement != NULL)
+			if (((*tab_region) + i)->tab_departement != NULL)
 			{
-				tab_departement_tmp = (tab_region + i)->tab_departement;
+				tab_departement_tmp = ((*tab_region) + i)->tab_departement;
 
-				for (j = 0; j < *((tab_region + i)->taille_tab_departement); j++)
+				for (j = 0; j < *(((*tab_region) + i)->taille_tab_departement); j++)
 				{
 					(tab_nouveau + i)->tab_departement = ajouterDepartement((tab_nouveau + i)->tab_departement, (tab_departement_tmp + j)->nom_dep, (tab_departement_tmp + j)->numero_dep, (tab_departement_tmp + j)->prefecture, &((tab_nouveau + i)->taille_tab_departement));
 				}
@@ -76,12 +76,56 @@ Region* ajouterRegion(Region* tab_region, wchar_t nom_reg[], int** taille_tab_re
 
 		(**taille_tab_region)++;
 
+		if (*tab_region != NULL)
+		{
+			if((*tab_region)->nom_reg != NULL)
+			{
+				free((*tab_region)->nom_reg);
+			}
+
+			free(*tab_region);
+		}
+
+
 		return  tab_nouveau;
 		
 	}
 
-	return tab_region;
+	return *tab_region;
 }
+
+void afficherRegion(Region* region)
+{
+
+	wprintf(L"Nom : %ls\n", region->nom_reg);
+
+}
+
+int rechercheRegionByNom(Region* tab_region, int* taille_tab_region, wchar_t nom_reg[])
+{
+	wchar_t tab_nom_reg_tmp[100];
+	wchar_t nom_reg_tmp[100];
+
+	wcscpy(nom_reg_tmp, nom_reg);
+	toMin(nom_reg, nom_reg_tmp);
+
+	for (int i = 0; i < *taille_tab_region; i++)
+	{
+		wcscmp(tab_nom_reg_tmp, (tab_region + i)->nom_reg);
+		toMin((tab_region + i)->nom_reg, tab_nom_reg_tmp);
+
+		if (!wcscmp(tab_nom_reg_tmp, nom_reg))
+		{
+			return i;
+		}
+	}
+
+	return -1;
+}
+
+
+
+
 
 void modifierNomRegion(Region* region, wchar_t nom_reg[])
 {
@@ -89,6 +133,10 @@ void modifierNomRegion(Region* region, wchar_t nom_reg[])
 	region->nom_reg = malloc(sizeof(wchar_t)* (wcslen(nom_reg) + 1));
 	wcscpy(region->nom_reg, nom_reg);
 }
+
+
+
+
 
 void* supprimerRegion(Region** tab_region, Region* region_supp, int** taille_tab_region)
 {
@@ -154,18 +202,7 @@ void* supprimerRegion(Region** tab_region, Region* region_supp, int** taille_tab
 	}
 }
 
-int rechercheRegionByNom(Region* tab_region, int* taille_tab_region, wchar_t nom_reg[])
-{
-	for (int i = 0; i < *taille_tab_region; i++)
-	{
-		if (!wcscmp((tab_region + i)->nom_reg, nom_reg))
-		{
-			return i;
-		}
-	}
 
-	return -1;
-}
 
 void detruireTabRegion(Region** tab_region, int** taille_tab_region)
 {

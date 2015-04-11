@@ -17,6 +17,7 @@ Ville.h
 #include <stdio.h>
 #include <wchar.h>
 
+#include "GestionChaine.h"
 #include "Recensement.h"
 
 typedef struct Ville Ville;
@@ -31,8 +32,8 @@ struct Ville {
 
 
 
-Ville* creerTabVille(Ville* tab_ville, int** taille_tab_ville, wchar_t nom_ville[], wchar_t dep_com[]);
-Ville* ajouterVille(Ville* tab_ville, wchar_t nom_ville[], wchar_t dep_com[], int** taille_tab_ville);
+Ville* creerTabVille(Ville** tab_ville, int** taille_tab_ville, wchar_t nom_ville[], wchar_t dep_com[]);
+Ville* ajouterVille(Ville** tab_ville, wchar_t nom_ville[], wchar_t dep_com[], int** taille_tab_ville);
 
 void afficherVille(Ville* ville);
 

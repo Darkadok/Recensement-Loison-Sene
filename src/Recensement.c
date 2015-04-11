@@ -11,55 +11,60 @@ Recensement.c
 #include "Recensement.h"
 
 
-Recensement* creerTabRecensement(Recensement* tab_recensement, int annee, int valeur_recen, int** taille_tab_recensement)
+Recensement* creerTabRecensement(Recensement** tab_recensement, int annee, int valeur_recen, int** taille_tab_recensement)
 {
 	*taille_tab_recensement = malloc(sizeof(int));
 	**taille_tab_recensement = 1;
 
-	tab_recensement = malloc(sizeof(Recensement)*(**taille_tab_recensement));
+	*tab_recensement = malloc(sizeof(Recensement)*(**taille_tab_recensement));
 
-	tab_recensement->annee = annee;
-	tab_recensement->valeur_recen = valeur_recen;
+	(*tab_recensement)->annee = annee;
+	(*tab_recensement)->valeur_recen = valeur_recen;
 
-	return tab_recensement;
+	return *tab_recensement;
 }
 
-Recensement* ajouterRecensement(Recensement* tab_recensement, int annee, int valeur_recen, int** taille_tab_recensement)
+Recensement* ajouterRecensement(Recensement** tab_recensement, int annee, int valeur_recen, int** taille_tab_recensement)
 {
 	int i;
 
 
-	if(*taille_tab_recensement == NULL)
+	if (*taille_tab_recensement == NULL)
 	{
-		tab_recensement = creerTabRecensement(tab_recensement, annee, valeur_recen, taille_tab_recensement);
+		*tab_recensement = creerTabRecensement(tab_recensement, annee, valeur_recen, taille_tab_recensement);
 	}
 
 	else
 	{
 
-		Recensement* tab_nouveau = malloc(sizeof(Recensement)* ((**taille_tab_recensement)+1));
+		Recensement* tab_nouveau = malloc(sizeof(Recensement)* ((**taille_tab_recensement) + 1));
 
-/******* On recopie le contenu du tableau champs par champs ******/
+		/******* On recopie le contenu du tableau champs par champs ******/
 
-		for (i=0; i<**taille_tab_recensement; i++)
+		for (i = 0; i<**taille_tab_recensement; i++)
 		{
 
-			(tab_nouveau + i)->valeur_recen = (tab_recensement + i)->valeur_recen;
-			(tab_nouveau + i)->annee = (tab_recensement + i)->annee;
+			(tab_nouveau + i)->valeur_recen = ((*tab_recensement) + i)->valeur_recen;
+			(tab_nouveau + i)->annee = ((*tab_recensement) + i)->annee;
 		}
 
-/****** On remplit la dernière case ******/
+		/****** On remplit la dernière case ******/
 
-		(tab_nouveau+i)->annee = annee;
-		(tab_nouveau+i)->valeur_recen = valeur_recen;
+		(tab_nouveau + i)->annee = annee;
+		(tab_nouveau + i)->valeur_recen = valeur_recen;
 
 		(**taille_tab_recensement)++;
+
+		if (*tab_recensement != NULL)
+		{
+			free(*tab_recensement);
+		}
 
 		return tab_nouveau;
 
 	}
 
-	return tab_recensement;
+	return *tab_recensement;
 }
 
 int rechercheRecensement(Recensement* tab_recensement, int* taille_tab_recensement, int annee)
@@ -97,9 +102,9 @@ void modifierAnneeRecensement(Recensement* recensement, int annee)
 void* supprimerRecensement(Recensement** tab_recensement, int** taille_tab_recensement, Recensement* recensement_supp)
 {
 	int i;
-	int j=0;
-	
-	
+	int j = 0;
+
+
 
 	if (**taille_tab_recensement == 1)
 	{
@@ -110,13 +115,13 @@ void* supprimerRecensement(Recensement** tab_recensement, int** taille_tab_recen
 	else
 	{
 
-		Recensement* tab_tmp = malloc(sizeof(Recensement)*((**taille_tab_recensement)-1));
+		Recensement* tab_tmp = malloc(sizeof(Recensement)*((**taille_tab_recensement) - 1));
 
 
 
-		for (i=0; i<**taille_tab_recensement; i++)
+		for (i = 0; i<**taille_tab_recensement; i++)
 		{
-			if(strcmp(((*tab_recensement)+i)->annee, recensement_supp->annee))
+			if (strcmp(((*tab_recensement) + i)->annee, recensement_supp->annee))
 			{
 				(tab_tmp + j)->valeur_recen = ((*tab_recensement) + i)->valeur_recen;
 				(tab_tmp + j)->annee = ((*tab_recensement) + i)->annee;
