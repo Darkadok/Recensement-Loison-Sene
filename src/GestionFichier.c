@@ -95,7 +95,6 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 
 			}
 		}
-
 		fclose(fichier);
 		ecritureFichierDepartements(*tab_region, *taille_tab_region);
 	}
@@ -216,8 +215,8 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 		}
 	}
 	fclose(fichier);
+
 	ecritureFichierRecensements(*tab_region, *taille_tab_region);
-	printf("ecriture ok !");
 }
 
 void* ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
@@ -246,6 +245,7 @@ void* ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
 			}
 		}
 		fprintf(fichier, "\n");
+		printf("ecriture ok !");
 		fclose(fichier);
 	}
 
@@ -315,6 +315,7 @@ void* ecritureFichierRecensements(Region* tab_region, int* taille_tab_region)
 		}
 		fprintf(fichier, "\n");
 	fclose(fichier);
+	printf("ecriture ok !");
 	}
 }
 //todo list : vérifier si supprimer ville + supprimer rencen is ok ? (données dans le bon ordre ?)
