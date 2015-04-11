@@ -93,13 +93,6 @@ int rechercheVilleByDepCom(Ville* tab_ville, int* taille_tab_ville, wchar_t dep_
 
 }
 
-void afficherVille(Ville* ville)
-{
-
-
-
-}
-
 
 void modifierNomVille(Ville* ville, wchar_t nom_ville[])
 {
@@ -232,6 +225,11 @@ void detruireTabVille(Ville** tab_ville, int** taille_tab_ville)
 		free(*taille_tab_ville);
 		*taille_tab_ville = NULL;
 	}
+}
+
+void afficherVille(Ville* ville)
+{
+	wprintf(L"Nom : %ls\n", ville->nom_ville);
 }
 
 

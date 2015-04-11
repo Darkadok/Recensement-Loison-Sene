@@ -25,6 +25,7 @@ struct Recensement {
 	int valeur_recen;
 };
 
+void afficherRecensement(Recensement* recensement);
 void creerTabRecensement(Recensement** tab_recensement, int annee, int valeur_recen, int** taille_tab_recensement);
 void ajouterRecensement(Recensement** tab_recensement, int annee, int valeur_recen, int** taille_tab_recensement);
 

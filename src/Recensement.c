@@ -64,14 +64,6 @@ int rechercheRecensement(Recensement* tab_recensement, int* taille_tab_recenseme
 	return -1;
 }
 
-void afficherRecensement(Recensement* recensement)
-{
-
-	wprintf(L"%ls personnes ont %lct%c recens%lces en %d.", recensement->annee, 130, 130, 130, recensement->valeur_recen);
-
-}
-
-
 
 void modifierValeurRecensement(Recensement* recensement, int valeur_recen)
 {
@@ -141,6 +133,12 @@ void detruireTabRecensement(Recensement** tab_recensement, int** taille_tab_rece
 	}
 }
 
+void afficherRecensement(Recensement* recensement)
+{
+
+	wprintf(L"%ls personnes ont %lct%c recens%lces en %d.", recensement->annee, 130, 130, 130, recensement->valeur_recen);
+
+}
 
 
 

@@ -1,14 +1,7 @@
-
-#include "Region.h"
-#include "GestionFichier.h"
+#include "Menu.h"
 
 int main()
 {
-
-	int* taille_tab_etoile = NULL;
-	Region* tab_region = NULL;
-	lectureFichiers(&tab_region, &taille_tab_etoile);
-
-	detruireTabRegion(&tab_region, &taille_tab_etoile);
+	menu();
 	return 0;
 }

@@ -275,6 +275,10 @@ void detruireTabDepartement(Departement** tab_departement, int** taille_tab_depa
 	}
 
 }
+void afficherDepartement(Departement* departement)
+{
+	wprintf(L"Nom : %ls\n", departement->nom_dep);
+}
 
 
 

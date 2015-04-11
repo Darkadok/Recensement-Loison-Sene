@@ -56,13 +56,6 @@ void ajouterRegion(Region** tab_region, wchar_t nom_reg[], int** taille_tab_regi
 
 }
 
-void afficherRegion(Region* region)
-{
-
-	wprintf(L"Nom : %ls\n", region->nom_reg);
-
-}
-
 int rechercheRegionByNom(Region* tab_region, int* taille_tab_region, wchar_t nom_reg[])
 {
 	wchar_t tab_nom_reg_tmp[100];
@@ -210,7 +203,12 @@ void detruireTabRegion(Region** tab_region, int** taille_tab_region)
 
 }
 
+void afficherRegion(Region* region)
+{
 
+	wprintf(L"Nom : %ls\n", region->nom_reg);
+
+}
 
 
 
