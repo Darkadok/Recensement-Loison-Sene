@@ -204,7 +204,7 @@ void* supprimerVille(Ville** tab_ville, int** taille_tab_ville, Ville* ville_sup
 					for (k = 0; k < *(((*tab_ville) + i)->taille_tab_recensement); k++)
 					{
 
-						(tab_tmp + j)->tab_recensement = ajouterRecensement((tab_tmp + j)->tab_recensement, (tab_recensement_tmp + k)->annee, (tab_recensement_tmp + k)->valeur_recen, &((tab_tmp + j)->taille_tab_recensement));
+						(tab_tmp + j)->tab_recensement = ajouterRecensement(&((tab_tmp + j)->tab_recensement), (tab_recensement_tmp + k)->annee, (tab_recensement_tmp + k)->valeur_recen, &((tab_tmp + j)->taille_tab_recensement));
 					}
 				}
 

@@ -60,7 +60,7 @@ Region* ajouterRegion(Region** tab_region, wchar_t nom_reg[], int** taille_tab_r
 
 				for (j = 0; j < *(((*tab_region) + i)->taille_tab_departement); j++)
 				{
-					(tab_nouveau + i)->tab_departement = ajouterDepartement((tab_nouveau + i)->tab_departement, (tab_departement_tmp + j)->nom_dep, (tab_departement_tmp + j)->numero_dep, (tab_departement_tmp + j)->prefecture, &((tab_nouveau + i)->taille_tab_departement));
+					(tab_nouveau + i)->tab_departement = ajouterDepartement(&((tab_nouveau + i)->tab_departement), (tab_departement_tmp + j)->nom_dep, (tab_departement_tmp + j)->numero_dep, (tab_departement_tmp + j)->prefecture, &((tab_nouveau + i)->taille_tab_departement));
 				}
 			}
 		}

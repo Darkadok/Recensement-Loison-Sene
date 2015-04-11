@@ -71,7 +71,7 @@ Departement* ajouterDepartement(Departement** tab_departement, wchar_t nom_dep[]
 
 				for (j = 0; j < *(((*tab_departement) + i)->taille_tab_ville); j++)
 				{
-					(tab_nouveau + i)->tab_ville = ajouterVille((tab_nouveau + i)->tab_ville, (tab_ville_tmp + j)->nom_ville, (tab_ville_tmp + j)->dep_com, &((tab_nouveau + i)->taille_tab_ville));
+					(tab_nouveau + i)->tab_ville = ajouterVille(&((tab_nouveau + i)->tab_ville), (tab_ville_tmp + j)->nom_ville, (tab_ville_tmp + j)->dep_com, &((tab_nouveau + i)->taille_tab_ville));
 				}
 
 			}
