@@ -96,8 +96,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 		}
 
 		fclose(fichier);
-		fflush(stdout);
-		//ecritureFichierDepartements(*tab_region, *taille_tab_region);
+		ecritureFichierDepartements(*tab_region, *taille_tab_region);
 	}
 	// ****************--------------------- deuxieme fichier, fichier des recensements  ---------------******************************
 
@@ -222,16 +221,13 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 void ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
 {
 	FILE* fichier = NULL;
-	int i;
-	int no_dep;
-	wchar_t nom_dep[200];
-	wchar_t prefecture[200];
-	wchar_t nom_region[200];
+	int i ;
+	Departement* tmp;
 #if _DEBUG
-	fichier = fopen("../../../../GIT/Recensement/Import/departements_test.csv", "w+");//!!!--A changer --!!!
+	fichier = _wfopen(L"../../../../GIT/Recensement/Import/departements_test.csv", L"w+");//!!!--A changer --!!!
 #endif
 #if !_DEBUG
-	fichier = fopen("../Import/departements.csv", "w+");
+	fichier = _wfopen("../Import/departements.csv", "w+");
 #endif
 	if (fichier == NULL)
 	{
@@ -241,7 +237,11 @@ void ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
 	{
 		for (i = 0; i < *taille_tab_region; i++)//héhéhé
 		{
-			fwprintf(fichier, L"%d;%ls;%ls;%ls\n", no_dep, nom_dep, prefecture, nom_region);
+			for (int j = 0; j < *((tab_region)+i)->taille_tab_departement; j++)//pour chaque dep de cette region	
+			{
+				tmp = ((tab_region)+i)->tab_departement;
+				fwprintf(fichier, L"%ls;%ls;%ls;%ls\n", (tmp + j)->numero_dep, (tmp + j)->nom_dep, (tmp + j)->prefecture, (tab_region + i)->nom_reg);
+			}
 		}
 		fclose(fichier);
 	}
@@ -262,7 +262,7 @@ void ecritureFichierRecensements(Region* tab_region, int* taille_tab_region)
 	{
 		return NULL;
 	}
-	else// ! Les rencement sont par ordre antechronologique !
+	else// ! Les recencements sont par ordre antechronologique !
 	{
 		int nombre_recensements = nombrePointVirguleDansLigne(fichier) - 2;
 		fwprintf(fichier, L"%ls;%ls;%ls;", "DEPCOM", "DEP", "LIBMIN");//cas de la premiere ligne
