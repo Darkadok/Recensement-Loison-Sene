@@ -294,7 +294,7 @@ void* ecritureFichierRecensements(Region* tab_region, int* taille_tab_region)
 		{
 			for (int j = 0; j < *((tab_region)+i)->taille_tab_departement; j++)//pour chaque dep de cette region
 			{
-				tmp = ((tab_region)+i)->tab_departement + j;
+				tmp = (tab_region + i)->tab_departement + j ;
 				for (int l = 0; l < *(tmp->taille_tab_ville); l++)//pour chaque ville
 				{	
 					ville_tmp = tmp->tab_ville + l;
