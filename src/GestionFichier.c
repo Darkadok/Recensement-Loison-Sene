@@ -185,6 +185,10 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 					{
 						((*tmp) + j)->tab_ville = ajouterVille(((*tmp) + j)->tab_ville, nom_ville_tmp, depcom_tmp, &(((*tmp) + j)->taille_tab_ville));
 						nombre_ville_total++;
+						if (nombre_ville_total == 9120)
+						{
+							printf("ca va peter");
+						}
 						/*wprintf(L"%ls ajouté dans la region %ls", nom_ville_tmp, ((*tab_region) + i)->nom_reg);
 						wprintf(L" dans le departement %ls\n", (((*tmp) + j)->nom_dep));*/
 						printf("nombre ville total : %d \n", nombre_ville_total);
