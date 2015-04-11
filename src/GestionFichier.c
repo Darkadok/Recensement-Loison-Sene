@@ -29,7 +29,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 {
 	FILE* fichier = NULL;
 	wchar_t ligne_en_cours[1000] = { 0 };
-	wchar_t numerodep_tmp[3] = { 0 };
+	wchar_t numerodep_tmp[10] = { 0 };
 	wchar_t departement_tmp[200] = { 0 };
 	wchar_t prefecture_tmp[200] = { 0 };
 	wchar_t nom_region_tmp[200] = { 0 };;
@@ -96,7 +96,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 		}
 
 		fclose(fichier);
-		ecritureFichierDepartements(*tab_region, *taille_tab_region);
+		//ecritureFichierDepartements(*tab_region, *taille_tab_region);
 	}
 // ****************--------------------- deuxieme fichier, fichier des recensements  ---------------******************************
 
@@ -125,6 +125,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 			wchar_t nom_ville_tmp[200];
 			wchar_t depcom_tmp[200];
 			wchar_t no_dep_tmp[15];
+			int is_num_dep_egal = 0;
 			rewind(fichier);
 			fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier);
 			token = wcstok(ligne_en_cours, ";");
@@ -145,6 +146,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 			token = wcstok(NULL, "\n");
 			wcscpy(ligne_en_cours, token);
 			tableau_annee_reference[i] = _wtoi(ligne_en_cours);
+			
 			while (fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier) != NULL)
 			{
 				wprintf(L"%ls", ligne_en_cours);
@@ -160,11 +162,27 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 					for (int j = 0; j < *(((*tab_region) + i)->taille_tab_departement); j++)//pour chaque dep de cette region
 					{
 						Departement** tmp = &(((*tab_region) + i)->tab_departement);
-						if (_wtoi((((*tmp) + j )->numero_dep)) == _wtoi(no_dep_tmp))//si le no du dep = no en cours => ya SOUCIS
+						wprintf(L"No de dep en cours : %ls \n", ((*tmp) + j)->numero_dep);
+						wprintf(L"No lu dans fichier : %ls \n", no_dep_tmp);
+						if ((_wtoi(((*tmp) + j)->numero_dep) == 0) || _wtoi(no_dep_tmp) == 0)
 						{
-							wprintf(L"%ls est dans la region %ls", nom_ville_tmp, ((*tab_region) + i)->nom_reg);
-							wprintf(L" dans le departement %ls\n", (((*tmp) + j)->nom_dep));
+							if (!(wcscmp((((*tmp) + j)->numero_dep), no_dep_tmp)))
+							{
+								is_num_dep_egal = 1;
+							}
+						}
+						else
+						{
+							if (_wtoi(((*tmp) + j)->numero_dep) == _wtoi(no_dep_tmp))
+							{
+								is_num_dep_egal = 1;
+							}
+						}
+						if (is_num_dep_egal) //si le no du dep = no en cours => ya SOUCIS
+						{
 							((*tmp) + j)->tab_ville = ajouterVille(((*tmp) + j)->tab_ville, nom_ville_tmp, depcom_tmp, &(((*tmp) + j)->taille_tab_ville));
+							wprintf(L"%ls ajouté dans la region %ls", nom_ville_tmp, ((*tab_region) + i)->nom_reg);
+							wprintf(L" dans le departement %ls\n", (((*tmp) + j)->nom_dep));
 							int taille_tableau_ville_tmp = *(((*tmp) + j)->taille_tab_ville);
 							Ville** ville_tmp = &(((*tmp) + j)->tab_ville);
 							Ville* ville_en_cours= ((*ville_tmp) + taille_tableau_ville_tmp - 1);
@@ -182,6 +200,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 							wcscpy(ligne_en_cours, token);
 							valeur_recensement_tmp = _wtoi(ligne_en_cours);
 							ville_en_cours->tab_recensement = ajouterRecensement(ville_en_cours->tab_recensement, tableau_annee_reference[k], valeur_recensement_tmp, &(ville_en_cours->taille_tab_recensement));
+							is_num_dep_egal = 0;
 						}
 					}
 				}
