@@ -96,6 +96,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 		}
 
 		fclose(fichier);
+		fflush(stdout);
 		//ecritureFichierDepartements(*tab_region, *taille_tab_region);
 	}
 	// ****************--------------------- deuxieme fichier, fichier des recensements  ---------------******************************
@@ -150,17 +151,13 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 
 		while (fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier) != NULL)
 		{
-			wprintf(L"%ls", ligne_en_cours);
+			//wprintf(L"%ls", ligne_en_cours);
 			token = wcstok(ligne_en_cours, ";");
 			wcscpy(depcom_tmp, token);//depcom
 			token = wcstok(NULL, ";");
 			wcscpy(no_dep_tmp, token);//dep
 			token = wcstok(NULL, ";");
 			wcscpy(nom_ville_tmp, token);//nomville
-			if (wcscmp(no_dep_tmp, L"2") == 0)
-			{
-				i = i;
-			}
 
 			for (i = 0; i < **taille_tab_region; i++)//pour chaque région
 			{
@@ -169,10 +166,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 					Departement** tmp = &(((*tab_region) + i)->tab_departement);
 					/*wprintf(L"No de dep en cours : %ls \n", ((*tmp) + j)->numero_dep);
 					wprintf(L"No lu dans fichier : %ls \n", no_dep_tmp);*/
-					if (wcscmp(((*tmp) + j)->numero_dep, L"2A") == 0)
-					{
-						i = i;
-					}
+
 					if ((wcscmp(((*tmp) + j)->numero_dep, L"2A") == 0) || (wcscmp(((*tmp) + j)->numero_dep, L"2B") == 0) || (wcscmp(no_dep_tmp, L"2B") == 0) || (wcscmp(no_dep_tmp, L"2A") == 0))//cas speciaux de la CORSE
 					{
 						if (wcscmp((((*tmp) + j)->numero_dep), no_dep_tmp) == 0)
@@ -191,12 +185,8 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 					{
 						((*tmp) + j)->tab_ville = ajouterVille(((*tmp) + j)->tab_ville, nom_ville_tmp, depcom_tmp, &(((*tmp) + j)->taille_tab_ville));
 						nombre_ville_total++;
-						if (nombre_ville_total > 37000)
-						{
-							printf("probleme");
-						}
-						wprintf(L"%ls ajouté dans la region %ls", nom_ville_tmp, ((*tab_region) + i)->nom_reg);
-						wprintf(L" dans le departement %ls\n", (((*tmp) + j)->nom_dep));
+						/*wprintf(L"%ls ajouté dans la region %ls", nom_ville_tmp, ((*tab_region) + i)->nom_reg);
+						wprintf(L" dans le departement %ls\n", (((*tmp) + j)->nom_dep));*/
 						printf("nombre ville total : %d \n", nombre_ville_total);
 						int taille_tableau_ville_tmp = *(((*tmp) + j)->taille_tab_ville);
 						Ville** ville_tmp = &(((*tmp) + j)->tab_ville);
