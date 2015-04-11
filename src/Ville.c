@@ -141,7 +141,7 @@ void* supprimerVille(Ville** tab_ville, int** taille_tab_ville, Ville* ville_sup
 				(tab_tmp + j)->nom_ville = malloc(sizeof(wchar_t)* (wcslen(((*tab_ville) + i)->nom_ville) + 1));
 				wcscpy((tab_tmp + j)->nom_ville, ((*tab_ville) + i)->nom_ville);
 
-				tab_tmp->dep_com = malloc(sizeof(wchar_t)*(wcslen(((*tab_ville) + i)->dep_com) + 1));
+				(tab_tmp + j)->dep_com = malloc(sizeof(wchar_t)*(wcslen(((*tab_ville) + i)->dep_com) + 1));
 				wcscpy((tab_tmp + j)->dep_com, ((*tab_ville) + i)->dep_com);
 
 				(tab_tmp + j)->tab_recensement = NULL;

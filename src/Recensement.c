@@ -105,7 +105,7 @@ void* supprimerRecensement(Recensement** tab_recensement, int** taille_tab_recen
 
 		for (i = 0; i<**taille_tab_recensement; i++)
 		{
-			if (strcmp(((*tab_recensement) + i)->annee, recensement_supp->annee))
+			if (((*tab_recensement) + i)->annee = recensement_supp->annee)
 			{
 				(tab_tmp + j)->valeur_recen = ((*tab_recensement) + i)->valeur_recen;
 				(tab_tmp + j)->annee = ((*tab_recensement) + i)->annee;
