@@ -126,7 +126,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 		wchar_t depcom_tmp[200];
 		wchar_t no_dep_tmp[15];
 		int is_num_dep_egal = 0;
-		int nombre_ville_total=0;
+		int nombre_ville_total = 0;
 		rewind(fichier);
 		fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier);
 		token = wcstok(ligne_en_cours, ";");
@@ -184,10 +184,12 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 					{
 						((*tmp) + j)->tab_ville = ajouterVille(((*tmp) + j)->tab_ville, nom_ville_tmp, depcom_tmp, &(((*tmp) + j)->taille_tab_ville));
 						nombre_ville_total++;
+
 						if (nombre_ville_total == 9120)
 						{
 							printf("ca va peter");
 						}
+
 						/*wprintf(L"%ls ajouté dans la region %ls", nom_ville_tmp, ((*tab_region) + i)->nom_reg);
 						wprintf(L" dans le departement %ls\n", (((*tmp) + j)->nom_dep));*/
 						printf("nombre ville total : %d \n", nombre_ville_total);
@@ -221,7 +223,7 @@ void lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempla
 void ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
 {
 	FILE* fichier = NULL;
-	int i ;
+	int i;
 	Departement* tmp;
 #if _DEBUG
 	fichier = _wfopen(L"../../../../GIT/Recensement/Import/departements_test.csv", L"w+");//!!!--A changer --!!!
@@ -251,9 +253,11 @@ void ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
 void ecritureFichierRecensements(Region* tab_region, int* taille_tab_region)
 {
 	FILE* fichier = NULL;
+	Departement* tmp;
 	int i;
+
 #if _DEBUG
-	fichier = fopen("../../../../GIT/Recensement/Import/recensements.csv", "w+");
+	fichier = fopen("../../../../GIT/Recensement/Import/recensements_test.csv", "w+");
 #endif
 #if !_DEBUG
 	fichier = fopen("../Import/recensements.csv", "w+");
@@ -266,18 +270,20 @@ void ecritureFichierRecensements(Region* tab_region, int* taille_tab_region)
 	{
 		int nombre_recensements = nombrePointVirguleDansLigne(fichier) - 2;
 		fwprintf(fichier, L"%ls;%ls;%ls;", "DEPCOM", "DEP", "LIBMIN");//cas de la premiere ligne
+
 		for (i = 0; i < nombre_recensements; i++)
 		{
 			fwprintf(fichier, "%ls;", "Recemement + i ");//Ou est stocke les années de recensement ?
 		}
-		for (i = 0; i < "nombre ville total"; i++)//comment connaitre le nombre de ville au total?
+
+		for (i = 0; i < *taille_tab_region; i++)//héhéhé
 		{
-			fwprintf(fichier, "\n%d;%d;%ls;", "dep_com + i", "numero_dep +i", "nom_ville + i");//Ou sont placées ces merdes..
-			for (i = 0; i < nombre_recensements; i++)
+			for (int j = 0; j < *((tab_region)+i)->taille_tab_departement; j++)//pour chaque dep de cette region
 			{
-				fwprintf(fichier, "%ls;", "Recemement + i ");//même combat
+				tmp = ((tab_region)+i)->tab_departement;
+				fwprintf(fichier, "\n%d;%d;%ls;", "dep_com + i", "numero_dep +i", "nom_ville + i");//Ou sont placées ces merdes..
 			}
+			fclose(fichier);
 		}
-		fclose(fichier);
 	}
 }
