@@ -9,5 +9,6 @@ int main()
 	Region* tab_region = NULL;
 	lectureFichiers(&tab_region, &taille_tab_etoile);
 
+	detruireTabRegion(&tab_region, &taille_tab_etoile);
 	return 0;
 }

@@ -38,7 +38,7 @@ void ajouterRegion(Region** tab_region, wchar_t nom_reg[], int** taille_tab_regi
 
 	else
 	{
-		Region* tab_nouveau = realloc(*tab_region, sizeof(Region)*((**taille_tab_region) + 1));
+		*tab_region = realloc(*tab_region, sizeof(Region)*((**taille_tab_region) + 1));
 
 
 		/****** On remplit la dernière case ******/
