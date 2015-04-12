@@ -70,10 +70,10 @@ void triTabVille(Ville* tab_ville, int* taille_tab_ville)
 	{
 		for (int j = 1; j < *taille_tab_ville; j++)
 		{
-			
+
 		}
 	}
-
+}
 
 int rechercheVilleByNom(Ville* tab_ville, int* taille_tab_ville, wchar_t nom_ville[])
 {

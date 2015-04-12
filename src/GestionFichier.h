@@ -17,6 +17,8 @@ GestionFichier.h
 #include <windows.h>
 #include <stdio.h>
 
+
+wchar_t* verifAccents(wchar_t chaineIn[]);
 int nombrePointVirguleDansLigne(FILE* fichier);
 
 void* lectureFichiers(Region** tab_region, int** taille_tab_region);

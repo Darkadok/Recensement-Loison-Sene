@@ -9,6 +9,28 @@ GestionFichier.c
 **/
 
 #include "GestionFichier.h"
+
+wchar_t* verifAccents(wchar_t chaineIn[])
+{
+	wprintf(L"%ls", chaineIn);
+	int i;
+	for (i = 0; i < wcslen(chaineIn); i++)
+	{
+		if (chaineIn[i] > 127)
+		{
+
+			swprintf((wchar_t)(chaineIn[i]), L"%x", chaineIn[i]);
+		}
+		wprintf(L"%x", chaineIn[i]);
+		wprintf(L"%ls", chaineIn);
+	}
+	return chaineIn;
+}
+
+
+
+
+
 int nombrePointVirguleDansLigne(FILE* fichier)
 {
 	wchar_t lettre = NULL;
@@ -37,6 +59,7 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 	int is_departement_exist = 0;
 	int is_region_exist = 0;
 	int i = 0;
+	int compteur_region;
 	int* taille_tab_departement = NULL;
 	int* ref_taille_tab_departement = NULL;
 	Departement* tab_departement = NULL;
@@ -71,14 +94,14 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 			wcscpy(nom_region_tmp, token);
 
 			wprintf(L"%ls \n", departement_tmp);
-			for (int compteur_region = 0; compteur_region < **taille_tab_region; compteur_region++)
+			for (compteur_region = 0; compteur_region < **taille_tab_region; compteur_region++)
 			{
 				if (!(wcscmp((((*tab_region) + compteur_region)->nom_reg), nom_region_tmp)))//on verifie si la region est deja cree
 				{
 					is_region_exist = 1;
 					ajouterDepartement(&(((*tab_region) + compteur_region)->tab_departement), departement_tmp, numerodep_tmp, prefecture_tmp, &(((*tab_region) + compteur_region)->taille_tab_departement));
 					wprintf(L"Departement ajouté à région existante. \n");
-					printf("%d \n", **taille_tab_region);
+					wprintf(L"%d \n", **taille_tab_region);
 					break;
 				}
 			}
@@ -86,16 +109,15 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 			if (!is_region_exist)//sinon on l'ajoute
 			{
 				ajouterRegion(tab_region, nom_region_tmp, taille_tab_region);
-
+				system("chcp 1200");
 				wprintf(L"R%lcgion %ls cr%lc%lce \n", 130, nom_region_tmp, 130, 130);
-				// test non concluant pour affichage accents fwprintf(stdout, L"%ls\n", nom_region_tmp);
-				printf("%d \n", **taille_tab_region);
+				wprintf(L"%d \n", **taille_tab_region);
 				ajouterDepartement(&(((*tab_region) + (**taille_tab_region) - 1)->tab_departement), departement_tmp, numerodep_tmp, prefecture_tmp, &(((*tab_region) + **taille_tab_region - 1)->taille_tab_departement));//ne marche pas encore
 
 			}
 		}
 		fclose(fichier);
-		ecritureFichierDepartements(*tab_region, *taille_tab_region);
+
 	}
 	// ****************--------------------- deuxieme fichier, fichier des recensements  ---------------******************************
 
@@ -189,7 +211,7 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 
 						wprintf(L"%ls ajouté dans la region %ls", nom_ville_tmp, ((*tab_region) + i)->nom_reg);
 						wprintf(L" dans le departement %ls\n", (((*tmp) + j)->nom_dep));
-						printf("nombre ville total : %d \n", nombre_ville_total);
+						wprintf(L"nombre ville total : %d \n", nombre_ville_total);
 						int taille_tableau_ville_tmp = *(((*tmp) + j)->taille_tab_ville);
 						Ville** ville_tmp = &(((*tmp) + j)->tab_ville);
 						Ville* ville_en_cours = ((*ville_tmp) + taille_tableau_ville_tmp - 1);
@@ -214,8 +236,6 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 		}
 	}
 	fclose(fichier);
-
-	ecritureFichierRecensements(*tab_region, *taille_tab_region);
 }
 
 void* ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
@@ -244,7 +264,7 @@ void* ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
 			}
 		}
 		fprintf(fichier, "\n");
-		printf("ecriture ok !");
+		wprintf(L"ecriture ok !");
 		fclose(fichier);
 	}
 
