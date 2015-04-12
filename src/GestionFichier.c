@@ -242,6 +242,7 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 
 void* ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
 {
+	//fichier pas range
 	FILE* fichier = NULL;
 	int i;
 	Departement* tmp;
@@ -274,6 +275,7 @@ void* ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
 
 void* ecritureFichierRecensements(Region* tab_region, int* taille_tab_region)
 {
+	//fichier pas range
 	FILE* fichier = NULL;
 	Recensement* no_annee_tmp;
 	Departement* tmp;
@@ -342,4 +344,3 @@ void* ecritureFichierRecensements(Region* tab_region, int* taille_tab_region)
 	printf("\n\n\nFELICITATION l'ecriture des %d villes est ok !\n\n", nombre_ville_ecrit);
 	}
 }
-//todo list : vérifier si supprimer ville + supprimer rencen is ok ? (données dans le bon ordre ?)
