@@ -38,14 +38,14 @@ void  masquerMdp(wchar_t saisie_mdp[])
 }
 
 
-void toMin(wchar_t chaine[], wchar_t chaine_tmp[])// transforme les caractères majuscules de la chaine en minuscules
+void toMin(wchar_t chaine_tmp[])// transforme les caractères majuscules de la chaine en minuscules
 {
 	int i;
 
 
-	for (i = 0; i < wcslen(chaine); i++)
+	for (i = 0; i < wcslen(chaine_tmp); i++)
 	{
-		chaine_tmp[i] = towlower(chaine[i]);
+		chaine_tmp[i] = towlower(chaine_tmp[i]);
 	}
 
 }
