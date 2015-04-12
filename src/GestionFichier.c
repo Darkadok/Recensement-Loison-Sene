@@ -42,7 +42,6 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 	Departement* tab_departement = NULL;
 	int* ref_tab_departement = NULL;
 
-
 	// ****************--------------------- premier fichier, fichier des departements ---------------******************************
 #if _DEBUG
 	fichier = _wfopen(L"../../../../GIT/Recensement/Import/departements.csv", L"r");
@@ -258,6 +257,7 @@ void* ecritureFichierRecensements(Region* tab_region, int* taille_tab_region)
 	Departement* tmp;
 	Ville* ville_tmp;
 	Recensement* recen_tmp;
+	int nombre_ville_ecrit = 0;
 
 	int i;
 	fichier = _wfopen(L"../../../../GIT/Recensement/Import/recensements.csv", L"r");
@@ -297,10 +297,12 @@ void* ecritureFichierRecensements(Region* tab_region, int* taille_tab_region)
 					if (wcscmp(tmp->numero_dep, L"2A") == 0 || wcscmp(tmp->numero_dep, L"2B") == 0)
 					{
 						fwprintf(fichier, L"\n%ls;%ls;%ls;", ville_tmp->dep_com, tmp->numero_dep, ville_tmp->nom_ville);
+						nombre_ville_ecrit++;
 					}
 					else
 					{
 						fwprintf(fichier, L"\n%ls;%d;%ls;", ville_tmp->dep_com, _wtoi(tmp->numero_dep), ville_tmp->nom_ville);
+						nombre_ville_ecrit++;
 					}
 					
 					for (int k = 0; k < nombre_recensements - 1; k++)//pour chaque recensement
@@ -315,7 +317,7 @@ void* ecritureFichierRecensements(Region* tab_region, int* taille_tab_region)
 		}
 		fprintf(fichier, "\n");
 	fclose(fichier);
-	printf("ecriture ok !");
+	printf("\n\n\nFELICITATION l'ecriture des %d villes est ok !\n\n", nombre_ville_ecrit);
 	}
 }
 //todo list : vérifier si supprimer ville + supprimer rencen is ok ? (données dans le bon ordre ?)
