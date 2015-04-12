@@ -70,6 +70,7 @@ void triTabRegion(Region* tab_region, int* taille_tab_region)
 
 }
 
+
 int rechercheRegionByNom(Region* tab_region, int* taille_tab_region, wchar_t nom_reg[])
 {
 	wchar_t tab_nom_reg_tmp[100];
@@ -91,6 +92,7 @@ int rechercheRegionByNom(Region* tab_region, int* taille_tab_region, wchar_t nom
 
 	return -1;
 }
+
 
 
 

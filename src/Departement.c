@@ -83,9 +83,18 @@ void triTabDepartement(Departement* tab_departement, int* taille_tab_departement
 
 int rechercheDepartementByNom(Departement* tab_departement, int* taille_tab_departement, wchar_t nom_dep[])
 {
+	wchar_t tab_nom_dep_tmp[100];
+	wchar_t nom_dep_tmp;
+
+	wcscpy(nom_dep_tmp, nom_dep);
+	toMin(nom_dep, nom_dep_tmp);
+
 	for (int i = 0; i < *taille_tab_departement; i++)
 	{
-		if (!wcscmp((tab_departement + i)->nom_dep, nom_dep))
+		wcscpy(tab_nom_dep_tmp, (tab_departement + i)->nom_dep);
+		toMin((tab_departement + i)->nom_dep, tab_nom_dep_tmp);
+
+		if (!wcscmp(tab_nom_dep_tmp, nom_dep_tmp))
 		{
 			return i;
 		}
@@ -96,9 +105,18 @@ int rechercheDepartementByNom(Departement* tab_departement, int* taille_tab_depa
 
 int rechercheDepartementByNumDep(Departement* tab_departement, int* taille_tab_departement, wchar_t numero_dep[])
 {
+	wchar_t tab_numero_dep_tmp[100];
+	wchar_t numero_dep_tmp;
+
+	wcscpy(numero_dep_tmp, numero_dep);
+	toMin(numero_dep, numero_dep_tmp);
+
 	for (int i = 0; i < *taille_tab_departement; i++)
 	{
-		if ((tab_departement + i)->numero_dep == numero_dep)
+		wcscpy(tab_numero_dep_tmp, (tab_departement + i)->numero_dep);
+		toMin((tab_departement + i)->numero_dep, tab_numero_dep_tmp);
+
+		if (!wcscmp(tab_numero_dep_tmp, numero_dep_tmp))
 		{
 			return i;
 		}
@@ -109,9 +127,18 @@ int rechercheDepartementByNumDep(Departement* tab_departement, int* taille_tab_d
 
 int rechercheDepartementByPrefecture(Departement* tab_departement, int* taille_tab_departement, wchar_t prefecture[])
 {
+	wchar_t tab_prefecture_tmp[100];
+	wchar_t prefecture_tmp[100];
+
+	wcscpy(prefecture_tmp, prefecture);
+	toMin(prefecture, prefecture_tmp);
+
 	for (int i = 0; i < *taille_tab_departement; i++)
 	{
-		if (!wcscmp((tab_departement + i)->prefecture, prefecture))
+		wcscpy(tab_prefecture_tmp, (tab_departement + i)->prefecture);
+		toMin((tab_departement + i)->prefecture, tab_prefecture_tmp);
+
+		if (!wcscmp(tab_prefecture_tmp, prefecture_tmp))
 		{
 			return i;
 		}
