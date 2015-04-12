@@ -9,24 +9,26 @@ GestionFichier.c
 **/
 
 #include "GestionFichier.h"
-
+/*
 wchar_t* verifAccents(wchar_t chaineIn[])
 {
-	wprintf(L"%ls", chaineIn);
+	printf("%c", 130);
+	wprintf(L"%ls\n", chaineIn);
 	int i;
 	for (i = 0; i < wcslen(chaineIn); i++)
 	{
-		if (chaineIn[i] > 127)
+		if (chaineIn[i] == 233)
 		{
-
-			swprintf((wchar_t)(chaineIn[i]), L"%x", chaineIn[i]);
+			chaineIn[i] = (chaineIn[i] - 103) ;
+			wprintf(L"%ls\n", chaineIn);
 		}
-		wprintf(L"%x", chaineIn[i]);
-		wprintf(L"%ls", chaineIn);
+		
+		
 	}
+	wprintf(L"%ls\n", chaineIn);
 	return chaineIn;
 }
-
+*/
 
 
 
@@ -112,7 +114,7 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 				system("chcp 1200");
 				wprintf(L"R%lcgion %ls cr%lc%lce \n", 130, nom_region_tmp, 130, 130);
 				wprintf(L"%d \n", **taille_tab_region);
-				ajouterDepartement(&(((*tab_region) + (**taille_tab_region) - 1)->tab_departement), departement_tmp, numerodep_tmp, prefecture_tmp, &(((*tab_region) + **taille_tab_region - 1)->taille_tab_departement));//ne marche pas encore
+(				ajouterDepartement(&(((*tab_region) + (**taille_tab_region) - 1)->tab_departement), departement_tmp, numerodep_tmp, prefecture_tmp, &(((*tab_region) + **taille_tab_region - 1)->taille_tab_departement)));//ne marche pas encore
 
 			}
 		}

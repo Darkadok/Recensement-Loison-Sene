@@ -4,8 +4,6 @@ int menu()
 {
 	int* taille_tab_etoile = NULL;
 	Region* tab_region = NULL;
-	wchar_t* test = L"azerté@ô";
-	verifAccents(test);
 	lectureFichiers(&tab_region, &taille_tab_etoile);
 	system("pause");
 	int code_menu = 2;
@@ -34,6 +32,7 @@ int menu()
 			ecritureFichierDepartements(tab_region, taille_tab_etoile);
 			ecritureFichierRecensements(tab_region, taille_tab_etoile);
 			detruireTabRegion(&tab_region, &taille_tab_etoile);
+			system("pause");
 			lapin();
 			break;
 		case 1:
