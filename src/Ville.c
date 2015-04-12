@@ -62,6 +62,23 @@ void ajouterVille(Ville** tab_ville, wchar_t nom_ville[], wchar_t dep_com[], int
 	}
 }
 
+void triTabVille(Ville* tab_ville, int* taille_tab_ville)
+{
+	wchar_t dec_com_tmp[6];
+
+	for (int i = 0; i < *taille_tab_ville; i++)
+	{
+		for (int j = 1; j < *taille_tab_ville; j++)
+		{
+			if (wcscmp((tab_ville + i)->dep_com, (tab_ville + j)->dep_com) > 0)
+			{
+				wcscpy(dec_com_tmp, (tab_ville + i)->dep_com);
+				wcscpy((tab_ville + i)->dep_com, (tab_ville + j)->dep_com);
+				wcscpy((tab_ville + j)->dep_com, dec_com_tmp);
+			}
+		}
+	}
+
 
 int rechercheVilleByNom(Ville* tab_ville, int* taille_tab_ville, wchar_t nom_ville[])
 {

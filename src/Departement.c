@@ -66,6 +66,26 @@ void ajouterDepartement(Departement** tab_departement, wchar_t nom_dep[], wchar_
 }
 
 
+void triTabDepartement(Departement* tab_departement, int* taille_tab_departement)
+{
+	wchar_t num_dep_tmp[3];
+
+	for (int i = 0; i < *taille_tab_departement; i++)
+	{
+		for (int j = 0; j < *taille_tab_departement; j++)
+		{
+			if (wcscmp((tab_departement + i)->numero_dep, (tab_departement + j)->numero_dep) > 0)
+			{
+				wcscpy(num_dep_tmp, (tab_departement + i)->numero_dep);
+				wcscpy((tab_departement + i)->numero_dep, (tab_departement + j)->numero_dep);
+				wcscpy((tab_departement + j)->numero_dep, num_dep_tmp);
+			}
+		}
+	}
+
+
+}
+
 int rechercheDepartementByNom(Departement* tab_departement, int* taille_tab_departement, wchar_t nom_dep[])
 {
 	for (int i = 0; i < *taille_tab_departement; i++)

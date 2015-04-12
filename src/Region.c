@@ -56,6 +56,25 @@ void ajouterRegion(Region** tab_region, wchar_t nom_reg[], int** taille_tab_regi
 
 }
 
+void triTabRegion(Region* tab_region, int* taille_tab_region)
+{
+	wchar_t nom_reg_tmp[30];
+
+	for (int i = 0; i < *taille_tab_region; i++)
+	{
+		for (int j = 0; j < *taille_tab_region; j++)
+		{
+			if (wcscmp((tab_region + i)->nom_reg, (tab_region + i)->nom_reg))
+			{
+				wcscpy(nom_reg_tmp, (tab_region + i)->nom_reg);
+			    wcscpy((tab_region + i)->nom_reg, (tab_region + j)->nom_reg);
+				wcscpy((tab_region + j)->nom_reg, nom_reg_tmp);
+			}	
+		}
+	}
+
+}
+
 int rechercheRegionByNom(Region* tab_region, int* taille_tab_region, wchar_t nom_reg[])
 {
 	wchar_t tab_nom_reg_tmp[100];

@@ -31,6 +31,9 @@ int* taille_tab_departement;
 void creerTabRegion(Region** tab_region, int** taille_tab_region, wchar_t nom_reg[]);
 void ajouterRegion(Region** tab_region, wchar_t nom_reg[], int** taille_tab_region);
 
+void triTabRegion(Region* region, int* taille_tab_region);
+
+
 void afficherRegion(Region* region);
 
 int rechercheRegionByNom(Region* tab_region, int* taille_tab_region, wchar_t nom_reg[]);

@@ -51,6 +51,26 @@ void ajouterRecensement(Recensement** tab_recensement, int annee, int valeur_rec
 	}
 }
 
+void triTabRecensement(Recensement* tab_recensement, int* taille_tab_recensement)
+{
+	
+	int annee_tmp = 0;
+
+	for (int i = 0; i < *taille_tab_recensement; i++)
+	{
+		for (int j = 1; j < *taille_tab_recensement; j++)
+		{
+			if ((tab_recensement + i)->annee < (tab_recensement + j)->annee)
+			{
+				annee_tmp = (tab_recensement + i)->annee;
+				(tab_recensement + i)->annee = (tab_recensement + j)->annee;
+				(tab_recensement + j)->annee = annee_tmp;
+			}
+		}
+	}
+
+}
+
 int rechercheRecensement(Recensement* tab_recensement, int* taille_tab_recensement, int annee)
 {
 	for (int i = 0; i < *taille_tab_recensement; i++)

@@ -36,6 +36,8 @@ void ajouterVille(Ville** tab_ville, wchar_t nom_ville[], wchar_t dep_com[], int
 
 void afficherVille(Ville* ville);
 
+void triTabVille(Ville* tab_ville, int* taille_tab_ville);
+
 int rechercheVilleByNom(Ville* tab_ville, int* taille_tab_ville, wchar_t nom_ville[]);
 int rechercheVilleByDepCom(Ville* tab_ville, int* taille_tab_ville, wchar_t dep_com[]);
 

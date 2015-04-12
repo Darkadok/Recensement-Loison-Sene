@@ -29,6 +29,8 @@ void afficherRecensement(Recensement* recensement);
 void creerTabRecensement(Recensement** tab_recensement, int annee, int valeur_recen, int** taille_tab_recensement);
 void ajouterRecensement(Recensement** tab_recensement, int annee, int valeur_recen, int** taille_tab_recensement);
 
+void triTabRecensement(Recensement* tab_recensement, int* taille_tab_recensement);
+
 void afficherRecensement(Recensement* recensement);
 
 int rechercheRecensement(Recensement* tab_recensement, int* taille_tab_recensement, int annee);
