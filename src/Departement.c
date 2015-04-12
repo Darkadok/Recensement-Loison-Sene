@@ -74,12 +74,7 @@ void triTabDepartement(Departement* tab_departement, int* taille_tab_departement
 	{
 		for (int j = 0; j < *taille_tab_departement; j++)
 		{
-			if (wcscmp((tab_departement + i)->numero_dep, (tab_departement + j)->numero_dep) > 0)
-			{
-				wcscpy(num_dep_tmp, (tab_departement + i)->numero_dep);
-				wcscpy((tab_departement + i)->numero_dep, (tab_departement + j)->numero_dep);
-				wcscpy((tab_departement + j)->numero_dep, num_dep_tmp);
-			}
+			
 		}
 	}
 

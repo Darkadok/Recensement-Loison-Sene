@@ -64,12 +64,7 @@ void triTabRegion(Region* tab_region, int* taille_tab_region)
 	{
 		for (int j = 0; j < *taille_tab_region; j++)
 		{
-			if (wcscmp((tab_region + i)->nom_reg, (tab_region + i)->nom_reg))
-			{
-				wcscpy(nom_reg_tmp, (tab_region + i)->nom_reg);
-			    wcscpy((tab_region + i)->nom_reg, (tab_region + j)->nom_reg);
-				wcscpy((tab_region + j)->nom_reg, nom_reg_tmp);
-			}	
+			
 		}
 	}
 
