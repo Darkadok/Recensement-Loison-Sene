@@ -73,23 +73,23 @@ void triTabRegion(Region* tab_region, int* taille_tab_region)
 
 int rechercheRegionByNom(Region* tab_region, int* taille_tab_region, wchar_t nom_reg[])
 {
-	wchar_t tab_nom_reg_tmp[100];
-	wchar_t nom_reg_tmp[100];
+	wchar_t* tab_nom_reg_tmp = malloc(sizeof(wchar_t)* (wcslen(tab_region->nom_reg) +1 ));
+	wchar_t* nom_reg_tmp = malloc(sizeof(wchar_t)* (wcslen(nom_reg) + 1));
 
 	wcscpy(nom_reg_tmp, nom_reg);
 	toMin(nom_reg, nom_reg_tmp);
 
 	for (int i = 0; i < *taille_tab_region; i++)
 	{
-		wcscmp(tab_nom_reg_tmp, (tab_region + i)->nom_reg);
+		wcscpy(tab_nom_reg_tmp, (tab_region + i)->nom_reg);
 		toMin((tab_region + i)->nom_reg, tab_nom_reg_tmp);
 
 		if (!wcscmp(tab_nom_reg_tmp, nom_reg))
 		{
+
 			return i;
 		}
 	}
-
 	return -1;
 }
 

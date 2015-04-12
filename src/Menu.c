@@ -5,6 +5,7 @@ int menu()
 	int* taille_tab_etoile = NULL;
 	Region* tab_region = NULL;
 	lectureFichiers(&tab_region, &taille_tab_etoile);
+	int test = rechercheRegionByNom(tab_region, taille_tab_etoile, L"Picardie");
 	system("pause");
 	int code_menu = 2;
 	/*wchar_t* saisie_utilisateur = NULL; */    //La saisie de l'utilisateur va dans un tableau
