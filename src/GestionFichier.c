@@ -1,10 +1,11 @@
 ﻿/*
 Override
 GestionFichier.c
-
+by Merlin
 2014/2015
 
 @author Alexandre Courcoul, Merlin Loison & Massamba Sène
+
 
 **/
 
@@ -213,7 +214,7 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 			}
 		}
 	}
-	rechercheVilleByNom((*tab_region + 1)->tab_departement->tab_ville, (*tab_region + 1)->tab_departement->taille_tab_ville, L"tést");
+	rechercheVilleByNom((*tab_region + 1)->tab_departement->tab_ville, (*tab_region + 1)->tab_departement->taille_tab_ville, L"abbecourt");
 	fclose(fichier);
 }
 

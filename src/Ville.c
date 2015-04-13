@@ -75,17 +75,25 @@ int rechercheVilleByNom(Ville* tab_ville, int* taille_tab_ville, wchar_t nom_vil
 	wchar_t tab_nom_ville_tmp[100];
 	wchar_t nom_ville_tmp[100];
 
-	wcscpy(nom_ville_tmp, nom_ville);
-	enleverAccent(nom_ville_tmp);
-	toMin(nom_ville, nom_ville_tmp);
+	wchar_t tab_nom_ville_tmp_sa[100];
+	wchar_t nom_ville_tmp_sa[100];
+
+
+	wcscpy(nom_ville_tmp_sa, nom_ville);
+	enleverAccent(nom_ville_tmp_sa);
+	
+	wcscpy(nom_ville_tmp, nom_ville_tmp_sa);
+
+	toMin(nom_ville_tmp_sa, nom_ville_tmp);
 
 	for (int i = 0; i < *taille_tab_ville; i++)
 	{
-		wcscpy(tab_nom_ville_tmp, (tab_ville + i)->nom_ville);
-		enleverAccent(tab_nom_ville_tmp);
-		toMin((tab_ville + i)->nom_ville, tab_nom_ville_tmp);
+		wcscpy(tab_nom_ville_tmp_sa, (tab_ville + i)->nom_ville);
+		enleverAccent(tab_nom_ville_tmp_sa);
+		wcscpy(tab_nom_ville_tmp, tab_nom_ville_tmp_sa);
+		toMin(tab_nom_ville_tmp_sa, tab_nom_ville_tmp);
 
-		if (!wcscmp(tab_nom_ville_tmp, nom_ville_tmp))
+		if (!wcscmp(tab_nom_ville_tmp_sa, nom_ville_tmp_sa))//fonctionne pas => tab_nom_ville_tmp_sa n'est pas sans accent
 		{
 			return i;
 		}
