@@ -90,3 +90,65 @@ int verificationSaisie(wchar_t saisie_utilisateur[], int code_menu)
 		}
 	}
 }
+
+void enleverAccent(wchar_t chaine[])
+{
+	for (int i = 0; i < wcslen(chaine); i++)
+	{
+		switch (chaine[i])
+		{
+		case L'à':
+		case L'â':
+		case L'Â':
+
+
+			chaine[i] = L'a';
+
+			break;
+
+		case L'è':
+		case L'é':
+		case L'ê':
+		case L'ë':
+		case L'É':
+		case L'È':
+
+			chaine[i] = L'e';
+
+			break;
+
+
+		case L'î':
+		case L'ï':
+
+			chaine[i] = L'i';
+
+			break;
+
+
+		case L'ô':
+		case L'Ô':
+		case L'ö':
+		case L'Ö':
+			chaine[i] = L'o';
+
+			break;
+
+
+		case L'û':
+		case L'ü':
+		case L'Û':
+		case L'Ü':
+			chaine[i] = L'u';
+
+			break;
+
+		case L'ç':
+			chaine[i] = L'c';
+
+		default:    break;
+		}
+
+	}
+
+}
