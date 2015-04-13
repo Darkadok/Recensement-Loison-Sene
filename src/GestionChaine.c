@@ -48,7 +48,7 @@ void toMin(wchar_t chaine_tmp[])// transforme les caractères majuscules de la ch
 
 	for (i = 0; i < wcslen(chaine_tmp); i++)
 	{
-		chaine_tmp[i] = towlower(chaine_tmp[i]);
+		chaine_tmp[i] = towlower(chaine_tmp[i]);// --- ca plante !! ----
 	}
 
 }
