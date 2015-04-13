@@ -1,10 +1,12 @@
 /*
 Override
-Region.h
+@author Alexandre Courcoul, Merlin Loison & Massamba Sène
 
 2014/2015
 
-@author Alexandre Courcoul, Merlin Loison & Massamba Sène
+
+Region.h
+@author Massamba Sène
 
 **/
 
@@ -30,9 +32,6 @@ int* taille_tab_departement;
 
 void creerTabRegion(Region** tab_region, int** taille_tab_region, wchar_t nom_reg[]);
 void ajouterRegion(Region** tab_region, wchar_t nom_reg[], int** taille_tab_region);
-
-void triTabRegion(Region* region, int* taille_tab_region);
-
 
 void afficherRegion(Region* region);
 

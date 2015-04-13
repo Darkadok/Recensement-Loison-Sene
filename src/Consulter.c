@@ -1,5 +1,5 @@
 #include "Consulter.h"
-#include"GestionChaine.h" 
+
 
 int menuConsulter(int choix_tmp, wchar_t saisie_utilisateur[])
 {

@@ -1,10 +1,12 @@
 /*
 Override
-Departement.h
+@author Alexandre Courcoul, Merlin Loison & Massamba Sène
 
 2014/2015
 
-@author Alexandre Courcoul, Merlin Loison & Massamba Sène
+
+Departement.h
+@author Massamba Sène
 
 **/
 
@@ -29,12 +31,10 @@ struct Departement {
 	int* taille_tab_ville;
 };
 
-void afficherDepartement(Departement* departement);
+
 
 void creerTabDepartement(Departement** tab_departement, int** taille_tab_departement, wchar_t nom_dep[], wchar_t numero_dep[], wchar_t prefecture[]);
 void ajouterDepartement(Departement** tab_departement, wchar_t nom_dep[], wchar_t numero_dep[], wchar_t prefecture[], int** taille_tab_departement);
-
-void triTabDepartement(Departement* tab_departement, int* taille_tab_departement);
 
 void afficherDepartement(Departement* departement);
 

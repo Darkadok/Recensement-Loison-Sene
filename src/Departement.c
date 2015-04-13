@@ -1,10 +1,12 @@
 /*
 Override
-Departement.c
+@author Alexandre Courcoul, Merlin Loison & Massamba Sène
 
 2014/2015
 
-@author Alexandre Courcoul, Merlin Loison & Massamba Sène
+
+Departement.c
+@author Massamba Sène
 
 **/
 
@@ -66,20 +68,13 @@ void ajouterDepartement(Departement** tab_departement, wchar_t nom_dep[], wchar_
 }
 
 
-void triTabDepartement(Departement* tab_departement, int* taille_tab_departement)
+void afficherDepartement(Departement* departement)
 {
-	wchar_t num_dep_tmp[3];
-
-	for (int i = 0; i < *taille_tab_departement; i++)
-	{
-		for (int j = 0; j < *taille_tab_departement; j++)
-		{
-			
-		}
-	}
-
-
+	wprintf(L"Nom : %ls\n", departement->nom_dep);
 }
+
+
+
 
 int rechercheDepartementByNom(Departement* tab_departement, int* taille_tab_departement, wchar_t nom_dep[])
 {
@@ -145,29 +140,27 @@ int rechercheDepartementByPrefecture(Departement* tab_departement, int* taille_t
 	}
 
 	return -1;
-
 }
+
 
 void modifierNomDepartement(Departement* departement, wchar_t nom_dep[])
 {
-	free(departement->nom_dep);
-	departement->nom_dep = malloc(sizeof(wchar_t)* (wcslen(nom_dep) + 1));
+	departement->nom_dep = realloc(departement->nom_dep, wcslen(nom_dep) + 1);
 	wcscpy(departement->nom_dep, nom_dep);
 }
 
 void modifierNumeroDepartement(Departement* departement, wchar_t numero_dep[])
 {
-	free(departement->numero_dep);
-	departement->numero_dep = malloc(sizeof(wchar_t)* (wcslen(numero_dep) + 1));
+	departement->numero_dep = realloc(departement->numero_dep, wcslen(numero_dep) + 1);
 	wcscpy(departement->numero_dep, numero_dep);
 }
 
-void modifierPrefectureDepartement(Departement* departement, wchar_t* prefecture)
+void modifierPrefectureDepartement(Departement* departement, wchar_t prefecture[])
 {
-	free(departement->prefecture);
-	departement->prefecture = malloc(sizeof(wchar_t) * (wcslen(prefecture) + 1));
+	departement->prefecture = realloc(departement->prefecture, wcslen(prefecture) + 1);
 	wcscpy(departement->prefecture, prefecture);
 }
+
 
 
 void* supprimerDepartement(Departement** tab_departement, Departement* departement_supp, int** taille_tab_departement)
@@ -317,11 +310,6 @@ void detruireTabDepartement(Departement** tab_departement, int** taille_tab_depa
 	}
 
 }
-void afficherDepartement(Departement* departement)
-{
-	wprintf(L"Nom : %ls\n", departement->nom_dep);
-}
-
 
 
 

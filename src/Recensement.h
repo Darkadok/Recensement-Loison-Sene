@@ -1,10 +1,11 @@
 /*
 Override
-Recensement.h
+@author Alexandre Courcoul, Merlin Loison & Massamba Sène
 
 2014/2015
 
-@author Alexandre Courcoul, Merlin Loison & Massamba Sène
+Recensement.h
+@author Massamba Sène
 
 **/
 
@@ -25,11 +26,9 @@ struct Recensement {
 	int valeur_recen;
 };
 
-void afficherRecensement(Recensement* recensement);
+
 void creerTabRecensement(Recensement** tab_recensement, int annee, int valeur_recen, int** taille_tab_recensement);
 void ajouterRecensement(Recensement** tab_recensement, int annee, int valeur_recen, int** taille_tab_recensement);
-
-void triTabRecensement(Recensement* tab_recensement, int* taille_tab_recensement);
 
 void afficherRecensement(Recensement* recensement);
 

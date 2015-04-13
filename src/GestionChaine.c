@@ -1,9 +1,12 @@
 /*
 Override
-GestionChaine.c
+@author Alexandre Courcoul, Merlin Loison & Massamba Sène
+
 2014/2015
 
-@author Alexandre Courcoul, Merlin Loison & Massamba Sène
+
+GestionChaine.c.h
+@author Massamba Sène
 
 **/
 

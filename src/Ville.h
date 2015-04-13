@@ -1,10 +1,12 @@
 /*
 Override
-Ville.h
+@author Alexandre Courcoul, Merlin Loison & Massamba Sène
 
 2014/2015
 
-@author Alexandre Courcoul, Merlin Loison & Massamba Sène
+
+Ville.h
+@author Massamba Sène
 
 **/
 
@@ -31,12 +33,10 @@ struct Ville {
 };
 
 
-
+void creerTabVille(Ville** tab_ville, int** taille_tab_ville, wchar_t nom_ville[], wchar_t dep_com[]);
 void ajouterVille(Ville** tab_ville, wchar_t nom_ville[], wchar_t dep_com[], int** taille_tab_ville);
 
 void afficherVille(Ville* ville);
-
-void triTabVille(Ville* tab_ville, int* taille_tab_ville);
 
 int rechercheVilleByNom(Ville* tab_ville, int* taille_tab_ville, wchar_t nom_ville[]);
 int rechercheVilleByDepCom(Ville* tab_ville, int* taille_tab_ville, wchar_t dep_com[]);
