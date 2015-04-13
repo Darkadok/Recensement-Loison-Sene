@@ -9,29 +9,6 @@ GestionFichier.c
 **/
 
 #include "GestionFichier.h"
-/*
-wchar_t* verifAccents(wchar_t chaineIn[])
-{
-	printf("%c", 130);
-	wprintf(L"%ls\n", chaineIn);
-	int i;
-	for (i = 0; i < wcslen(chaineIn); i++)
-	{
-		if (chaineIn[i] == 233)
-		{
-			chaineIn[i] = (chaineIn[i] - 103) ;
-			wprintf(L"%ls\n", chaineIn);
-		}
-		
-		
-	}
-	wprintf(L"%ls\n", chaineIn);
-	return chaineIn;
-}
-*/
-
-
-
 
 int nombrePointVirguleDansLigne(FILE* fichier)
 {
