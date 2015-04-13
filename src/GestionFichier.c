@@ -213,7 +213,7 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 			}
 		}
 	}
-	rechercheVilleByNom((*tab_region + 1)->tab_departement->tab_ville, (*tab_region + 1)->tab_departement->taille_tab_ville, L"test");
+	rechercheVilleByNom((*tab_region + 1)->tab_departement->tab_ville, (*tab_region + 1)->tab_departement->taille_tab_ville, L"tést");
 	fclose(fichier);
 }
 
