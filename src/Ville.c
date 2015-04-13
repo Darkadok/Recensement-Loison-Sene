@@ -69,7 +69,7 @@ void afficherVille(Ville* ville)
 	wprintf(L"Nom : %ls\n", ville->nom_ville);
 }
 
-int rechercheVilleByNom(Ville* tab_ville, int* taille_tab_ville, wchar_t nom_ville[])
+int rechercheVilleByNom(Ville* tab_ville, int* taille_tab_ville, wchar_t nom_ville[])//on devrait pas chercher dans toutes les villes ?
 {
 
 	wchar_t tab_nom_ville_tmp[100];
@@ -100,13 +100,13 @@ int rechercheVilleByDepCom(Ville* tab_ville, int* taille_tab_ville, wchar_t dep_
 	wchar_t dep_com_tmp[100];
 
 	wcscpy(dep_com_tmp, dep_com);
-	enleverAccent(nom_ville_tmp);
+	//enleverAccent(nom_ville_tmp);
 	toMin(dep_com, dep_com_tmp);
 
 	for (int i = 0; i < *taille_tab_ville; i++)
 	{
 		wcscpy(tab_dep_com_tmp, (tab_ville + i)->dep_com);
-		enleverAccent(tab_nom_ville_tmp);
+		//enleverAccent(tab_nom_ville_tmp);
 		toMin((tab_ville + i)->dep_com, tab_dep_com_tmp);
 
 		if (!wcscmp(tab_dep_com_tmp , dep_com_tmp))
