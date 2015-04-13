@@ -5,8 +5,8 @@ int menu()
 	int* taille_tab_etoile = NULL;
 	Region* tab_region = NULL;
 	lectureFichiers(&tab_region, &taille_tab_etoile);
-	int test = rechercheRegionByNom(tab_region, taille_tab_etoile, L"Picardie");
-	system("pause");
+	//int test = rechercheRegionByNom(tab_region, taille_tab_etoile, L"Picardie");
+	//system("pause");
 	int code_menu = 2;
 	/*wchar_t* saisie_utilisateur = NULL; */    //La saisie de l'utilisateur va dans un tableau
 	int choix = 0;
@@ -34,6 +34,7 @@ int menu()
 			ecritureFichierRecensements(tab_region, taille_tab_etoile);
 			detruireTabRegion(&tab_region, &taille_tab_etoile);
 			system("pause");
+			system("cls");
 			lapin();
 			break;
 		case 1:
