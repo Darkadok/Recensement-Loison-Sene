@@ -111,7 +111,6 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 			if (!is_region_exist)//sinon on l'ajoute
 			{
 				ajouterRegion(tab_region, nom_region_tmp, taille_tab_region);
-				system("chcp 1200");
 				wprintf(L"R%lcgion %ls cr%lc%lce \n", 130, nom_region_tmp, 130, 130);
 				wprintf(L"%d \n", **taille_tab_region);
 (				ajouterDepartement(&(((*tab_region) + (**taille_tab_region) - 1)->tab_departement), departement_tmp, numerodep_tmp, prefecture_tmp, &(((*tab_region) + **taille_tab_region - 1)->taille_tab_departement)));//ne marche pas encore
@@ -266,7 +265,6 @@ void* ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
 				fwprintf(fichier, L"%ls;%ls;%ls;%ls\n", (tmp + j)->numero_dep, (tmp + j)->nom_dep, (tmp + j)->prefecture, (tab_region + i)->nom_reg);
 			}
 		}
-		fprintf(fichier, "\n");
 		wprintf(L"ecriture ok !");
 		fclose(fichier);
 	}
@@ -275,7 +273,6 @@ void* ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
 
 void* ecritureFichierRecensements(Region* tab_region, int* taille_tab_region)
 {
-	//fichier pas range
 	FILE* fichier = NULL;
 	Recensement* no_annee_tmp;
 	Departement* tmp;
@@ -284,8 +281,10 @@ void* ecritureFichierRecensements(Region* tab_region, int* taille_tab_region)
 	int nombre_ville_ecrit = 0;
 
 	int i;
-	fichier = _wfopen(L"../../../../GIT/Recensement/Import/recensements.csv", L"r");
+	fichier = _wfopen(L"../Import/recensements.csv", L"r");
 	int nombre_recensements = nombrePointVirguleDansLigne(fichier) - 2;
+	fclose(fichier);
+	fichier = NULL;
 #if _DEBUG
 	fichier = _wfopen(L"../../../../GIT/Recensement/Import/recensements_test.csv", L"w+");
 #endif
@@ -339,7 +338,6 @@ void* ecritureFichierRecensements(Region* tab_region, int* taille_tab_region)
 				}
 			}
 		}
-		fprintf(fichier, "\n");
 	fclose(fichier);
 	printf("\n\n\nFELICITATION l'ecriture des %d villes est ok !\n\n", nombre_ville_ecrit);
 	}

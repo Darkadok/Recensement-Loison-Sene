@@ -123,13 +123,13 @@ void modifierNomVille(Ville* ville, wchar_t nom_ville[])
 {
 	
 	ville->nom_ville = realloc(ville->nom_ville, wcslen(nom_ville) +1);
-	wcscpy(ville->nom_ville; nom_ville);
+	wcscpy(ville->nom_ville, nom_ville);
 }
 
 void modifierDepComVille(Ville* ville, wchar_t dep_com[])
 {
 	ville->dep_com = realloc(ville->dep_com, wcslen(dep_com) +1);
-	wcscpy(ville->dep_com; dep_com);
+	wcscpy(ville->dep_com, dep_com);
 }
 
 void* supprimerVille(Ville** tab_ville, int** taille_tab_ville, Ville* ville_supp)
