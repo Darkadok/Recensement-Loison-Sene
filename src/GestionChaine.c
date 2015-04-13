@@ -41,17 +41,18 @@ void  masquerMdp(wchar_t saisie_mdp[])
 }
 
 
-void toMin(wchar_t chaine_tmp[])// transforme les caractères majuscules de la chaine en minuscules
+void toMin(wchar_t chaine[], wchar_t chaine_tmp[])// transforme les caractères majuscules de la chaine en minuscules
 {
 	int i;
 
 
-	for (i = 0; i < wcslen(chaine_tmp); i++)
+	for (i = 0; i < wcslen(chaine); i++)
 	{
-		chaine_tmp[i] = towlower(chaine_tmp[i]);// --- ca plante !! ----
+		chaine_tmp[i] = towlower(chaine[i]);
 	}
 
 }
+
 
 
 /**** La vérification se fait avec une chaîne de caractère au cas où l'utilisateur tape plusieurs caractères
