@@ -22,9 +22,9 @@ void menuAdministration(int choix_tmp, int connexion, Region** tab_region, int**
 					system("cls");
 					printf("=== MENU SECURISE ===\n");
 					printf("\n Choisir une option :\n");
-					printf("\n1 - Ajouter un recenssement ou une commune\n");
+					printf("\n1 - Ajouter un recensement ou une commune\n");
 					printf("2 - Modifier les informations d une commune\n");
-					printf("3 - Supprimer une commune ou un recenssement\n");
+					printf("3 - Supprimer une commune ou un recensement\n");
 					printf("0 - Deconnexion\n");
 
 					printf("\n Saisir votre choix : ");
@@ -35,8 +35,8 @@ void menuAdministration(int choix_tmp, int connexion, Region** tab_region, int**
 					case 1:
 						code_menu = 2;
 						system("cls");
-						printf("=== MENU AJOUTER Recenssement===\n");
-						printf("\n1 - Ajouter un recenssement\n");
+						printf("=== MENU AJOUTER recensement===\n");
+						printf("\n1 - Ajouter un recensement\n");
 						printf("2 - Ajouter une commune\n");
 						printf("0 - Retour\n");//Pas fini ...
 						wscanf(L"%s", saisie_utilisateur);
@@ -54,7 +54,7 @@ void menuAdministration(int choix_tmp, int connexion, Region** tab_region, int**
 						code_menu = 2;
 						system("cls");
 						printf("=== MENU SUPPRIMER Commune ou Recencement ===\n");
-						printf("\n1 - Supprimer un recenssement\n");
+						printf("\n1 - Supprimer un recensement\n");
 						printf("2 - Supprimer une commune\n");
 						printf("0 - Retour\n");
 						wscanf(L"%s", saisie_utilisateur);

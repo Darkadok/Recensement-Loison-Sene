@@ -33,6 +33,12 @@ int menu(Region** tab_region, int** taille_tab_etoile)
 			menuAdministration(choix_tmp, connexion, tab_region, taille_tab_etoile);
 			saisie_utilisateur[1] = -1;
 			break;
+
+		case 0:
+			ecritureFichierDepartements(*tab_region, *taille_tab_etoile);
+			ecritureFichierRecensements(*tab_region, *taille_tab_etoile);
+			detruireTabRegion(tab_region, taille_tab_etoile);
+			break;
 		default:
 			break;
 		}

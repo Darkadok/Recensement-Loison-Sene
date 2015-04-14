@@ -242,7 +242,7 @@ void* ecritureFichierDepartements(Region* tab_region, int* taille_tab_region)
 				fwprintf(fichier, L"%ls;%ls;%ls;%ls\n", (tmp + j)->numero_dep, (tmp + j)->nom_dep, (tmp + j)->prefecture, (tab_region + i)->nom_reg);
 			}
 		}
-		wprintf(L"ecriture ok !");
+		wprintf(L"%lccriture des r%lcgions et d%lcpartements ok !", 130,130,130);
 		fclose(fichier);
 	}
 
@@ -316,6 +316,7 @@ void* ecritureFichierRecensements(Region* tab_region, int* taille_tab_region)
 			}
 		}
 	fclose(fichier);
-	printf("\n\n\nFELICITATION l'ecriture des %d villes est ok !\n\n", nombre_ville_ecrit);
+	wprintf(L"\n\n\nF%lcLICITATION l'%lccriture des %d villes est ok !\n\n", 144, 130, nombre_ville_ecrit);
+	system("pause");
 	}
 }
