@@ -19,7 +19,7 @@ Ville.h
 #include <stdio.h>
 #include <wchar.h>
 
-#include "GestionChaine.h"
+#include "GestionSaisie.h"
 #include "Recensement.h"
 
 typedef struct Ville Ville;

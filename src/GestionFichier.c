@@ -27,7 +27,7 @@ int nombrePointVirguleDansLigne(FILE* fichier)
 }
 
 
-void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a remplacer par Dépendances
+void* lectureFichiers(Region** tab_region, int** taille_tab_region)
 {
 	FILE* fichier = NULL;
 	wchar_t ligne_en_cours[1000] = { 0 };
@@ -64,7 +64,7 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 		while ((fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier)) != NULL)// parcours le fichier par ligne
 		{
 			is_region_exist = 0;
-			token = wcstok(ligne_en_cours, L";");
+			token = wcstok(ligne_en_cours, L";");//decoupage
 			wcscpy(numerodep_tmp, token);
 			token = wcstok(NULL, L";");
 			wcscpy(departement_tmp, token);
@@ -73,15 +73,15 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 			token = wcstok(NULL, L"\n");
 			wcscpy(nom_region_tmp, token);
 
-			wprintf(L"%ls \n", departement_tmp);
+			//wprintf(L"%ls \n", departement_tmp);
 			for (compteur_region = 0; compteur_region < **taille_tab_region; compteur_region++)
 			{
 				if (!(wcscmp((((*tab_region) + compteur_region)->nom_reg), nom_region_tmp)))//on verifie si la region est deja cree
 				{
 					is_region_exist = 1;
 					ajouterDepartement(&(((*tab_region) + compteur_region)->tab_departement), departement_tmp, numerodep_tmp, prefecture_tmp, &(((*tab_region) + compteur_region)->taille_tab_departement));
-					wprintf(L"Departement ajouté à région existante. \n");
-					wprintf(L"%d \n", **taille_tab_region);
+					/*wprintf(L"Departement ajouté à région existante. \n");
+					wprintf(L"%d \n", **taille_tab_region);*/
 					break;
 				}
 			}
@@ -89,8 +89,8 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 			if (!is_region_exist)//sinon on l'ajoute
 			{
 				ajouterRegion(tab_region, nom_region_tmp, taille_tab_region);
-				wprintf(L"R%lcgion %ls cr%lc%lce \n", 130, nom_region_tmp, 130, 130);
-				wprintf(L"%d \n", **taille_tab_region);
+				/*wprintf(L"R%lcgion %ls cr%lc%lce \n", 130, nom_region_tmp, 130, 130);
+				wprintf(L"%d \n", **taille_tab_region);*/
 (				ajouterDepartement(&(((*tab_region) + (**taille_tab_region) - 1)->tab_departement), departement_tmp, numerodep_tmp, prefecture_tmp, &(((*tab_region) + **taille_tab_region - 1)->taille_tab_departement)));//ne marche pas encore
 
 			}
@@ -103,7 +103,7 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 	fichier = NULL;
 	token = NULL;
 	i = NULL;
-
+	system("cls");
 
 
 #if _DEBUG
@@ -152,13 +152,13 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 
 		while (fgetws(ligne_en_cours, sizeof(ligne_en_cours), fichier) != NULL)
 		{
-			wprintf(L"%ls", ligne_en_cours);
+			//wprintf(L"%ls", ligne_en_cours);
 			token = wcstok(ligne_en_cours, L";");
-			wcscpy(depcom_tmp, token);//depcom
+			wcscpy(depcom_tmp, token);
 			token = wcstok(NULL, L";");
-			wcscpy(no_dep_tmp, token);//dep
+			wcscpy(no_dep_tmp, token);
 			token = wcstok(NULL, L";");
-			wcscpy(nom_ville_tmp, token);//nomville
+			wcscpy(nom_ville_tmp, token);
 
 			for (i = 0; i < **taille_tab_region; i++)//pour chaque région
 			{
@@ -166,9 +166,6 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 				for (int j = 0; j < *(((*tab_region) + i)->taille_tab_departement); j++)//pour chaque dep de cette region
 				{
 					
-					/*wprintf(L"No de dep en cours : %ls \n", ((*tmp) + j)->numero_dep);
-					wprintf(L"No lu dans fichier : %ls \n", no_dep_tmp);*/
-
 					if ((wcscmp(((*tmp) + j)->numero_dep, L"2A") == 0) || (wcscmp(((*tmp) + j)->numero_dep, L"2B") == 0) || (wcscmp(no_dep_tmp, L"2B") == 0) || (wcscmp(no_dep_tmp, L"2A") == 0))//cas speciaux de la CORSE
 					{
 						if (wcscmp((((*tmp) + j)->numero_dep), no_dep_tmp) == 0)
@@ -183,14 +180,16 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 							is_num_dep_egal = 1;
 						}
 					}
-					if (is_num_dep_egal) //si le no du dep = no en cours => ya SOUCIS
+					if (is_num_dep_egal) 
 					{
 						ajouterVille(&(((*tmp) + j)->tab_ville), nom_ville_tmp, depcom_tmp, &(((*tmp) + j)->taille_tab_ville));
 						nombre_ville_total++;
 
-						wprintf(L"%ls ajouté dans la region %ls", nom_ville_tmp, ((*tab_region) + i)->nom_reg);
+						/*wprintf(L"%ls ajouté dans la region %ls", nom_ville_tmp, ((*tab_region) + i)->nom_reg);
 						wprintf(L" dans le departement %ls\n", (((*tmp) + j)->nom_dep));
-						wprintf(L"nombre ville total : %d \n", nombre_ville_total);
+						system("cls");
+						wprintf(L"Veuillez patienter");
+						wprintf(L"nombre ville total : %d \n", nombre_ville_total);*/
 						int taille_tableau_ville_tmp = *(((*tmp) + j)->taille_tab_ville);
 						Ville** ville_tmp = &(((*tmp) + j)->tab_ville);
 						Ville* ville_en_cours = ((*ville_tmp) + taille_tableau_ville_tmp - 1);
@@ -214,7 +213,6 @@ void* lectureFichiers(Region** tab_region, int** taille_tab_region)// => a rempl
 			}
 		}
 	}
-	rechercheVilleByNom((*tab_region + 1)->tab_departement->tab_ville, (*tab_region + 1)->tab_departement->taille_tab_ville, L"abbecourt");
 	fclose(fichier);
 }
 

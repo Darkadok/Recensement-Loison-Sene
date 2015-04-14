@@ -5,50 +5,40 @@ int menu()
 	int* taille_tab_etoile = NULL;
 	Region* tab_region = NULL;
 	lectureFichiers(&tab_region, &taille_tab_etoile);
-	//int test = rechercheRegionByNom(tab_region, taille_tab_etoile, L"Picardie");
-	//system("pause");
 	int code_menu = 2;
-	/*wchar_t* saisie_utilisateur = NULL; */    //La saisie de l'utilisateur va dans un tableau
-	int choix = 0;
+	wchar_t saisie_utilisateur[50];
 	int connexion = 0;
 	int choix_tmp = 0;
 	do
 	{
 		system("cls");
 		printf("=== MENU PRINCIPAL ===\n");
-		printf("\n \t Choisir une option :\n");
-		printf("1 -Consulter des donnees \n");
+		printf("\n Choisir une option :\n");
+		printf("\n1 - Consulter des donnees \n");
 		printf("2 - Espace administration\n");
 		printf("0 - Quitter\n");
 
 		printf("\n Saisir votre choix : ");
-		/*saisie_utilisateur = malloc(sizeof(int)*)
+		wscanf(L"%s", saisie_utilisateur);
 
-		verificationSaisie(saisie_utilisateur, code_menu); */
-		scanf_s("%d", &choix_tmp);       //test
 
-		switch (choix_tmp)
+
+		switch (verificationSaisie(saisie_utilisateur, code_menu))
 		{
-		case 0:
-			ecritureFichierDepartements(tab_region, taille_tab_etoile);
-			ecritureFichierRecensements(tab_region, taille_tab_etoile);
-			detruireTabRegion(&tab_region, &taille_tab_etoile);
-			system("pause");
-			system("cls");
-			lapin();
-			break;
 		case 1:
 			system("cls");
-			menuConsulter(choix_tmp);
+			menuConsulter(choix_tmp, saisie_utilisateur);
+			saisie_utilisateur[1] = -1;
 			break;
 		case 2:
 			system("cls");
 			menuAdministration(choix_tmp, connexion);
+			saisie_utilisateur[1] = -1;
 			break;
 		default:
 			break;
 		}
-	} while (choix_tmp != 0);
+	} while (verificationSaisie(saisie_utilisateur, code_menu) != 0);
 
 	return 0;
 }

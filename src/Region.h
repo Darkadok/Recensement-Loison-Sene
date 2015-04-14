@@ -18,7 +18,7 @@ Region.h
 #include <wchar.h>
 #include <stdio.h>
 
-#include "GestionChaine.h"
+#include "GestionSaisie.h"
 #include "Departement.h"
 
 typedef struct Region Region;

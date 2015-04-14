@@ -73,7 +73,7 @@ int rechercheRegionByNom(Region* tab_region, int* taille_tab_region, wchar_t nom
 	wchar_t* nom_reg_tmp = malloc(sizeof(wchar_t)* (wcslen(nom_reg) + 1));
 
 	wcscpy(nom_reg_tmp, nom_reg);
-	toMin(nom_reg_tmp);
+	//toMin(nom_reg_tmp);
 
 	for (int i = 0; i < *taille_tab_region; i++)
 	{
@@ -83,7 +83,7 @@ int rechercheRegionByNom(Region* tab_region, int* taille_tab_region, wchar_t nom
 		}
 		 
 		wcscpy(tab_nom_reg_tmp, (tab_region + i)->nom_reg);
-		toMin(tab_nom_reg_tmp);
+		//toMin(tab_nom_reg_tmp);
 
 		if (!wcscmp(tab_nom_reg_tmp, nom_reg))
 		{
