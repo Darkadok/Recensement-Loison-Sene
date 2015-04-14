@@ -12,8 +12,7 @@
 
 
 //Fonctions de lecture 
-int menu();
-
+int menu(Region** tab_region, int** taille_tab_etoile);
 //Fonctions en rapport avec l'administration
 void menuAdmin(int choix);
 void menuAjouter(int choix);

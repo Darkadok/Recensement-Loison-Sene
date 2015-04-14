@@ -1,16 +1,16 @@
 #include "MenuAdministration.h"
 
 
-void menuAdministration(int choix_tmp, int connexion)
+void menuAdministration(int choix_tmp, int connexion, Region** tab_region, int** taille_tab_etoile)
 {
 	int j = 0;
 	do
 	{
 		int connexion = 0;
-		wchar_t mdp[] = L"a123"; // Exemple de mot de passe pour accéder
+		wchar_t mdp[] = L"P@ssw0rd"; // Exemple de mot de passe pour accéder
 		wchar_t saisie_mdp[50];   
 			system("cls");
-			printf("\nSaisisser votre mot de passe: (3 essais \n");
+			printf("\nSaisisser votre mot de passe: (avez vous essaye 'P@ssw0rd' ? ;) \n");
 			masquerMdp(saisie_mdp);
 			if (wcscmp(mdp, saisie_mdp) == 0) 
 			{
@@ -38,7 +38,7 @@ void menuAdministration(int choix_tmp, int connexion)
 						printf("=== MENU AJOUTER Recenssement===\n");
 						printf("\n1 - Ajouter un recenssement\n");
 						printf("2 - Ajouter une commune\n");
-						printf("0 - Retour\n");
+						printf("0 - Retour\n");//Pas fini ...
 						wscanf(L"%s", saisie_utilisateur);
 						verificationSaisie(saisie_utilisateur, code_menu);
 						saisie_utilisateur[1] = -1;

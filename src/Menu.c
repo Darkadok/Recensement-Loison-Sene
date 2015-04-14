@@ -1,10 +1,8 @@
 #include "Menu.h"
 
-int menu()
+int menu(Region** tab_region, int** taille_tab_etoile)
 {
-	int* taille_tab_etoile = NULL;
-	Region* tab_region = NULL;
-	lectureFichiers(&tab_region, &taille_tab_etoile);
+	
 	int code_menu = 2;
 	wchar_t saisie_utilisateur[50];
 	int connexion = 0;
@@ -27,12 +25,12 @@ int menu()
 		{
 		case 1:
 			system("cls");
-			menuConsulter(choix_tmp, saisie_utilisateur);
+			menuConsulter(choix_tmp, saisie_utilisateur, tab_region, taille_tab_etoile);
 			saisie_utilisateur[1] = -1;
 			break;
 		case 2:
 			system("cls");
-			menuAdministration(choix_tmp, connexion);
+			menuAdministration(choix_tmp, connexion, tab_region, taille_tab_etoile);
 			saisie_utilisateur[1] = -1;
 			break;
 		default:
