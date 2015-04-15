@@ -68,7 +68,7 @@ void menuConsulter(int choix_tmp, wchar_t saisie_utilisateur[], Region** tab_reg
 			system("pause");
 			break;
 
-		case 3:// ... par Merlin en reprenant le code d'ecritureRecensements code en vitesee => pas fini mais plus ou moins fonctionnelle
+		case 3:// ... par Merlin en reprenant le code d'ecritureRecensements code en vitesee => pas fini mais plus ou moins fonctionnel
 			fichier = _wfopen(L"../Import/recensements.csv", L"r");
 			int nombre_recensements = nombrePointVirguleDansLigne(fichier) - 2;
 			fclose(fichier);
