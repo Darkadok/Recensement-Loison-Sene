@@ -7,5 +7,7 @@
 
 int verificationSaisie(wchar_t saisie_utilisateur[], int code_menu);
 void enleverAccent(wchar_t chaine[]);
+void toMin(wchar_t chaine[], wchar_t chaine_tmp[]);
+void  masquerMdp(wchar_t saisie_mdp[]);
 
 #endif

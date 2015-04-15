@@ -49,6 +49,7 @@ void toMin(wchar_t chaine[], wchar_t chaine_tmp[])// transforme les caractères m
 	}
 
 }
+
 void  masquerMdp(wchar_t saisie_mdp[])
 {
 
