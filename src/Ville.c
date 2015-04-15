@@ -66,12 +66,12 @@ void ajouterVille(Ville** tab_ville, wchar_t nom_ville[], wchar_t dep_com[], int
 
 void afficherVille(Ville* ville)
 {
-	wprintf(L"Nom : %ls\n", ville->nom_ville);
+	wprintf(L"Nom : %ls\nDepCom : %ls\n", ville->nom_ville, ville->dep_com);
 }
 
-int rechercheVilleByNom(Ville* tab_ville, int* taille_tab_ville, wchar_t nom_ville[])//on devrait pas chercher dans toutes les villes ?
+int rechercheVilleByNom(Ville* tab_ville, int* taille_tab_ville, wchar_t nom_ville[])
 {
-
+	int i = 0;
 	wchar_t tab_nom_ville_tmp[100];
 	wchar_t nom_ville_tmp[100];
 
@@ -86,14 +86,15 @@ int rechercheVilleByNom(Ville* tab_ville, int* taille_tab_ville, wchar_t nom_vil
 
 	toMin(nom_ville_tmp_sa, nom_ville_tmp);
 
-	for (int i = 0; i < *taille_tab_ville; i++)
+	for (i = 0; i < *taille_tab_ville; i++)
 	{
+		
 		wcscpy(tab_nom_ville_tmp_sa, (tab_ville + i)->nom_ville);
-		enleverAccent(tab_nom_ville_tmp_sa);
+	    enleverAccent(tab_nom_ville_tmp_sa);
 		wcscpy(tab_nom_ville_tmp, tab_nom_ville_tmp_sa);
 		toMin(tab_nom_ville_tmp_sa, tab_nom_ville_tmp);
 
-		if (!wcscmp(tab_nom_ville_tmp_sa, nom_ville_tmp_sa))//fonctionne pas => tab_nom_ville_tmp_sa n'est pas sans accent
+		if (!wcscmp(tab_nom_ville_tmp, nom_ville_tmp))//fonctionne pas => tab_nom_ville_tmp_sa n'est pas sans accent
 		{
 			return i;
 		}

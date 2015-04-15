@@ -1,14 +1,18 @@
 #include "MenuConsulte.h"
 
 
-void menuConsulter(int choix_tmp, wchar_t saisie_utilisateur[], Region** tab_region, int** taille_tab_region)
+void menuConsulter(Region** tab_region, int** taille_tab_region)
 {
 	int code_menu = 3;
-	choix_tmp = 0;
-	int i = 0;
 	int num_dep_tmp;
+	int trouve = 0;
+	int stop = 0;
+	int reponse = -1;
+
 	wchar_t chaine[50];
 	wchar_t chaine_tmp[50];
+	wchar_t saisie_utilisateur[30];
+
 
 	//pour cas 3 :
 	Recensement* no_annee_tmp;
@@ -17,6 +21,8 @@ void menuConsulter(int choix_tmp, wchar_t saisie_utilisateur[], Region** tab_reg
 	Recensement* recen_tmp;
 	FILE* fichier;
 	char continuer;
+
+
 
 	do
 	{
@@ -36,35 +42,66 @@ void menuConsulter(int choix_tmp, wchar_t saisie_utilisateur[], Region** tab_reg
 		case 1:
 			system("cls");
 			printf("Pour quelle commune voulez-vous des informations ? \n");
-			printf("Indiquer le nom : \n");
+			printf("Indiquez le nom : \n");
 			wscanf(L"%ls", chaine);
-			if (wcslen(chaine) > 4)
-			{
-				toMin(chaine, chaine_tmp);
 
-				printf("Recherche par nom commune encore non implemente ... \n");
-			}
+			int i = 0;
+			int j = 0;
+			int k = 0;
+
+				while (!trouve && i < **taille_tab_region)//... par Massamba, ne fonctionne pas systématiquement, codé en vitesse (on a essayé de sauver les meubles ?)
+				{
+					while(!trouve && j < *((*tab_region) + i)->taille_tab_departement)//pour chaque dep de cette region
+						{
+							tmp = (*tab_region + i)->tab_departement + j;
+
+							while(!trouve &&  k < *(tmp->taille_tab_ville))//pour chaque ville
+							{
+								reponse = rechercheVilleByNom(tmp->tab_ville, tmp->taille_tab_ville, chaine);
+
+								if (reponse != -1)
+								{
+									
+									afficherVille(tmp->tab_ville + reponse);
+									trouve = 1;
+								}
+
+								k++;
+							}
+
+							j++;
+						}
+
+						i++;
+					}
+
+				if (!trouve)
+				{
+					wprintf(L"La ville que vous recherchez n'existe pas.\n");
+				}
+			
 			system("pause");
 			break;
 		case 2:
 			system("cls");
 			printf(" Dans quel département se trouve la commune ? \n");
-			printf("Inscriver le numéro sous la forme 01  ou le nom :");
-			system("pause");
+			printf("Inscrivez le numéro sous la forme 01  ou le nom :\n");
+			wscanf(L"%ls", saisie_utilisateur);
+		
 			do{
 				if (wcslen(saisie_utilisateur) > 3)
 				{
 					wscanf(L"%ls", &saisie_utilisateur);//recherche par nom fonction recherche by nom département 
-					i++;
+					stop = 1;
 
 				}
 				else if (!iswdigit(saisie_utilisateur[1]))
 				{
 					num_dep_tmp = _wtoi(&saisie_utilisateur[0]); //recherche par numéro fonction recherche by numéro
 
-					i++;
+					stop = 1;
 				}
-			} while (i == 0);
+			} while (!stop);
 			system("pause");
 			break;
 

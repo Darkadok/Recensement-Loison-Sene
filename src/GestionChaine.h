@@ -1,5 +1,17 @@
-#ifndef GESION_SAISIE_H
-#define GESTION_SAISIE_H
+/*
+Override
+@author Alexandre Courcoul, Merlin Loison & Massamba Sène
+
+2014/2015
+
+
+GestionChaine.h
+@author Massamba Sène
+
+**/
+
+#ifndef GESION_CHAINE_H
+#define GESTION_CHAINE_H
 
 #include <wchar.h>
 #include <stdio.h>

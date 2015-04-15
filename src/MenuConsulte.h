@@ -7,7 +7,7 @@
 #include <wctype.h>
 #include "Region.h"
 
-void menuConsulter(int choix_tmp, wchar_t saisie_utilisateur);
+void menuConsulter(Region** tab_region, int** taille_tab_region);
 void lectureNom(choix_tmp);
 
 #endif

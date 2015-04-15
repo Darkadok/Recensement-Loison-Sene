@@ -1,4 +1,17 @@
-#include"GestionSaisie.h" 
+/*
+Override
+@author Alexandre Courcoul, Merlin Loison & Massamba Sène
+
+2014/2015
+
+
+GestionChaine.c
+@author Massamba Sène
+
+**/
+
+
+#include"GestionChaine.h" 
 
 /**** La vérification se fait avec une chaîne de caractère au cas où l'utilisateur tape plusieurs caractères
 et également pour éviter les problèmes avec scanf et les char. *****/

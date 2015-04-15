@@ -3,10 +3,10 @@
 int menu(Region** tab_region, int** taille_tab_etoile)
 {
 	
-	int code_menu = 2;
+
 	wchar_t saisie_utilisateur[50];
 	int connexion = 0;
-	int choix_tmp = 0;
+	
 	do
 	{
 		system("cls");
@@ -17,32 +17,31 @@ int menu(Region** tab_region, int** taille_tab_etoile)
 		printf("0 - Quitter\n");
 
 		printf("\n Saisir votre choix : ");
-		wscanf(L"%s", saisie_utilisateur);
+		wscanf(L"%ls", saisie_utilisateur);
 
 
 
-		switch (verificationSaisie(saisie_utilisateur, code_menu))
+		switch (verificationSaisie(saisie_utilisateur, 3))
 		{
 		case 1:
 			system("cls");
-			menuConsulter(choix_tmp, saisie_utilisateur, tab_region, taille_tab_etoile);
+			menuConsulter(tab_region, taille_tab_etoile);
 			saisie_utilisateur[1] = -1;
 			break;
 		case 2:
 			system("cls");
-			menuAdministration(choix_tmp, connexion, tab_region, taille_tab_etoile);
+			menuAdministration(connexion, tab_region, taille_tab_etoile);
 			saisie_utilisateur[1] = -1;
 			break;
 
 		case 0:
 			ecritureFichierDepartements(*tab_region, *taille_tab_etoile);
 			ecritureFichierRecensements(*tab_region, *taille_tab_etoile);
-			detruireTabRegion(tab_region, taille_tab_etoile);
 			break;
 		default:
 			break;
 		}
-	} while (verificationSaisie(saisie_utilisateur, code_menu) != 0);
+	} while (verificationSaisie(saisie_utilisateur, 3) != 0);
 
 	return 0;
 }

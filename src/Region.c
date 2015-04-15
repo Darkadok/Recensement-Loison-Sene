@@ -69,23 +69,25 @@ void afficherRegion(Region* region)
 
 int rechercheRegionByNom(Region* tab_region, int* taille_tab_region, wchar_t nom_reg[])
 {
-	wchar_t* tab_nom_reg_tmp = malloc(sizeof(wchar_t)* (wcslen((tab_region)->nom_reg) + 1));
-	wchar_t* nom_reg_tmp = malloc(sizeof(wchar_t)* (wcslen(nom_reg) + 1));
+	wchar_t tab_nom_reg_tmp[100];
+	wchar_t nom_reg_tmp[100];
 
-	wcscpy(nom_reg_tmp, nom_reg);
-	//toMin(nom_reg_tmp);
+	wchar_t nom_reg_sa[100];
+	wchar_t tab_nom_reg_sa[100];
+
+	wcscpy(nom_reg_sa, nom_reg);
+	enleverAccent(nom_reg_sa);
+	wcscpy(nom_reg_tmp, nom_reg_sa);
+	toMin(nom_reg_sa, nom_reg_tmp);
 
 	for (int i = 0; i < *taille_tab_region; i++)
 	{
-		if (i > 0)
-		{
-			tab_nom_reg_tmp = realloc(tab_nom_reg_tmp, wcslen((tab_region + i)->nom_reg) + 1);
-		}
-		 
-		wcscpy(tab_nom_reg_tmp, (tab_region + i)->nom_reg);
-		//toMin(tab_nom_reg_tmp);
+		wcscpy(tab_nom_reg_sa, (tab_region+i)->nom_reg);
+		enleverAccent(tab_nom_reg_sa);
+		wcscpy(tab_nom_reg_tmp, tab_nom_reg_sa);
+		toMin(tab_nom_reg_sa, tab_nom_reg_tmp);
 
-		if (!wcscmp(tab_nom_reg_tmp, nom_reg))
+		if (!wcscmp(tab_nom_reg_tmp, nom_reg_tmp))
 		{
 
 			return i;

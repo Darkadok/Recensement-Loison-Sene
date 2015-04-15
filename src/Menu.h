@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <windows.h>
 
-#include "GestionSaisie.h" 
+#include "GestionChaine.h" 
 #include "MenuAdministration.h"
 #include "MenuConsulte.h"
 #include "Region.h"
