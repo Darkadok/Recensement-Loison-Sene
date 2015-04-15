@@ -8,10 +8,10 @@ void menuAdministration(int choix_tmp, int connexion)
 	do
 	{
 		int connexion = 0;
-		wchar_t mdp[] = L"a123"; // Exemple de mot de passe
+		wchar_t mdp[] = L"P@ssw0rd"; // Exemple de mot de passe
 		wchar_t saisie_mdp[50];
 		system("cls");
-		printf("\nSaisissez votre mot de passe: (3 essais) \n");
+		printf("\nSaisissez votre mot de passe: (3 essais) ... Avez vous essayer 'P@ssw0rd' ? ;)\n");
 		masquerMdp(saisie_mdp);
 		if (wcscmp(mdp, saisie_mdp) == 0)
 		{
